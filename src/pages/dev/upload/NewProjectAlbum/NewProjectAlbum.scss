@@ -1,0 +1,40 @@
+.new-project-album {
+    position: relative;
+    margin-bottom: 2em;
+    .submit-btn {
+        position: relative;
+        margin-top: 10em;
+        .error {
+            color: red;
+        }
+        button {
+            border-radius: 10px;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1em 3em;
+            font-weight: 600;
+            letter-spacing: .1em;
+            font-size: 1.5em;
+        }
+    }
+
+    .success-prompt {
+        margin-top: 3em;
+        h5 {
+            font-weight: 600;
+            letter-spacing: .05em;
+            padding-left: 1em;
+            padding-right: 1em;
+            margin-bottom: 2em;
+            font-size: 1.5em;
+            color: green;
+        }
+        button {
+            border: 1px solid var(--primary-color);
+            border-radius: 10px;
+            padding: .5em 1.2em;
+            font-weight: 500;
+
+        }
+    }
+}

@@ -1,0 +1,10 @@
+.manage-projects{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    background-color: rgba(0,0,0,0.15);
+    border: 1px dotted var(--primary-color);
+    padding: 1em;
+    gap: 1em;
+
+}

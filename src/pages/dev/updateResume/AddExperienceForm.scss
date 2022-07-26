@@ -1,0 +1,101 @@
+.add-experience-form{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1em;
+    justify-content: space-between;
+    border: 2px solid var(--primary-color);
+    border-radius: 20px;
+    position: relative;
+    max-width: 32em;
+    margin-right: auto;
+    margin-left: 0;
+    h5 {
+        font-weight: 600;
+        letter-spacing: .02em;
+        padding-left: 1em;
+        padding-right: 1em;
+        margin-bottom: 1em;
+        font-size: 1.5em;
+        border-bottom: 1px solid var(--dark-color);
+    }
+    label {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: .8em;
+        span {
+            text-align: left;
+            font-weight: 500;
+            letter-spacing: .02em;
+        }
+        input {
+            text-align: left;
+            background-color: rgba(0,0,0,0.1);
+            height: 1.5em;
+            font-size: 1em;
+            width: 28em;
+            margin-left: .5em;
+            margin-top: .25em;
+            padding: .15em .4em;
+            color: var(--primary-color);
+            font-weight: 500;
+            &:placeholder-shown{
+                opacity: .6;
+                font-weight: 300;
+                font-style: italic;
+            }
+
+            &:focus{
+                outline: 2px solid var(--primary-color);
+            }
+        }
+        ul {
+            display: flex;
+            margin-left: .1em;
+            margin-top: .2em;
+            margin-bottom: 1em;
+            li {
+                background-color: var(--primary-color);
+                font-size: .8em;
+                padding: .2em;
+                padding-right: .5em;
+                margin-left: .5em;
+                color: var(--light-color);
+                position: relative;
+                cursor: pointer;
+                &:hover{
+                    filter: brightness(120%);
+                }
+                svg {
+                    font-size: .9em;
+                    position: absolute;
+                    top: -.2em;
+                    right: -.2em;
+                    fill: red;
+                }
+            }
+        }
+    }
+    p{
+        &.success, &.error{
+            color: green;
+            position: absolute;
+            right: 1em;
+            bottom: 3.5em;
+            text-align: right;
+        }
+        &.error{
+            color: red;
+        }
+    }
+    .save-btn {
+        margin-top: 1.5em;
+        align-self: flex-end;
+        border: 1px solid var(--dark-color);
+        padding: .2em .5em;
+        font-weight: 500;
+        &:disabled{
+            opacity: .5;
+        }
+    }
+}

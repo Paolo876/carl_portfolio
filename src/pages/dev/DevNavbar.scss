@@ -1,0 +1,35 @@
+.devNav{
+    background-color: orangered;
+    opacity: .9;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    color: var(--light-color);
+    padding: .4em 0;
+    z-index: 5;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    ul {
+        display: flex;
+        flex-direction: row;
+        justify-content: end;
+        margin-right: 3em;
+        align-items: center;
+        li {
+            font-size: 1em;
+            margin-left: 1em;
+            img {
+                height: 25px;
+            }
+            &:nth-child(2){
+                margin-right: 3em;
+
+            }
+            a, button {
+                border: 1px solid var(--light-color);
+                padding: .2em .5em;
+                cursor: pointer;
+            }
+        }
+    }
+}

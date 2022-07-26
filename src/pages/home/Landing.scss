@@ -1,0 +1,114 @@
+.landing {
+    height: 75vh;
+    margin: 0 auto;
+    position: relative;
+
+    .header{
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
+    .header-name {
+        text-align: left;
+        position: absolute;
+        height: fit-content;
+        width: 100%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        .left-text {
+            p {
+                font-weight: 200;
+                line-height: .9em;
+                text-shadow: 2px 7px 5px rgba(0,0,0,0.05), 
+                0px -4px 10px rgba(255,255,255,.05);
+    
+                &:first-child{
+                    font-weight: 200;
+                    font-size: 5.5em;
+                    letter-spacing: .17em;
+                }
+                &:nth-child(2){
+                    font-size: 5em;
+                    opacity: .8;
+    
+                }
+                &:last-child{
+                    font-size: 3.5em;
+                    opacity: .6;
+                    // letter-spacing: .0001em;
+                }
+            }
+        }
+
+    }
+    
+        .header-logo {
+            position: absolute;
+            transform: translateX(-50%);
+            top: 2%;
+            left: 50%;
+            user-select: none;
+            height: 100px;
+            img {
+                height: inherit;
+            }
+            div{
+                position: absolute;
+                transform: translateY(-50%);
+                height: 7px;
+                width: 40px;
+                background-color: var(--dark-color);
+                clip-path: polygon(15% 0%, 100% 0%, 85% 100%, 0% 100%);
+                opacity: .25;
+                &.line-left{
+                    top: 50%;
+                    left: -60%;
+                    cursor: initial;
+                }
+                &.line-right{
+                    top: 50%;
+                    right: -75%;
+                    cursor: initial;
+
+                }
+
+            }
+        }
+
+        .links {
+            position: absolute;
+            bottom: 1em;
+            right: 1.5em;
+            li {
+                margin-bottom: 1.5em;
+                a {
+                    svg {
+                        font-size: 1.6em;
+                        fill: var(--dark-color);
+                        opacity: .8;
+                        &:hover{
+                            fill: var(--primary-color);
+                        }
+                    }
+                }
+            }
+            &::after{
+                content: "";
+                position: absolute;
+                top: -150%;
+                left: 50%;
+                // transform: translateX(-50%);
+                height: 300px;
+                width: 1px;
+                opacity: .3;
+                background-color: var(--dark-color);
+            }
+        }
+
+    }
+    
+}
