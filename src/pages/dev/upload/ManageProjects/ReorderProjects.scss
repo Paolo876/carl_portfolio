@@ -1,0 +1,26 @@
+.reorder-projects {
+    ul{
+        max-height: 80vh;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        li{
+            gap: .5em;
+            border: 1px solid black;
+            margin: .1em;
+            display: flex;            
+            flex-direction: row;
+            align-items: center;
+            padding-right: 1em;
+            img {
+                height: 40px;
+                width: 70px;
+                object-fit: cover;
+            }
+            .info{
+                font-weight: 400;
+            }
+        }
+    }
+
+}

@@ -10,7 +10,7 @@ export default function Login() {
   const { user } = useAuthContext();
   const { login, isLoading } = useGoogleLogin();
 
-  if(user) navigate('/');
+  // if(user) navigate('/');
   const handleLogin = async () => {
     await login();
   };

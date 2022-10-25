@@ -14,3 +14,24 @@ footer{
   color: var(--dark-color);
   z-index: 5;
 }
+
+.drag-item {
+  gap: .5em;
+  border: 1px solid black;
+  margin: .25em;
+  display: flex;            
+  flex-direction: row;
+  align-items: center;
+  padding-right: 1em;
+  z-index: 50;
+  background-color: white;
+}
+.drag-item img {
+  height: 50px;
+  width: 80px;
+  object-fit: cover;
+}
+.drag-item .info {
+  font-weight: 400;
+
+}

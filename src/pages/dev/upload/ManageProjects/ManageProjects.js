@@ -14,7 +14,7 @@ export default function ManageProjects() {
     <div className='manage-projects'>
       {document &&
         <>
-          <ProjectsList selectedProjectId={selectedProjectId} setSelectedProjectId={setSelectedProjectId}/>
+          <ProjectsList selectedProjectId={selectedProjectId} setSelectedProjectId={setSelectedProjectId} document={document}/>
           {selectedProjectId && 
             <>
               <ProjectImages  selectedProjectId={selectedProjectId} projects={document}/>
