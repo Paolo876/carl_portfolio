@@ -12,7 +12,8 @@ export default function Home() {
   // const inViewport = useIntersection(worksRef, '-30%'); // Trigger as soon as the element becomes visible
 
   return (
-    <Box className='home'>
+    <Box className='home' sx={{
+    }}>
       <Landing/>
       <Works/>
       <About/>

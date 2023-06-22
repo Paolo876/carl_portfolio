@@ -77,15 +77,12 @@ input {
   border-radius: 5px;
 } */
 
-body {
-  height: 100%;
-  /* height: -webkit-fill-available; */
+/* body { */
+  /* height: 100%;
   text-rendering: optimizeSpeed;
-  /* line-height: 1.5; */
-  /* background-color: var(--dark-green-color); */
   color: var(--dark-color);
-  font-family: var(--primary-font);
-}
+  font-family: var(--primary-font); */
+/* } */
 
 ::-webkit-scrollbar {
   width: 15px;

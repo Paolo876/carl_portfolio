@@ -7,6 +7,7 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import GoogleIcon from '@mui/icons-material/Google';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { useNavigate } from "react-router-dom";
+import { Box, Typography } from '@mui/material';
 
 export default function Landing() {
   const { dispatch } = useAuthContext();
@@ -29,11 +30,16 @@ export default function Landing() {
     <div className='landing'>
       <div className="header">
         <div className='header-name'>
-          <div className="left-text">
-            <p>CARL</p>
+          {/* <div className="left-text">
+            <Typography variant="h1" sx={{fontWeight: 100, letterSpacing: 1}}>CARL</Typography>
             <p>adriant</p>
             <p>dimabuyu</p>
-          </div>
+          </div> */}
+          <Box sx={{width: 300, textAlign: "center"}}>
+            <Typography variant="h1" sx={{fontWeight: 100, letterSpacing: 10, lineHeight: 1}}>CARL</Typography>
+            <Typography variant="h2" sx={{fontWeight: 100, letterSpacing: 7, lineHeight: 1, fontSize: 70}}>adriant</Typography>
+            <Typography variant="h3" sx={{fontWeight: 100, lineHeight: 1}}>dimabuyu</Typography>
+          </Box>
           <div className="border"></div>
         </div>
         <button className='header-logo'>
