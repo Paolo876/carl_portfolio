@@ -12,7 +12,7 @@ function App() {
     <div className="app" >
       <BrowserRouter>
         { user && <DevNavbar/> }
-        <Navbar/>
+        {/* <Navbar/> */}
         <MainNavigation/>
       </BrowserRouter>
     </div>

@@ -10,9 +10,9 @@ export const theme = createTheme({
     MuiCssBaseline: {
       styleOverrides: {
         body: {
-          height: "100%",
+          // height: "100%",
           textRendering: "optimizeSpeed",
-          color: "rgb(35, 35, 35)",
+          // color: "rgb(35, 35, 35)",
         },
       },
     },
@@ -20,49 +20,25 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           // fontFamily: 'Manrope',
-          borderWidth: 2,
-          borderRadius: 0,
-          fontWeight: 600,
-          letterSpacing: .95,
-          ":hover": {
-            borderRadius: 0,
-            borderWidth: 2,
-
-          }
+          // borderWidth: 2,
+          // borderRadius: 0,
+          // fontWeight: 600,
+          // letterSpacing: .95,
+          // ":hover": {
+          //   borderRadius: 0,
+          //   borderWidth: 2,
+          // }
         },
         
       },
     },
-    // MuiAppBar: {
-    //   styleOverrides: {
-    //     root: {
-    //       background: "none",
-    //       boxShadow: "none",
-    //     }
-    //   }
-    // },
-    // MuiLink: {
-    //   styleOverrides: {
-    //     root: {
-    //       textTransform: "uppercase",
-    //       textDecoration: "none",
-    //       color: "#efebe5"
-    //     }
-    //   }
-    // },
-    // MuiIconButton: {
-    //   styleOverrides: {
-    //     root: {
-    //       borderRadius: 0
-    //     }
-    //   }
-    // }
+
   },
   palette: {
-    // mode: 'dark',
+    mode: 'dark',
     primary: {
       // main: '#DC8C24',
-      main: 'rgb(3, 107, 145)',
+      main: '#036b91',
     },
     secondary: {
       // main: '#9da5f7',
@@ -122,8 +98,8 @@ export const theme = createTheme({
     },
     h6: {
       fontFamily: 'Montserrat',
-      letterSpacing: 2,
-      fontWeight: 600,
+      // letterSpacing: 3,
+      // fontWeight: 400,
     },
     subtitle1: {
       fontWeight: 300,
