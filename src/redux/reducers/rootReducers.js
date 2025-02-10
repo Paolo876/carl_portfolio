@@ -1,19 +1,19 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { functions } from '../../firebase/config';
-import { httpsCallable } from 'firebase/functions';
+// import { functions } from '../../firebase/config';
+// import { httpsCallable } from 'firebase/functions';
 import emailjs from '@emailjs/browser';
-
+import useDocument from "../../hooks/useDocuments"
 /** getImageKeys
  *  @desc get imagekit-io keys { urlEndpoint, publicKey }
  */
-export const getImageKeys = createAsyncThunk( 'root/getImageKeys', async ( payload, { rejectWithValue }) => {
-    try {
-        let { data } = await httpsCallable(functions, "getImagekitKeys")()
-        return data;
-    } catch (err){
-        return rejectWithValue(err.response.data)
-    }
-})
+// export const getImageKeys = createAsyncThunk( 'root/getImageKeys', async ( payload, { rejectWithValue }) => {
+//     try {
+//         let { data } = await httpsCallable(functions, "getImagekitKeys")()
+//         return data;
+//     } catch (err){
+//         return rejectWithValue(err.response.data)
+//     }
+// })
 
 
 /** getEmailJSKeys

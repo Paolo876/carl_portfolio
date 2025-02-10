@@ -1,24 +1,82 @@
 import { useState } from 'react'
-import { Modal, Typography, Box, Backdrop, Fade } from '@mui/material'
+import { Modal, Typography, Box, Backdrop, Fade, List, ListItem } from '@mui/material'
 import Image from 'mui-image'
-
+import useProjectsRedux from '../../hooks/useProjectsRedux';
 
 const style = {
   position: 'absolute',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
   bgcolor: 'background.paper',
-  border: '2px solid #000',
   boxShadow: 24,
-  p: 4,
+  // maxHeight: "92vh",
+  borderRadius: 0,
+  border: 0,
+  height: "max-content",
+  // width: "100%",
+  width: "max-content",
+  maxHeight: "92vh",
+  maxWidth: "1500px",
 };
+
+const containerProps = {
+  display: "grid",
+  gridTemplateAreas: "'image desc'",
+  // gridTemplateColumns: `repeat(auto-fill, minmax(280px, 1fr))`,
+  gridTemplateColumns: `minmax(auto, 1fr) 380px`,
+  alignItems: "center"
+}
+
+
+const imageProps = {
+  height: "100%",
+  width: "100%",
+  maxHeight: "90vh",
+  maxWidth: "90vw"
+}
+
+
+const headerTextProps = {
+  fontWeight: 500,
+  letterSpacing: 1,
+  fontSize: 20,
+  borderBottom: 1,
+  borderColor: "primary.main",
+  // textTransform: "uppercase",
+}
+
+const subHeaderTextProps = {
+  fontWeight: 300,
+  letterSpacing: 1,
+  fontSize: 13,
+  opacity: .85,
+  // textTransform: "uppercase",
+
+}
+
+const listProps = {
+  m:0,
+  p:0,
+  mt: 5
+}
+
+const listItemProps = {
+  m:0,
+  p:0,
+  mt: .5,
+  fontWeight: 300,
+  letterSpacing: 1,
+  fontSize: 12,
+  opacity: .8
+}
 
 
 const ProjectModal = ({ setIsModalVisible, isModalVisible }) => {
-
-
+  const id = isModalVisible.id;
+  const { projects } = useProjectsRedux();
+  const selectedImage = projects.find(item => item.id === id)
+  console.log(selectedImage.softwares)
   return (
     <>
       <Modal
@@ -33,15 +91,26 @@ const ProjectModal = ({ setIsModalVisible, isModalVisible }) => {
             timeout: 500,
           },
         }}
+        sx={{
+          border:0,
+          borderRadius:0
+        }}
       >
         <Fade in={isModalVisible.isVisible}>
           <Box sx={style}>
-            <Typography id="project-image-modal-text" variant="h6" component="h2">
-              Text in a modal
-            </Typography>
-            <Typography id="project-image-description" sx={{ mt: 2 }}>
-              Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-            </Typography>
+            <Box sx={containerProps}>
+              <Box sx={{gridArea: "image", }}>
+                <Image src={selectedImage.images[0].src} alt={selectedImage.images[0].filename} duration={100} sx={imageProps} fit="cover" />
+                {/* {selectedImage.images.length === 1 && <Image src={selectedImage.images[0].src} alt={selectedImage.images[0].filename} duration={100} sx={imageProps} fit="cover" />} */}
+              </Box>
+              <Box sx={{gridArea: "desc", bgcolor: 'background.paper', py: 5, pl: 1.5, pr: 3,}}>
+                <Typography id="project-image-modal-text" variant="h6" sx={headerTextProps}>{selectedImage.header}</Typography>
+                <Typography id="project-image-modal-text" variant="h6" sx={subHeaderTextProps}>{selectedImage.style}</Typography>
+                <List sx={listProps}>
+                  {selectedImage.softwares.map(item => <ListItem sx={listItemProps}>{item}</ListItem>)}
+                </List>
+              </Box>
+            </Box>
           </Box>
         </Fade>
       </Modal>
