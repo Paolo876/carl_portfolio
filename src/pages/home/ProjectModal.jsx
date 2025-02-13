@@ -100,17 +100,27 @@ const buttonProps = {
   borderRadius: "50%",
   backgroundColor: "rgba(255,255,255,.2)",
   p:.75,
-  fontSize: {xs: 20, sm: 24, md: 26, lg:28}
+  fontSize: {xs: 20, sm: 24, md: 26, lg:28},
+  boxShadow: 2
 }
 
 const ProjectModal = ({ setIsModalVisible, isModalVisible }) => {
   const id = isModalVisible.id;
   const { projects } = useProjectsRedux();
   const [ selectedImage, setSelectedImage ] = useState(null)
-
+  const [ selectedImageIdx, setSelectedImageIdx ] = useState(0);
   useEffect(() => {
     setSelectedImage(projects.find(item => item.id === id))
   },[])
+
+
+  const handleBackClick = () => {
+    if(selectedImageIdx !== 0) setSelectedImageIdx(selectedImageIdx - 1)
+  }
+
+  const handleNextClick = () => {
+    if(selectedImageIdx < selectedImage.images.length - 1) setSelectedImageIdx(selectedImageIdx + 1)
+  }
 
 
   return (
@@ -129,7 +139,8 @@ const ProjectModal = ({ setIsModalVisible, isModalVisible }) => {
         }}
         sx={{
           border:0,
-          borderRadius:0
+          borderRadius:0,
+          outline: 0
         }}
       >
         <Fade in={isModalVisible.isVisible}>
@@ -137,12 +148,16 @@ const ProjectModal = ({ setIsModalVisible, isModalVisible }) => {
             {selectedImage !== null && <Box sx={containerProps}>
               <Box sx={{gridArea: "image", position: "relative" }}>
                 
-                {<Image src={selectedImage.images[0].src} alt={selectedImage.images[0].filename} duration={100} sx={imageProps} fit="cover" draggable={false}/>}
+                {<Image src={selectedImage.images[selectedImageIdx].src} alt={selectedImage.images[selectedImageIdx].filename} duration={100} sx={imageProps} fit="cover" draggable={false}/>}
 
                 {/* buttons */}
                 {selectedImage.images.length > 1 && <Box sx={buttonContainerProps}>
-                  <IconButton onClick={() => {}}><ArrowBackIosNewIcon sx={buttonProps}/></IconButton>
-                  <IconButton onClick={() => {}}><ArrowForwardIosIcon sx={buttonProps}/></IconButton>
+                  <IconButton onClick={handleBackClick} sx={{visibility: selectedImageIdx === 0 ? "hidden" : "visible"}}>
+                    <ArrowBackIosNewIcon sx={buttonProps}/>
+                  </IconButton>
+                  <IconButton onClick={handleNextClick} sx={{visibility: selectedImageIdx >= selectedImage.images.length - 1 ? "hidden" : "visible"}}>
+                    <ArrowForwardIosIcon sx={buttonProps}/>
+                  </IconButton>
                   <Box
                     sx={{
                       position: "absolute",
@@ -154,28 +169,25 @@ const ProjectModal = ({ setIsModalVisible, isModalVisible }) => {
                   >
                   <MobileStepper
                     variant="dots"
-                    steps={selectedImage.images.length + 1}
+                    steps={selectedImage.images.length}
+                    activeStep={selectedImageIdx}
                     position='absolute'
+                    disabled={false}
                     sx={{
-                      cursor: "pointer",
-                      background: "none"
+                      background: "none",
+                      borderRadius: 5,
+                      px: 1.5,
+                      py: .8,
+                      mb: .5,
+                      "& div div": {
+                        height: 6,
+                        width: 6,
+                        boxShadow: 2
+                      }
                     }}
                   />
                   </Box>
-
-
-
                 </Box>}
-                {/* {selectedImage.images.length > 1 && <Carousel
-                  indicators={true}
-                  interval={8000}
-                  duration={800} 
-                  navButtonsAlwaysInvisible={true}
-                  sx={{ overflowY: 'visible', overflowX: 'clip', minHeight: "auto", width: "auto" }} 
-                >
-                  {selectedImage.images.map(item => <Image src={item.src} alt={item.filename} duration={100} sx={imageProps} fit="cover" draggable={false}/>
-                  )}
-                </Carousel>} */}
               </Box>
               <Box sx={{gridArea: "desc", bgcolor: 'background.paper', py: 5, pl: 1.5, pr: 3,}}>
                 <Typography id="project-image-modal-text" variant="h6" sx={headerTextProps}>{selectedImage.header}</Typography>
