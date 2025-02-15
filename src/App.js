@@ -14,7 +14,7 @@ function App() {
   const { getProjects } = useProjectsRedux();
 
   useEffect(() => {
-    getProjects()
+    // getProjects()
   }, [])
 
 

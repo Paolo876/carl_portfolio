@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
-import { Modal, Typography, Box, Backdrop, Fade, List, ListItem, Button, IconButton, MobileStepper } from '@mui/material'
+import { Modal, Typography, Box, Backdrop, Fade, List, ListItem, Button, IconButton, MobileStepper, SpeedDial } from '@mui/material'
 import Image from 'mui-image'
 import useProjectsRedux from '../../hooks/useProjectsRedux';
 import Carousel from 'react-material-ui-carousel'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import SpeedDialIcon from '@mui/material/SpeedDialIcon';
 
 
 const style = {
@@ -22,6 +23,7 @@ const style = {
   width: "max-content",
   maxHeight: "92vh",
   maxWidth: "1500px",
+  outline: "none"
 };
 
 const containerProps = {
@@ -51,7 +53,6 @@ const headerTextProps = {
   fontSize: 20,
   borderBottom: 1,
   borderColor: "primary.main",
-  // textTransform: "uppercase",
 }
 
 const subHeaderTextProps = {
@@ -61,20 +62,18 @@ const subHeaderTextProps = {
   opacity: .85,
   textAlign: "right",
   pr: 1,
-  // textTransform: "uppercase",
-
 }
 
 const listProps = {
   m:0,
   p:0,
-  mt: 5
+  mt: 10
 }
 
 const listItemProps = {
   m:0,
   p:0,
-  mt: .5,
+  mt: .85,
   fontWeight: 300,
   letterSpacing: 1,
   fontSize: 12,
@@ -89,7 +88,6 @@ const buttonContainerProps = {
   height: "100%",
   width: "100%",
   display: "flex",
-  // background: "red",
   justifyContent: "space-between",
   alignItems: "center",
   p:1
@@ -102,6 +100,14 @@ const buttonProps = {
   p:.75,
   fontSize: {xs: 20, sm: 24, md: 26, lg:28},
   boxShadow: 2
+}
+
+const navButtonProps = {
+  borderRadius: "50%",
+  backgroundColor: "rgba(255,255,255,.45)",
+  p:.9,
+  fontSize: {xs: 30, sm: 32, md: 34, lg:40},
+  boxShadow: 5
 }
 
 const ProjectModal = ({ setIsModalVisible, isModalVisible }) => {
@@ -140,16 +146,14 @@ const ProjectModal = ({ setIsModalVisible, isModalVisible }) => {
         sx={{
           border:0,
           borderRadius:0,
-          outline: 0
+          outline: "none",
         }}
       >
         <Fade in={isModalVisible.isVisible}>
           <Box sx={style}>
             {selectedImage !== null && <Box sx={containerProps}>
               <Box sx={{gridArea: "image", position: "relative" }}>
-                
                 {<Image src={selectedImage.images[selectedImageIdx].src} alt={selectedImage.images[selectedImageIdx].filename} duration={100} sx={imageProps} fit="cover" draggable={false}/>}
-
                 {/* buttons */}
                 {selectedImage.images.length > 1 && <Box sx={buttonContainerProps}>
                   <IconButton onClick={handleBackClick} sx={{visibility: selectedImageIdx === 0 ? "hidden" : "visible"}}>
@@ -197,9 +201,28 @@ const ProjectModal = ({ setIsModalVisible, isModalVisible }) => {
                 </List>
               </Box>
             </Box>}
+            <Box
+              sx={{
+                position: "absolute",
+                top:"50%",
+                left:0,
+                width: "100%",
+                display: "flex",
+                justifyContent: "space-between"
+              }}
+            >
+              <IconButton onClick={() => console.log()} sx={{transform: "translateX(-150px) translateY(-50%)"}}>
+                <ArrowBackIosNewIcon sx={navButtonProps}/>
+              </IconButton>
+              <IconButton onClick={() => console.log()} sx={{transform: "translateX(150px) translateY(-50%)"}}>
+                <ArrowForwardIosIcon sx={navButtonProps}/>
+              </IconButton>
+            </Box>
           </Box>
         </Fade>
       </Modal>
+
+
     </>
   )
 }
