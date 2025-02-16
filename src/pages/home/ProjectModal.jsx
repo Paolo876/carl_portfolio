@@ -38,7 +38,7 @@ const imageProps = {
   width: "100%",
   minHeight: "auto",
   minWidth: "auto",
-  maxHeight: "90vh",
+  maxHeight: {md: "70vh", lg: "90vh"},
   maxWidth: "85vw",
   position: "relative",
   userSelect: "none"
@@ -221,7 +221,7 @@ const ProjectModal = ({ setIsModalVisible, isModalVisible }) => {
                   width: "100%", 
                   display: "flex",
                   justifyContent: "space-between",
-                  px: 5,
+                  px: {md: 2, lg:5},
                 }}
               >
                 <IconButton onClick={handleProjectBackClick} sx={{visibility: selectedImage.index === 0 ? "hidden" : "visible"}}>
