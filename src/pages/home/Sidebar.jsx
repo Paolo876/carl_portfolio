@@ -1,6 +1,6 @@
-import React from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router';
-import { Paper, Box, Typography, ButtonBase } from '@mui/material'
+import { Paper, Box, Typography, ButtonBase, IconButton } from '@mui/material'
 import Image from 'mui-image'
 import logo from "../../assets/logo_white_100.png"
 
@@ -30,18 +30,18 @@ const buttonProps = {
 const textProps = {
   fontWeight: 400,
   letterSpacing: 1.25,
-  fontSize: 13,
+  fontSize: {lg: 12, xl: 13},
 }
 
 const boxBorderProps = {
-  mt: 4,
-  pt: 6,
+  mt: {lg: 3, xl: 4},
+  pt: {lg: 4, xl: 6},
   borderTop: 1,
   borderColor: "primary.dark"
 }
 
 
-const Sidebar = () => {
+const Sidebar = ({ isSidebarCollapsed, pageTopMargin }) => {
   const navigate = useNavigate();
 
   return (
@@ -51,33 +51,44 @@ const Sidebar = () => {
         border: 1,
         borderColor: "rgba(255,255,255, .05)",
         borderRadius: 4,
-        py: 8,
-        mt: 5,
-        px: 4,
         position: "fixed",
         top:0,
         right:0,
         left: "auto",
         mr: 8,
-        width: "330px",
-        height: "92vh",
-        overflowY: "auto"
+        overflowY: "auto",
+        pt: { lg: 6, xl:8 },
+        pb: {xl: isSidebarCollapsed.state ? 10 : 8},
+        mt: {md: pageTopMargin.md + 5, lg: pageTopMargin.lg + 5, xl: pageTopMargin.xl + 5 },
+        px: isSidebarCollapsed.state ? 3 : 4,
+        width: isSidebarCollapsed.state ? isSidebarCollapsed.widthOn : isSidebarCollapsed.widthOff,
+        height: isSidebarCollapsed.state ? "auto" : "85vh",
       }}
     >
-      <Box sx={{ height: "auto", }}>
-        <Image src={logo} fit="scale-down" height={75} width="auto" duration={100}/>
+      <Box 
+        sx={{ 
+          height: {
+            lg: 65, 
+            xl: isSidebarCollapsed.state ? 45 : 75
+          }, 
+          display: "flex", 
+          justifyContent: "center",
+        }}
+      >
+        <Image src={logo} fit="cover" height="auto" width="auto" duration={100}/>
       </Box>
       <Box
         sx={{
           mt: 4,
-          textAlign: "center"
+          textAlign: "center",
+          display: isSidebarCollapsed.state ? "none" : "block"
         }}
       >
         <Typography
           variant="h6"
           sx={{
             letterSpacing: 2.5,
-            fontSize: 18,
+            fontSize: {lg: 16, xl:18},
             fontWeight: 600,
             opacity: .9
           }}
@@ -89,7 +100,7 @@ const Sidebar = () => {
           sx={{
             fontWeight: 200,
             letterSpacing: 2.25,
-            fontSize: 12,
+            fontSize: {lg: 11, xl:12},
             opacity: .9,
             mt: 1,
           }}  
@@ -99,40 +110,80 @@ const Sidebar = () => {
       </Box>
       <Box
         sx={{
-          mt: 12,
+          mt: { lg:10, xl:12 },
         }}
       >
-        <ButtonBase sx={buttonProps} onClick={() => navigate("/about")}>
-          <PersonIcon style={{fontSize: "inherit", opacity: .6}}/>
-          <Typography variant='h6' sx={textProps}>ABOUT</Typography>
-        </ButtonBase>
-        <ButtonBase sx={buttonProps}>
-          <PhoneIcon style={{fontSize: "inherit", opacity: .6}}/>
-          <Typography variant='h6' sx={textProps}>CONTACT</Typography>
-        </ButtonBase>
-
+        {isSidebarCollapsed.state ? 
+          <Box 
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 2,
+              alignItems: "center"
+            }}
+          >
+            <Box>
+              <IconButton sx={{borderRadius: 2, background: "rgba(255,255,255,0.05)"}} color="primary"><PersonIcon style={{fontSize: "inherit"}}/></IconButton>
+            </Box>
+            <Box>
+              <IconButton sx={{borderRadius: 2, background: "rgba(255,255,255,0.05)"}} color="primary"><PhoneIcon style={{fontSize: "inherit"}}/></IconButton>
+            </Box>
+          </Box>:
+          <>
+            <ButtonBase sx={buttonProps} onClick={() => navigate("/about")}>
+              <PersonIcon style={{fontSize: "inherit", opacity: .6}}/>
+              <Typography variant='h6' sx={textProps}>ABOUT</Typography>
+            </ButtonBase>
+            <ButtonBase sx={buttonProps}>
+              <PhoneIcon style={{fontSize: "inherit", opacity: .6}}/>
+              <Typography variant='h6' sx={textProps}>CONTACT</Typography>
+            </ButtonBase>
+          </>
+        }
       </Box>
       <Box sx={boxBorderProps}>
-        <Typography variant='h6' sx={{fontSize: 12, letterSpacing: 1.5, fontWeight: 300, mb: 3, opacity: .8}}>FOLLOW MY SOCIAL:</Typography>
-        <ButtonBase sx={buttonProps}>
-          <LinkedInIcon style={{fontSize: "inherit", opacity: .6}}/>
-          <Typography variant='h6' sx={textProps}>LINKEDIN</Typography>
-        </ButtonBase>
-        <ButtonBase sx={buttonProps}>
-          <FacebookIcon style={{fontSize: "inherit", opacity: .6}}/>
-          <Typography variant='h6' sx={textProps}>FACEBOOK</Typography>
-        </ButtonBase>
-        <ButtonBase sx={buttonProps}>
-          <InstagramIcon style={{fontSize: "inherit", opacity: .6}}/>
-          <Typography variant='h6' sx={textProps}>INSTAGRAM</Typography>
-        </ButtonBase>
+        {isSidebarCollapsed.state ? 
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 2,
+              alignItems: "center"
+            }}
+          >
+            <Box>
+              <IconButton sx={{background: "rgba(255,255,255,0.05)"}}><LinkedInIcon style={{fontSize: "inherit", opacity: .7}}/></IconButton>
+            </Box>
+            <Box>
+              <IconButton sx={{background: "rgba(255,255,255,0.05)"}}><FacebookIcon style={{fontSize: "inherit", opacity: .7}}/></IconButton>
+            </Box>
+            <Box>
+              <IconButton sx={{background: "rgba(255,255,255,0.05)"}}><InstagramIcon style={{fontSize: "inherit", opacity: .7}}/></IconButton>
+            </Box>
+          </Box>:
+          <>
+            <Typography variant='h6' sx={{fontSize: 12, letterSpacing: 1.5, fontWeight: 300, mb: 3, opacity: .8}}>FOLLOW MY SOCIAL:</Typography>
+            <ButtonBase sx={buttonProps}>
+              <LinkedInIcon style={{fontSize: "inherit", opacity: .6}}/>
+              <Typography variant='h6' sx={textProps}>LINKEDIN</Typography>
+            </ButtonBase>
+            <ButtonBase sx={buttonProps}>
+              <FacebookIcon style={{fontSize: "inherit", opacity: .6}}/>
+              <Typography variant='h6' sx={textProps}>FACEBOOK</Typography>
+            </ButtonBase>
+            <ButtonBase sx={buttonProps}>
+              <InstagramIcon style={{fontSize: "inherit", opacity: .6}}/>
+              <Typography variant='h6' sx={textProps}>INSTAGRAM</Typography>
+            </ButtonBase>
+          </>
+        }
       </Box>
-      <Box sx={boxBorderProps}>
+      {!isSidebarCollapsed.state && <Box sx={boxBorderProps}>
         <Typography variant='h6' sx={{fontSize: 12, letterSpacing: 1.5, fontWeight: 300, mb: 3, opacity: .8}}>EMAIL:</Typography>
         <ButtonBase sx={{...buttonProps, opacity: 1}} href="mailto: carl.dimabuyu@gmail.com" target="_blank" rel="noreferrer">
           <Typography variant='h6' sx={{...textProps, fontWeight: 500, color: "primary.light", letterSpacing: 1 }}>carl.dimabuyu@gmail.com</Typography>
         </ButtonBase>
-      </Box>
+      </Box>}
     </Paper>
   )
 }

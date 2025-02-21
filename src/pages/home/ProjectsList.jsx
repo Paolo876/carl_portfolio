@@ -8,25 +8,33 @@ import ProjectModal from './ProjectModal'
 const projectImagesContainerProps = {
   pt: 5,
   display: "grid",
-  gridTemplateColumns: `repeat(auto-fill, minmax(280px, 1fr))`,
   gap: 1
 }
 
 
-const ProjectsList = () => {
+const ProjectsList = ({ isSidebarCollapsed }) => {
   const [ isModalVisible, setIsModalVisible ] = useState({ isVisible: false, id: null })
   const { isLoading, projects, error } = useProjectsRedux();
 
   useEffect(() => {
     // getProjects()
   }, [])
+
+
+
+
   return (
     <Box
       sx={{
         gridArea: "projects",
       }}
     >
-      <Box sx={projectImagesContainerProps}>
+      <Box 
+        sx={{
+          ...projectImagesContainerProps, 
+          gridTemplateColumns: `repeat(auto-fill, minmax(${isSidebarCollapsed.state ? "350px": "280px"}, 1fr))`,
+        }}
+      >
         {projects.map(item => <ProjectImage key={item.id} id={item.id} title={item.header} images={item.images} softwares={item.softwares} style={item.style} setIsModalVisible={setIsModalVisible}/>)}
         {projects.map(item => <ProjectImage key={item.id} id={item.id} title={item.header} images={item.images} softwares={item.softwares} style={item.style} setIsModalVisible={setIsModalVisible}/>)}
         {projects.map(item => <ProjectImage key={item.id} id={item.id} title={item.header} images={item.images} softwares={item.softwares} style={item.style} setIsModalVisible={setIsModalVisible}/>)}
