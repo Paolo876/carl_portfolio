@@ -130,11 +130,17 @@ const ProjectModal = ({ setIsModalVisible, isModalVisible }) => {
 
     
   const handleProjectBackClick = () => {
-    if(selectedImage.index !== 0) setSelectedImage(({...projects[selectedImage.index - 1], index: selectedImage.index - 1}))
+    if(selectedImage.index !== 0) {
+      setSelectedImageIdx(0)
+      setSelectedImage(({...projects[selectedImage.index - 1], index: selectedImage.index - 1}))
+    }
   }
 
   const handleProjectNextClick = () => {
-    if(selectedImage.index < projects.length - 1) setSelectedImage(({...projects[selectedImage.index + 1], index: selectedImage.index + 1}))
+    if(selectedImage.index < projects.length - 1) {
+      setSelectedImageIdx(0)
+      setSelectedImage(({...projects[selectedImage.index + 1], index: selectedImage.index + 1}))
+    }
   }
 
 
