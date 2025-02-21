@@ -155,7 +155,8 @@ const ProjectModal = ({ setIsModalVisible, isModalVisible }) => {
         sx={{
           border:0,
           borderRadius:0,
-          outline: "none",
+          outline: "none", 
+          background: "rgba(0,0,0,0.5)"
         }}
       >
         <Fade in={isModalVisible.isVisible}>

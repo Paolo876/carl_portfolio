@@ -14,10 +14,10 @@ const projectImagesContainerProps = {
 
 const ProjectsList = ({ isSidebarCollapsed }) => {
   const [ isModalVisible, setIsModalVisible ] = useState({ isVisible: false, id: null })
-  const { isLoading, projects, error } = useProjectsRedux();
+  const { isLoading, projects, error, getProjects } = useProjectsRedux();
 
   useEffect(() => {
-    // getProjects()
+    getProjects()
   }, [])
 
 
@@ -32,7 +32,10 @@ const ProjectsList = ({ isSidebarCollapsed }) => {
       <Box 
         sx={{
           ...projectImagesContainerProps, 
-          gridTemplateColumns: `repeat(auto-fill, minmax(${isSidebarCollapsed.state ? "350px": "280px"}, 1fr))`,
+          gridTemplateColumns: {
+            lg: `repeat(auto-fill, minmax(${isSidebarCollapsed.state ? "300px": "250px"}, 1fr))`,
+            xl: `repeat(auto-fill, minmax(${isSidebarCollapsed.state ? "350px": "280px"}, 1fr))`
+          },
         }}
       >
         {projects.map(item => <ProjectImage key={item.id} id={item.id} title={item.header} images={item.images} softwares={item.softwares} style={item.style} setIsModalVisible={setIsModalVisible}/>)}

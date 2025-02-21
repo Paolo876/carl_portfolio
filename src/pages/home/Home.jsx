@@ -6,16 +6,17 @@ import Sidebar from './Sidebar';
 
 
 const sidebarWidthsOff = {
-  md: "200px", lg: "300px", xl: "340px"
+  md: "200px", lg: "280px", xl: "340px"
 
 }
 
 const sidebarWidthsOn = {
-  md: "50px", lg: "50px", xl: "100px"
+  md: "50px", lg: "80px", xl: "100px"
 }
 
 const pageTopMargin = {
   xs: 5,
+  lg: 4,
   xl: 4
 }
 
@@ -24,11 +25,7 @@ export default function Home() {
 
     // trigger when window.scrollY is not 0
     window.onscroll = () => {
-      if(window.scrollY !== 0) {
-        if(!isSidebarCollapsed.state) setIsSidebarCollapsed(prevState => ({...prevState, state: true}))
-      } else {
-        if(isSidebarCollapsed.state) setIsSidebarCollapsed(prevState => ({...prevState, state: false}))
-      }
+      if(!isSidebarCollapsed.state) setIsSidebarCollapsed(prevState => ({...prevState, state: true}))
     }
 
   const gridTemplateColumns = {
@@ -47,11 +44,11 @@ export default function Home() {
           gridTemplateAreas: "'projects nav' 'footer footer'",
           gridTemplateColumns,
           gap: 5,
-          mx: {lg: 6, xl: 8},
+          mx: {lg: 4, xl: 8},
           mt: pageTopMargin
         }}
       >
-        <Sidebar isSidebarCollapsed={isSidebarCollapsed} pageTopMargin={pageTopMargin}/>
+        <Sidebar isSidebarCollapsed={isSidebarCollapsed} setIsSidebarCollapsed={setIsSidebarCollapsed} pageTopMargin={pageTopMargin}/>
         <ProjectsList isSidebarCollapsed={isSidebarCollapsed}/>
       </Box>
   )

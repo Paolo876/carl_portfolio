@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router';
-import { Paper, Box, Typography, ButtonBase, IconButton } from '@mui/material'
+import { Paper, Box, Typography, ButtonBase, IconButton, Tooltip } from '@mui/material'
 import Image from 'mui-image'
 import logo from "../../assets/logo_white_100.png"
 
@@ -41,7 +41,7 @@ const boxBorderProps = {
 }
 
 
-const Sidebar = ({ isSidebarCollapsed, pageTopMargin }) => {
+const Sidebar = ({ isSidebarCollapsed, setIsSidebarCollapsed, pageTopMargin }) => {
   const navigate = useNavigate();
 
   return (
@@ -53,22 +53,47 @@ const Sidebar = ({ isSidebarCollapsed, pageTopMargin }) => {
         borderRadius: 4,
         position: "fixed",
         top:0,
-        right:0,
+        right:{lg: 4, xl: 8},
         left: "auto",
-        mr: 8,
+        mr: {lg: 4, xl: 8},
         overflowY: "auto",
-        pt: { lg: 6, xl:8 },
-        pb: {xl: isSidebarCollapsed.state ? 10 : 8},
+        pb: {lg: isSidebarCollapsed.state ? 8 : 6, xl: isSidebarCollapsed.state ? 10 : 8},
         mt: {md: pageTopMargin.md + 5, lg: pageTopMargin.lg + 5, xl: pageTopMargin.xl + 5 },
         px: isSidebarCollapsed.state ? 3 : 4,
         width: isSidebarCollapsed.state ? isSidebarCollapsed.widthOn : isSidebarCollapsed.widthOff,
-        height: isSidebarCollapsed.state ? "auto" : "85vh",
+        height: isSidebarCollapsed.state ? "auto" : "88vh",
       }}
     >
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: isSidebarCollapsed.state ? "center" : "right",
+        mt: 2
+      }}
+    >
+      {isSidebarCollapsed.state ? 
+        <IconButton 
+          size="small" 
+          sx={{borderRadius: 2, transform: "rotate(180deg)"}} 
+          onClick={() => setIsSidebarCollapsed(prevState => ({...prevState, state: false}))}
+        >
+          <KeyboardTabIcon style={{fontSize: "inherit"}}/>
+        </IconButton>
+      : 
+        <IconButton 
+          size="small" 
+          sx={{borderRadius: 2}}
+          onClick={() => setIsSidebarCollapsed(prevState => ({...prevState, state: true}))}
+        >
+          <KeyboardTabIcon  style={{fontSize: "inherit"}}/>
+        </IconButton>
+      }
+    </Box>
       <Box 
         sx={{ 
+          mt: { lg: 4 },
           height: {
-            lg: 65, 
+            lg: isSidebarCollapsed.state ? 35 : 65, 
             xl: isSidebarCollapsed.state ? 45 : 75
           }, 
           display: "flex", 
@@ -110,7 +135,7 @@ const Sidebar = ({ isSidebarCollapsed, pageTopMargin }) => {
       </Box>
       <Box
         sx={{
-          mt: { lg:10, xl:12 },
+          mt: { lg:10 },
         }}
       >
         {isSidebarCollapsed.state ? 
@@ -122,12 +147,12 @@ const Sidebar = ({ isSidebarCollapsed, pageTopMargin }) => {
               alignItems: "center"
             }}
           >
-            <Box>
+            <Tooltip title="About" placement="left" arrow>
               <IconButton sx={{borderRadius: 2, background: "rgba(255,255,255,0.05)"}} color="primary"><PersonIcon style={{fontSize: "inherit"}}/></IconButton>
-            </Box>
-            <Box>
+            </Tooltip>
+            <Tooltip title="Contact" placement="left" arrow>
               <IconButton sx={{borderRadius: 2, background: "rgba(255,255,255,0.05)"}} color="primary"><PhoneIcon style={{fontSize: "inherit"}}/></IconButton>
-            </Box>
+            </Tooltip>
           </Box>:
           <>
             <ButtonBase sx={buttonProps} onClick={() => navigate("/about")}>
@@ -151,15 +176,15 @@ const Sidebar = ({ isSidebarCollapsed, pageTopMargin }) => {
               alignItems: "center"
             }}
           >
-            <Box>
+            <Tooltip title="LinkedIn" placement="left" arrow>
               <IconButton sx={{background: "rgba(255,255,255,0.05)"}}><LinkedInIcon style={{fontSize: "inherit", opacity: .7}}/></IconButton>
-            </Box>
-            <Box>
+            </Tooltip>
+            <Tooltip  title="Facebook" placement="left" arrow>
               <IconButton sx={{background: "rgba(255,255,255,0.05)"}}><FacebookIcon style={{fontSize: "inherit", opacity: .7}}/></IconButton>
-            </Box>
-            <Box>
+            </Tooltip>
+            <Tooltip  title="Instagram" placement="left" arrow>
               <IconButton sx={{background: "rgba(255,255,255,0.05)"}}><InstagramIcon style={{fontSize: "inherit", opacity: .7}}/></IconButton>
-            </Box>
+            </Tooltip>
           </Box>:
           <>
             <Typography variant='h6' sx={{fontSize: 12, letterSpacing: 1.5, fontWeight: 300, mb: 3, opacity: .8}}>FOLLOW MY SOCIAL:</Typography>

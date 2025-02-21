@@ -6,7 +6,7 @@ import CollectionsIcon from '@mui/icons-material/Collections';
 const boxContainerProps = {
   border: 1, 
   borderColor: "rgba(255,255,255,.1)", 
-  height: 275,
+  height: {md: 200, lg: 240,  xl: 275},
   cursor: "pointer",
   position: "relative",
   overflow: "hidden"
