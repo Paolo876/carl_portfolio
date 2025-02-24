@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Box } from '@mui/material'
+import { Box, Fade } from '@mui/material'
 import ProjectImage from './ProjectImage'
 import useProjectsRedux from '../../hooks/useProjectsRedux'
 import ProjectModal from './ProjectModal'
@@ -8,7 +8,7 @@ import ProjectModal from './ProjectModal'
 const projectImagesContainerProps = {
   pt: 5,
   display: "grid",
-  gap: 1
+  gap: 1,
 }
 
 
@@ -27,21 +27,26 @@ const ProjectsList = ({ isSidebarCollapsed }) => {
     <Box
       sx={{
         gridArea: "projects",
+        transition: "300ms width ease"
       }}
     >
-      <Box 
-        sx={{
-          ...projectImagesContainerProps, 
-          gridTemplateColumns: {
-            lg: `repeat(auto-fill, minmax(${isSidebarCollapsed.state ? "300px": "250px"}, 1fr))`,
-            xl: `repeat(auto-fill, minmax(${isSidebarCollapsed.state ? "350px": "280px"}, 1fr))`
-          },
-        }}
-      >
-        {projects.map(item => <ProjectImage key={item.id} id={item.id} title={item.header} images={item.images} softwares={item.softwares} style={item.style} setIsModalVisible={setIsModalVisible}/>)}
-        {/* {projects.map(item => <ProjectImage key={item.id} id={item.id} title={item.header} images={item.images} softwares={item.softwares} style={item.style} setIsModalVisible={setIsModalVisible}/>)} */}
-        {/* {projects.map(item => <ProjectImage key={item.id} id={item.id} title={item.header} images={item.images} softwares={item.softwares} style={item.style} setIsModalVisible={setIsModalVisible}/>)} */}
-      </Box>
+      <Fade in={true} timeout={{enter: 800}} style={{transitionDelay: "300ms"}}>
+        <Box 
+          sx={{
+            ...projectImagesContainerProps, 
+            gridTemplateColumns: {
+              md: `repeat(auto-fill, minmax(${isSidebarCollapsed.state ? "250px": "220px"}, 1fr))`,
+              lg: `repeat(auto-fill, minmax(${isSidebarCollapsed.state ? "300px": "250px"}, 1fr))`,
+              xl: `repeat(auto-fill, minmax(${isSidebarCollapsed.state ? "350px": "280px"}, 1fr))`
+            },
+            transition: "300ms width ease"
+          }}
+        >
+          {projects.map(item => <ProjectImage key={item.id} id={item.id} title={item.header} images={item.images} softwares={item.softwares} style={item.style} setIsModalVisible={setIsModalVisible}/>)}
+          {projects.map(item => <ProjectImage key={item.id} id={item.id} title={item.header} images={item.images} softwares={item.softwares} style={item.style} setIsModalVisible={setIsModalVisible}/>)}
+          {/* {projects.map(item => <ProjectImage key={item.id} id={item.id} title={item.header} images={item.images} softwares={item.softwares} style={item.style} setIsModalVisible={setIsModalVisible}/>)} */}
+        </Box>
+      </Fade>
       {isModalVisible.isVisible && <ProjectModal 
         isModalVisible={isModalVisible} 
         setIsModalVisible={setIsModalVisible}

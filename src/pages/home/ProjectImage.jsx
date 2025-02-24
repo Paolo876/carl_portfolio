@@ -6,10 +6,11 @@ import CollectionsIcon from '@mui/icons-material/Collections';
 const boxContainerProps = {
   border: 1, 
   borderColor: "rgba(255,255,255,.1)", 
-  height: {md: 200, lg: 240,  xl: 275},
+  height: {md: 240, lg: 240,  xl: 275},
   cursor: "pointer",
   position: "relative",
-  overflow: "hidden"
+  overflow: "hidden",
+  transition: "300ms width ease"
 
 }
 
@@ -66,11 +67,13 @@ const ProjectImage = ({ src, title, images, software, style, setIsModalVisible, 
           p: 1,
           zIndex: 1,
           fontSize: 20,
+          transition: "300ms width ease"
+
         }}
       >
         <CollectionsIcon style={{fontSize: "inherit", filter: "drop-shadow( 1px 1px 1px rgba(0, 0, 0, 0.7))"}}/>
       </Box>}
-      <Image src={images[0].src} duration={100}/>
+      <Image src={images[0].src} duration={100} sx={{transition: "300ms width ease"}}/>
     </Box>
   )
 }
