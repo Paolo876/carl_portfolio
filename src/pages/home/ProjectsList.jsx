@@ -35,7 +35,7 @@ const ProjectsList = ({ isSidebarCollapsed }) => {
           sx={{
             ...projectImagesContainerProps, 
             gridTemplateColumns: {
-              md: `repeat(auto-fill, minmax(${isSidebarCollapsed.state ? "250px": "220px"}, 1fr))`,
+              md: `repeat(auto-fill, minmax(${isSidebarCollapsed.state ? "270px": "220px"}, 1fr))`,
               lg: `repeat(auto-fill, minmax(${isSidebarCollapsed.state ? "300px": "250px"}, 1fr))`,
               xl: `repeat(auto-fill, minmax(${isSidebarCollapsed.state ? "350px": "280px"}, 1fr))`
             },
@@ -43,7 +43,7 @@ const ProjectsList = ({ isSidebarCollapsed }) => {
           }}
         >
           {projects.map(item => <ProjectImage key={item.id} id={item.id} title={item.header} images={item.images} softwares={item.softwares} style={item.style} setIsModalVisible={setIsModalVisible}/>)}
-          {projects.map(item => <ProjectImage key={item.id} id={item.id} title={item.header} images={item.images} softwares={item.softwares} style={item.style} setIsModalVisible={setIsModalVisible}/>)}
+          {/* {projects.map(item => <ProjectImage key={item.id} id={item.id} title={item.header} images={item.images} softwares={item.softwares} style={item.style} setIsModalVisible={setIsModalVisible}/>)} */}
           {/* {projects.map(item => <ProjectImage key={item.id} id={item.id} title={item.header} images={item.images} softwares={item.softwares} style={item.style} setIsModalVisible={setIsModalVisible}/>)} */}
         </Box>
       </Fade>

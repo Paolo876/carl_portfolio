@@ -41,7 +41,7 @@ export default function Home() {
       <Box
         sx={{
           display: "grid",
-          gridTemplateAreas: "'projects nav' 'footer footer'",
+          gridTemplateAreas: {sm: "'projects'", md: "'projects nav' 'footer footer'"},
           gridTemplateColumns,
           gap: {md: 4, lg:5},
           mx: {md: 4, lg: 4, xl: 8},

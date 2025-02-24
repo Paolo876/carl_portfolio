@@ -57,11 +57,12 @@ const Sidebar = ({ isSidebarCollapsed, setIsSidebarCollapsed, pageTopMargin }) =
         left: "auto",
         mr: {md: 3, lg: 4, xl: 8},
         overflowY: "auto",
-        pb: {md: isSidebarCollapsed.state ? 6 : 3, lg: isSidebarCollapsed.state ? 8 : 5, xl: isSidebarCollapsed.state ? 10 : 8},
+        pb: {md: isSidebarCollapsed.state ? 7 : 6, lg: isSidebarCollapsed.state ? 8 : 5, xl: isSidebarCollapsed.state ? 10 : 8},
         mt: {md: 6, lg: pageTopMargin.lg + 5, xl: pageTopMargin.xl + 5 },
         px: {md: isSidebarCollapsed.state ? 2 : 3, lg: isSidebarCollapsed.state ? 3 : 4},
         width: isSidebarCollapsed.state ? isSidebarCollapsed.widthOn : isSidebarCollapsed.widthOff,
-        height: isSidebarCollapsed.state ? "auto" : "88vh",
+        // height: {md: "auto", lg: isSidebarCollapsed.state ? "auto" : "88vh"},
+        height: "auto",
         transition: "150ms width ease"
       }}
     >
