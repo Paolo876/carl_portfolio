@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { useAuthContext } from "./useAuthContext";
-import { GoogleAuthProvider, signInWithRedirect } from "firebase/auth";
+import { GoogleAuthProvider, signInWithRedirect, getAuth, signInWithPopup } from "firebase/auth";
 import { auth } from "../firebase/config";
+
+
 export const useGoogleLogin = () => {
   const [ error, setError ] = useState(null);
   const [ isLoading, setIsLoading ] = useState(false);
@@ -10,13 +12,27 @@ export const useGoogleLogin = () => {
     setError(null)
     setIsLoading(true)
     const provider = new GoogleAuthProvider();
-    await signInWithRedirect( auth, provider)
-        .then( result => {
-            dispatch({type: 'LOGIN', payload: result.user});
-        })
-        .catch(err => {
-            setError(err.message)
-        });
+    provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+
+    signInWithPopup(auth, provider)
+      .then(result => {
+        console.log(result.user)
+        dispatch({type: 'LOGIN', payload: result.user});
+      })
+      .catch(err => {
+          setError(err.message)
+      });
+    // await signInWithRedirect( auth, provider)
+
+    //     .then( result => {
+    //       console.log(result.user)
+    //         dispatch({type: 'LOGIN', payload: result.user});
+    //     })
+    //     .catch(err => {
+    //         setError(err.message)
+    //     });
+
+
     setIsLoading(false);
   }
 

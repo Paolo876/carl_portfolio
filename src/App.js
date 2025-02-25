@@ -22,7 +22,6 @@ function App() {
     <div className="app" >
       <BrowserRouter>
         { user && <DevNavbar/> }
-        {/* <Navbar/> */}
         <MainNavigation/>
       </BrowserRouter>
     </div>

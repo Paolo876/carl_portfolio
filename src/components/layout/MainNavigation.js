@@ -15,6 +15,7 @@ import UpdateResume from '../../pages/dev/updateResume/UpdateResume';
 
 export default function MainNavigation() {
   const { isLoginAllowed, user, authIsReady } = useAuthContext();
+  console.log(user, authIsReady)
   return (
     <main>
       {authIsReady &&
@@ -23,7 +24,7 @@ export default function MainNavigation() {
             <Route path='/projects' element={ <Projects/>}/>
             <Route path='/about' element={ <About/>}/>
             <Route path='/contact' element={ <Contact/>}/>
-            <Route path='/dev/login' element={ isLoginAllowed || user ? <Login/> : <Navigate to="/"/>}/>
+            <Route path='/dev/login' element={ !user ? <Login/> : <Navigate to="/"/>}/>
             <Route path='/dev/upload' element={ isLoginAllowed || user ? <Upload/> : <Navigate to="/"/>}/>
             <Route path='/dev/update-resume' element={ isLoginAllowed || user ? <UpdateResume/> : <Navigate to="/"/>}/>
         </Routes>
