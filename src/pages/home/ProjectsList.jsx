@@ -35,7 +35,7 @@ const ProjectsList = ({ isSidebarCollapsed }) => {
           sx={{
             ...projectImagesContainerProps, 
             gridTemplateColumns: {
-              sm: `450px`,
+              sm: `60vw`,
               md: `repeat(auto-fill, minmax(${isSidebarCollapsed.state ? "270px": "220px"}, 1fr))`,
               lg: `repeat(auto-fill, minmax(${isSidebarCollapsed.state ? "300px": "250px"}, 1fr))`,
               xl: `repeat(auto-fill, minmax(${isSidebarCollapsed.state ? "350px": "280px"}, 1fr))`
