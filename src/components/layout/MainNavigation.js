@@ -15,7 +15,7 @@ import UpdateResume from '../../pages/dev/updateResume/UpdateResume';
 
 export default function MainNavigation() {
   const { isLoginAllowed, user, authIsReady } = useAuthContext();
-  console.log(user, authIsReady)
+  // console.log(user, authIsReady)
   return (
     <main>
       {authIsReady &&

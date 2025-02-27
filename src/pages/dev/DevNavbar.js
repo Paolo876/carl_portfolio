@@ -13,7 +13,7 @@ export default function DevNavbar() {
             <li><p>Logged in as: {user.displayName}</p></li>
             <li><Link to="/dev/upload">UPLOAD IMAGES</Link></li>
             <li><Link to="/dev/update-resume">UPDATE RESUME</Link></li>
-            <li><button onClick={() => logout()}>LOGOUT</button></li>
+            <li style={{marginLeft: "80px"}}><button onClick={() => logout()}>LOGOUT</button></li>
         </ul>
     </div>
   )

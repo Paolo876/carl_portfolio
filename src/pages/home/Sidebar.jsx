@@ -34,8 +34,8 @@ const textProps = {
 }
 
 const boxBorderProps = {
-  mt: {md: 2, lg: 3, xl: 4},
-  pt: {md: 3, lg: 4, xl: 6},
+  mt: {sm: 2, md: 2, lg: 3, xl: 4},
+  pt: {sm: 2, emd: 3, lg: 4, xl: 6},
   borderTop: 1,
   borderColor: "primary.dark"
 }
@@ -45,6 +45,7 @@ const Sidebar = ({ isSidebarCollapsed, setIsSidebarCollapsed, pageTopMargin }) =
   const navigate = useNavigate();
 
   return (
+    <>
     <Paper
       sx={{
         gridArea: "nav",
@@ -53,17 +54,17 @@ const Sidebar = ({ isSidebarCollapsed, setIsSidebarCollapsed, pageTopMargin }) =
         borderRadius: 4,
         position: "fixed",
         top:0,
-        right:{md: 3, lg: 4, xl: 8},
+        right:{sm: 2, md: 3, lg: 4, xl: 8},
         left: "auto",
-        mr: {md: 3, lg: 4, xl: 8},
+        mr: {sm: 2, md: 3, lg: 4, xl: 8},
         overflowY: "auto",
-        pb: {md: isSidebarCollapsed.state ? 7 : 6, lg: isSidebarCollapsed.state ? 8 : 5, xl: isSidebarCollapsed.state ? 10 : 8},
-        mt: {md: 6, lg: pageTopMargin.lg + 5, xl: pageTopMargin.xl + 5 },
-        px: {md: isSidebarCollapsed.state ? 2 : 3, lg: isSidebarCollapsed.state ? 3 : 4},
+        pb: {sm: 6, md: isSidebarCollapsed.state ? 7 : 6, lg: isSidebarCollapsed.state ? 8 : 5, xl: isSidebarCollapsed.state ? 10 : 8},
+        mt: {sm: 6, md: 6, lg: pageTopMargin.lg + 5, xl: pageTopMargin.xl + 5 },
+        px: {sm: 2, md: isSidebarCollapsed.state ? 2 : 3, lg: isSidebarCollapsed.state ? 3 : 4},
         width: isSidebarCollapsed.state ? isSidebarCollapsed.widthOn : isSidebarCollapsed.widthOff,
-        // height: {md: "auto", lg: isSidebarCollapsed.state ? "auto" : "88vh"},
         height: "auto",
-        transition: "150ms width ease"
+        transition: "150ms width ease",
+        display: {sm: "none", md:"initial"}
       }}
     >
       <Box
@@ -93,7 +94,7 @@ const Sidebar = ({ isSidebarCollapsed, setIsSidebarCollapsed, pageTopMargin }) =
       </Box>
       <Box 
         sx={{ 
-          mt: { md: 3, lg: 4 },
+          mt: { sm: 3, md: 3, lg: 4 },
           height: {
             md: isSidebarCollapsed.state ? 35 : 60, 
             lg: isSidebarCollapsed.state ? 35 : 65, 
@@ -103,7 +104,7 @@ const Sidebar = ({ isSidebarCollapsed, setIsSidebarCollapsed, pageTopMargin }) =
           justifyContent: "center",
         }}
       >
-        <Image src={logo} fit="cover" height="auto" width="auto" duration={250}/>
+        <Image src={logo} fit="scale-down" height="auto" width="auto" duration={250}/>
       </Box>
       <Box
         sx={{
@@ -142,7 +143,7 @@ const Sidebar = ({ isSidebarCollapsed, setIsSidebarCollapsed, pageTopMargin }) =
       </Box>
       <Box
         sx={{
-          mt: { md: 8, lg:10 },
+          mt: { sm: 6, md: 8, lg:10 },
         }}
       >
         {isSidebarCollapsed.state ? 
@@ -221,6 +222,69 @@ const Sidebar = ({ isSidebarCollapsed, setIsSidebarCollapsed, pageTopMargin }) =
         </ButtonBase>
       </Box>}
     </Paper>
+    <Paper
+      sx={{
+        gridArea: "nav",
+        border: 1,
+        borderColor: "rgba(255,255,255, .05)",
+        borderRadius: 4,
+        position: "fixed",
+        top:0,
+        right:{sm: 2},
+        left: "auto",
+        mr: {sm: 2},
+        overflowY: "auto",
+        pb: {sm: 6 },
+        mt: {sm: 6 },
+        px: {sm: 2 },
+        height: "auto",
+        transition: "150ms width ease",
+        display: {sm: "initial", md:"none"}
+      }}
+    >
+      <Box 
+        sx={{ 
+          mt: { sm: 6, },
+          height: {sm: 35 }, 
+          display: "flex", 
+          justifyContent: "center",
+        }}
+      >
+        <Image src={logo} fit="scale-down" height="auto" width="auto" duration={250}/>
+      </Box>
+      <Box
+        sx={{
+          mt: { sm: 6, md: 8, lg:10 },
+        }}
+      >
+        <Box 
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 2,
+            alignItems: "center"
+          }}
+        >
+          <IconButton sx={{borderRadius: 2, background: "rgba(255,255,255,0.05)"}} color="primary"><PersonIcon style={{fontSize: "inherit"}}/></IconButton>
+          <IconButton sx={{borderRadius: 2, background: "rgba(255,255,255,0.05)"}} color="primary"><PhoneIcon style={{fontSize: "inherit"}}/></IconButton>
+        </Box>
+      </Box>
+      <Box sx={boxBorderProps}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 2,
+            alignItems: "center"
+          }}
+        >
+            <IconButton sx={{background: "rgba(255,255,255,0.05)"}}><LinkedInIcon style={{fontSize: "inherit", opacity: .7}}/></IconButton>
+            <IconButton sx={{background: "rgba(255,255,255,0.05)"}}><FacebookIcon style={{fontSize: "inherit", opacity: .7}}/></IconButton>
+            <IconButton sx={{background: "rgba(255,255,255,0.05)"}}><InstagramIcon style={{fontSize: "inherit", opacity: .7}}/></IconButton>
+        </Box>
+      </Box>
+    </Paper>
+    </>
   )
 }
 

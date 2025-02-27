@@ -6,12 +6,12 @@ import Sidebar from './Sidebar';
 
 
 const sidebarWidthsOff = {
-  md: "230px", lg: "280px", xl: "340px"
+  sm: "70px", md: "230px", lg: "280px", xl: "340px"
 
 }
 
 const sidebarWidthsOn = {
-  md: "75px", lg: "80px", xl: "100px"
+  sm: "70px", md: "75px", lg: "80px", xl: "100px"
 }
 
 const pageTopMargin = {
@@ -41,10 +41,10 @@ export default function Home() {
       <Box
         sx={{
           display: "grid",
-          gridTemplateAreas: {sm: "'projects'", md: "'projects nav' 'footer footer'"},
+          gridTemplateAreas: {sm: "'projects nav'", md: "'projects nav' 'footer footer'"},
           gridTemplateColumns,
-          gap: {md: 4, lg:5},
-          mx: {md: 4, lg: 4, xl: 8},
+          gap: {sm: 4, md: 4, lg:5},
+          mx: {sm: 4, md: 4, lg: 4, xl: 8},
           mt: pageTopMargin
         }}
       >

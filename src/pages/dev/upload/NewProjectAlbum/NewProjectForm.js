@@ -80,7 +80,7 @@ export default function NewProjectForm({ projectInformation, setProjectInformati
               <span>TITLE:</span>
               <input 
                   type="text" 
-                  placeholder='GAMING ROOM v1'
+                  placeholder='Gaming Room'
                   onChange={(e) => setHeader(e.target.value)}  
                   value={header}
                   required
@@ -91,7 +91,7 @@ export default function NewProjectForm({ projectInformation, setProjectInformati
               <span>STYLE:</span>
               <input 
                   type="text" 
-                  placeholder='CONTEMPORARY'
+                  placeholder='Contemporary'
                   onChange={e => setStyle(e.target.value)}  
                   value={style}
                   required
@@ -101,6 +101,7 @@ export default function NewProjectForm({ projectInformation, setProjectInformati
           </label>
           <label className="header-input">
           <span>SOFTWARES USED:</span>
+          <span><small>**click mo lang enter kada entry pre</small></span>
               <input 
                   type="text" 
                   placeholder='Adobe Photoshop'

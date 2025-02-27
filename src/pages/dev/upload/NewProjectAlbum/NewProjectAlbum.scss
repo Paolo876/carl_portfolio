@@ -9,8 +9,8 @@
         }
         button {
             border-radius: 10px;
-            background-color: var(--primary-color);
-            color: white;
+            background-color: white;
+            color: var(--primary-color);
             padding: 1em 3em;
             font-weight: 600;
             letter-spacing: .1em;
@@ -34,7 +34,8 @@
             border-radius: 10px;
             padding: .5em 1.2em;
             font-weight: 500;
-
+            // background-color: white;
+            color: var(--primary-color);
         }
     }
 }
