@@ -3,7 +3,7 @@ import { Box, Fade } from '@mui/material'
 import ProjectImage from './ProjectImage'
 import useProjectsRedux from '../../hooks/useProjectsRedux'
 import ProjectModal from './ProjectModal'
-
+import Carousel from 'react-material-ui-carousel'
 
 const projectImagesContainerProps = {
   pt: 5,
@@ -30,12 +30,17 @@ const ProjectsList = ({ isSidebarCollapsed }) => {
         transition: "300ms width ease"
       }}
     >
+    {/* mobile header */}
+      <Box>
+        asdasdasds
+      </Box>
       <Fade in={true} timeout={{enter: 800}} style={{transitionDelay: "300ms"}}>
         <Box 
           sx={{
             ...projectImagesContainerProps, 
             gridTemplateColumns: {
-              sm: `60vw`,
+              xs: "100vw",
+              sm: `65vw`,
               md: `repeat(auto-fill, minmax(${isSidebarCollapsed.state ? "270px": "220px"}, 1fr))`,
               lg: `repeat(auto-fill, minmax(${isSidebarCollapsed.state ? "300px": "250px"}, 1fr))`,
               xl: `repeat(auto-fill, minmax(${isSidebarCollapsed.state ? "350px": "280px"}, 1fr))`

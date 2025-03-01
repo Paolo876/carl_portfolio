@@ -11,7 +11,7 @@ const boxContainerProps = {
   position: "relative",
   overflow: "hidden",
   transition: "300ms width ease",
-  display: {sm: "none", md: "initial"}
+  display: {xs: "none", md: "initial"}
 }
 
 const infoBoxProps = {
@@ -95,7 +95,7 @@ const ProjectImage = ({ src, title, images, softwares, style, setIsModalVisible,
       <Box
         sx={{
           border: "none",
-          display: {sm: "initial", md: "none"}
+          display: {xs: "initial", md: "none"}
 
         }}
       >

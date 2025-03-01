@@ -53,6 +53,7 @@ const Sidebar = ({ isSidebarCollapsed, setIsSidebarCollapsed, pageTopMargin }) =
         borderColor: "rgba(255,255,255, .05)",
         borderRadius: 4,
         position: "fixed",
+        background: isSidebarCollapsed.state ? "rgba(55,55,55,0.35)": "rgba(55,55,55,0.2)",
         top:0,
         right:{sm: 2, md: 3, lg: 4, xl: 8},
         left: "auto",
@@ -63,8 +64,8 @@ const Sidebar = ({ isSidebarCollapsed, setIsSidebarCollapsed, pageTopMargin }) =
         px: {sm: 2, md: isSidebarCollapsed.state ? 2 : 3, lg: isSidebarCollapsed.state ? 3 : 4},
         width: isSidebarCollapsed.state ? isSidebarCollapsed.widthOn : isSidebarCollapsed.widthOff,
         height: "auto",
-        transition: "150ms width ease",
-        display: {sm: "none", md:"initial"}
+        transition: "150ms all ease",
+        display: {xs: "none", md:"initial"}
       }}
     >
       <Box
@@ -222,6 +223,8 @@ const Sidebar = ({ isSidebarCollapsed, setIsSidebarCollapsed, pageTopMargin }) =
         </ButtonBase>
       </Box>}
     </Paper>
+
+    {/* mobile */}
     <Paper
       sx={{
         gridArea: "nav",
@@ -229,9 +232,10 @@ const Sidebar = ({ isSidebarCollapsed, setIsSidebarCollapsed, pageTopMargin }) =
         borderColor: "rgba(255,255,255, .05)",
         borderRadius: 4,
         position: "fixed",
-        top:0,
-        right:{sm: 2},
-        left: "auto",
+        top:{xs: "initial", sm: 0 },
+        bottom:{xs: 0, sm: "initial"},
+        right:{xs: 0, sm: 2},
+        left: {xs: 0, sm:"auto"},
         mr: {sm: 2},
         overflowY: "auto",
         pb: {sm: 6 },
@@ -239,14 +243,17 @@ const Sidebar = ({ isSidebarCollapsed, setIsSidebarCollapsed, pageTopMargin }) =
         px: {sm: 2 },
         height: "auto",
         transition: "150ms width ease",
-        display: {sm: "initial", md:"none"}
+        display: {xs: "flex", sm: "initial", md:"none"},
+        zIndex: 5,
+        width: {xs: "fit-content", sm: "initial"},
+        marginInline: {xs: "auto", sm:"none"}
       }}
     >
       <Box 
         sx={{ 
           mt: { sm: 6, },
           height: {sm: 35 }, 
-          display: "flex", 
+          display: {xs: "none", sm:"flex" }, 
           justifyContent: "center",
         }}
       >
@@ -269,7 +276,7 @@ const Sidebar = ({ isSidebarCollapsed, setIsSidebarCollapsed, pageTopMargin }) =
           <IconButton sx={{borderRadius: 2, background: "rgba(255,255,255,0.05)"}} color="primary"><PhoneIcon style={{fontSize: "inherit"}}/></IconButton>
         </Box>
       </Box>
-      <Box sx={boxBorderProps}>
+      <Box sx={{...boxBorderProps, display: {xs: "none", sm:"flex"}}}>
         <Box
           sx={{
             display: "flex",
