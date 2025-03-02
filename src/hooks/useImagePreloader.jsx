@@ -16,6 +16,7 @@ function preloadImage (src) {
 
 const useImagePreloader = (imageList) => {
   const [imagesPreloaded, setImagesPreloaded] = useState(false)
+  const [ maxDimensions, setMaxDimensions ] = useState({height: 0, width: 0, ratio: 0})
 
   useEffect(() => {
     let isCancelled = false
@@ -25,10 +26,17 @@ const useImagePreloader = (imageList) => {
       if (isCancelled) {
         return
       }
-
       const imagesPromiseList = []
       for (const i of imageList) {
         imagesPromiseList.push(preloadImage(i))
+        const img = new Image();
+        img.src = i;
+
+        img.onload = () => {
+          if((img.height / img.width) > maxDimensions.ratio) {
+            setMaxDimensions({height: img.height, width: img.width, ratio: (img.height / img.width)})
+          }
+        }
       }
   
       await Promise.all(imagesPromiseList)
@@ -41,13 +49,12 @@ const useImagePreloader = (imageList) => {
     }
 
     effect()
-
     return () => {
       isCancelled = true
     }
   }, [imageList])
 
-  return { imagesPreloaded }
+  return { imagesPreloaded, maxDimensions }
 }
 
 

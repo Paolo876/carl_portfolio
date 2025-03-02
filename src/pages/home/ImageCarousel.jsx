@@ -12,12 +12,13 @@ const containerProps = {
 const carouselContainerProps = {
   border: 1,
   borderColor: "rgba(255,255,255,.1)", 
-  borderRadius: 1,
+  borderRadius: 0,
   maxHeight: "80vh",
   cursor: "pointer",
   position: "relative",
   overflow: "hidden",
   transition: "300ms width ease",
+  background: "rgba(5,5,5,.5)"
 }
 
 const infoContainerProps = {
@@ -46,11 +47,10 @@ const listItemProps = {
 }
 
 
-const ImageCarousel = ({ src, title, images, softwares, style, setIsModalVisible, id }) => {
+const ImageCarousel = ({ src, title, images, softwares, style, id }) => {
 
-  const { imagesPreloaded } = useImagePreloader(images.map(item => item.src))
-
-
+  const { imagesPreloaded, maxDimensions } = useImagePreloader(images.map(item => item.src))
+  console.log(maxDimensions.ratio * window.innerWidth)
   return (
     <Box sx={containerProps}>
       {imagesPreloaded && <Carousel
@@ -58,7 +58,14 @@ const ImageCarousel = ({ src, title, images, softwares, style, setIsModalVisible
         autoPlay={false}
         animation='slide'
       >
-        {images.map(item => <Box sx={carouselContainerProps}>
+        {images.map(item => <Box 
+          sx={{
+            ...carouselContainerProps, 
+            // height: maxDimensions.width > maxDimensions.height ? (maxDimensions.height / maxDimensions.width) * window.innerWidth : "100%",
+            height: maxDimensions.ratio * window.innerWidth
+          }} 
+          key={item.filename}
+        >
           <Image 
             src={item.src} 
             duration={100} 
@@ -67,14 +74,7 @@ const ImageCarousel = ({ src, title, images, softwares, style, setIsModalVisible
             alt={item.title}
           />
         </Box>)}
-        {/* <Box sx={carouselContainerProps}>
-          <Image 
-            src={images[0].src} 
-            duration={100} 
-            sx={{transition: "300ms width ease"}} 
-            fit="scale-down"
-          />
-        </Box> */}
+
       </Carousel>}
 
       <Box sx={infoContainerProps}>

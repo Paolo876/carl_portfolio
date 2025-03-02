@@ -106,44 +106,6 @@ const ProjectImage = ({ title, images, softwares, style, setIsModalVisible, id }
         }}
       >
         <ImageCarousel title={title} images={images} softwares={softwares} style={style} id={id}/>
-        {/* <Box
-          sx={{
-            border: 1,
-            borderColor: "rgba(255,255,255,.1)", 
-            borderRadius: 1,
-            maxHeight: "80vh",
-            cursor: "pointer",
-            position: "relative",
-            overflow: "hidden",
-            transition: "300ms width ease",
-          }}
-        >
-          <Image 
-            src={images[0].src} 
-            duration={100} 
-            sx={{transition: "300ms width ease"}} 
-            fit="scale-down"
-          />
-        </Box>
-        <Box 
-          sx={{
-            py: .75,
-            align: "left"
-          }}
-        >
-          <Typography 
-            sx={{  
-              fontWeight: 500,
-              letterSpacing: 1,
-              fontSize: 13,
-            }}
-          >
-            {title} <Box component="small" sx={{fontWeight: 300, fontSize: 10, letterSpacing: .75}}>| {style}</Box>
-          </Typography>
-          <List sx={listProps}>
-            {softwares.map(item => <ListItem sx={listItemProps} key={item}>{item}</ListItem>)}
-          </List>
-        </Box> */}
       </Box>
     </>
   )

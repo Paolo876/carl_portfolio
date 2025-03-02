@@ -3,7 +3,6 @@ import { Box, Fade } from '@mui/material'
 import ProjectImage from './ProjectImage'
 import useProjectsRedux from '../../hooks/useProjectsRedux'
 import ProjectModal from './ProjectModal'
-import Carousel from 'react-material-ui-carousel'
 import MobileHeader from './MobileHeader'
 
 const projectImagesContainerProps = {
