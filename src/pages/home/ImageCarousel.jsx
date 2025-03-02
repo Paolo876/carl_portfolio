@@ -4,10 +4,13 @@ import { useSwipeable } from 'react-swipeable';
 import { Box,  Typography, List, ListItem } from '@mui/material'
 import useImagePreloader from '../../hooks/useImagePreloader'
 import Image from 'mui-image'
-
+import CircleIcon from '@mui/icons-material/Circle';
 
 const containerProps = {
-
+  borderBottom: 1,
+  borderColor: "rgba(255,255,255, .25)",
+  mb: 2,
+  pb: 4,
 }
 
 const carouselContainerProps = {
@@ -24,31 +27,30 @@ const carouselContainerProps = {
 
 const infoContainerProps = {
   py: .75,
-  align: "left"
+  px: 1.25,
+  align: "left",
+  mt: 1,
 }
 
 const listProps = {
   m:0,
   p:0,
-  mt: {sm: 1,},
-  mb: 2,
-  pb: 3,
-  borderBottom: 1,
-  borderColor: "rgba(255,255,255, .2)",
+  pt: 1,
+
 }
 
 const listItemProps = {
   m:0,
   p:0,
-  mt: {sm: .75},
+  mt: .5,
   fontWeight: 300,
   letterSpacing: 1,
-  fontSize: {sm: 11},
+  fontSize: 11,
   opacity: .8,
 }
 
 
-const ImageCarousel = ({ src, title, images, softwares, style, id }) => {
+const ImageCarousel = ({ title, images, softwares, style }) => {
   const { imagesPreloaded, maxDimensions } = useImagePreloader(images.map(item => item.src));
   const [ currentIdx, setCurrentIdx ] = useState(0)
 
@@ -70,10 +72,23 @@ const ImageCarousel = ({ src, title, images, softwares, style, id }) => {
       <Box  {...handlers}>
         <Carousel
           indicators={true}
+          navButtonsAlwaysInvisible={true}
           autoPlay={false}
           animation='slide'
           swipe={false}
           index={currentIdx}
+          indicatorIconButtonProps={{
+            style: {
+              color: 'rgba(50,50,50,1)',
+              margin: "0 1px",
+            }
+          }}
+          activeIndicatorIconButtonProps={{
+            style: {
+              color: '#036b91',
+            }
+          }}
+          IndicatorIcon={<CircleIcon style={{fontSize: 10}}/>}
         >
           {images.map(item => <Box 
             sx={{
@@ -100,10 +115,10 @@ const ImageCarousel = ({ src, title, images, softwares, style, id }) => {
           sx={{  
             fontWeight: 500,
             letterSpacing: 1,
-            fontSize: 13,
+            fontSize: 14,
           }}
         >
-          {title} <Box component="small" sx={{fontWeight: 300, fontSize: 10, letterSpacing: .75}}>| {style}</Box>
+          {title} <Box component="small" sx={{fontWeight: 300, fontSize: 11, letterSpacing: .75}}>| {style}</Box>
         </Typography>
         <List sx={listProps}>
           {softwares.map(item => <ListItem sx={listItemProps} key={item}>{item}</ListItem>)}
