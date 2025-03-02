@@ -45,7 +45,7 @@ const Sidebar = ({ isSidebarCollapsed, setIsSidebarCollapsed, pageTopMargin }) =
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  console.log(pathname)
+  // console.log(pathname)
 
   return (
     <>

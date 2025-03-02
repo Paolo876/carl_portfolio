@@ -1,7 +1,8 @@
 import { useState } from 'react'
-import { Box, Typography, ListItem, List } from '@mui/material'
+import { Box, Typography, ListItem, List, Fade} from '@mui/material'
 import Image from 'mui-image'
 import CollectionsIcon from '@mui/icons-material/Collections';
+import ImageCarousel from './ImageCarousel';
 
 const boxContainerProps = {
   border: 1, 
@@ -56,26 +57,31 @@ const listItemProps = {
 }
 
 
-const ProjectImage = ({ src, title, images, softwares, style, setIsModalVisible, id }) => {
+const ProjectImage = ({ title, images, softwares, style, setIsModalVisible, id }) => {
   const [ isHovered, setIsHovered ] = useState(false)
 
 
   return (
     <>
       <Box sx={boxContainerProps} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)} onClick={() => setIsModalVisible({ isVisible: true, id })}>
-        {isHovered && <Box sx={infoBoxProps}>
-          <Box 
-            sx={{
-              borderBottom: 1,
-              py: .75,
-              px: 1,
-              borderColor: "rgba(255,255,255, .3)",
-              overflow: "hidden"
-            }}
-          >
-            <Typography sx={textProps}>{title}</Typography>
+        {/* hover info container */}
+        {isHovered && 
+        <Fade in={true} timeout={{enter: 250}}>
+          <Box sx={infoBoxProps}>
+            <Box 
+              sx={{
+                borderBottom: 1,
+                py: .75,
+                px: 1,
+                borderColor: "rgba(255,255,255, .3)",
+                overflow: "hidden"
+              }}
+            >
+              <Typography sx={textProps}>{title}</Typography>
+            </Box>
           </Box>
-        </Box>}
+        </Fade>}
+
         {images.length > 1 && <Box
           sx={{
             position: "absolute",
@@ -85,21 +91,22 @@ const ProjectImage = ({ src, title, images, softwares, style, setIsModalVisible,
             zIndex: 1,
             fontSize: 20,
             transition: "300ms width ease"
-
           }}
         >
           <CollectionsIcon style={{fontSize: "inherit", filter: "drop-shadow( 1px 1px 1px rgba(0, 0, 0, 0.7))"}}/>
         </Box>}
+
+
         <Image src={images[0].src} duration={100} sx={{transition: "300ms width ease"}} />
       </Box>
       <Box
         sx={{
           border: "none",
           display: {xs: "initial", md: "none"}
-
         }}
       >
-        <Box
+        <ImageCarousel title={title} images={images} softwares={softwares} style={style} id={id}/>
+        {/* <Box
           sx={{
             border: 1,
             borderColor: "rgba(255,255,255,.1)", 
@@ -120,11 +127,7 @@ const ProjectImage = ({ src, title, images, softwares, style, setIsModalVisible,
         </Box>
         <Box 
           sx={{
-            // borderBottom: 1,
             py: .75,
-            // px: 1,
-            // borderColor: "rgba(255,255,255, .3)",
-            // overflow: "hidden"
             align: "left"
           }}
         >
@@ -140,7 +143,7 @@ const ProjectImage = ({ src, title, images, softwares, style, setIsModalVisible,
           <List sx={listProps}>
             {softwares.map(item => <ListItem sx={listItemProps} key={item}>{item}</ListItem>)}
           </List>
-        </Box>
+        </Box> */}
       </Box>
     </>
   )

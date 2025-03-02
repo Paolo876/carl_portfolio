@@ -26,7 +26,7 @@ const infoContainerProps = {
   flexDirection: "row",
   alignItems: "center",
   justifyContent: "center",
-  gap: 3.5,
+  gap: 3,
   my: 1,
 }
 
@@ -78,7 +78,7 @@ const MobileHeader = () => {
             variant="h6"
             sx={{
               letterSpacing: 2.5,
-              fontSize: 13,
+              fontSize: 14,
               fontWeight: 600,
               opacity: .9
             }}

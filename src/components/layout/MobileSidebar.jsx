@@ -58,9 +58,24 @@ const textProps = {
 
 
 const MobileSidebar = () => {
-
+  // const [ currentOffset, setCurrentOffset ] = useState(window.scrollY);
+  // const [ isVisible, setIsVisible ] = useState(true)
   const navigate = useNavigate();
   const { pathname } = useLocation();
+
+  // window.onscroll = () => {
+  //   console.log(currentOffset, window.scrollY)
+  //   if(window.scrollY > currentOffset && isVisible) {
+  //     console.log("hide")
+  //     setCurrentOffset(window.scrollY)
+  //     setIsVisible(false)
+  //   } else if(window.scrollY < currentOffset && !isVisible) {
+  //     console.log("show")
+  //     setCurrentOffset(window.scrollY)
+  //     setIsVisible(true)
+  //   }
+  // }
+
 
   const handleClick = (path) => {
     window.scrollTo(0, 0);
