@@ -7,6 +7,7 @@ import AboutDescription from './AboutDescription';
 import "./About.scss";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import caloyFace from "../../assets/caloyface.webp";
+import MobileSidebar from '../../components/layout/MobileSidebar';
 
 export default function About() {
   const { document, isLoading, error } = useDocument('user', 'about');
@@ -31,6 +32,7 @@ export default function About() {
             </ul>
           </div>
           <AboutDescription document={document}/>
+          <MobileSidebar/>
         </div>
       }
       <footer>

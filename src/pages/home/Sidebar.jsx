@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router';
-import { Paper, Box, Typography, ButtonBase, IconButton, Tooltip, Fade } from '@mui/material'
+import { useNavigate, useParams } from 'react-router';
+import { Paper, Box, Typography, ButtonBase, IconButton, Tooltip, Fade, Button } from '@mui/material'
 import Image from 'mui-image'
 import logo from "../../assets/logo_white_100.png"
 
@@ -12,6 +12,7 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import KeyboardTabIcon from '@mui/icons-material/KeyboardTab';
+import HomeIcon from '@mui/icons-material/Home';
 
 const buttonProps = {
   p:0,
@@ -30,7 +31,7 @@ const buttonProps = {
 const textProps = {
   fontWeight: 400,
   letterSpacing: 1.25,
-  fontSize: { md: 11, lg: 12, xl: 13},
+  fontSize: { xs: 11, md: 11, lg: 12, xl: 13},
 }
 
 const boxBorderProps = {
@@ -40,9 +41,19 @@ const boxBorderProps = {
   borderColor: "primary.dark"
 }
 
+const mobileButtonProps = {
+  px: 1.85,
+  py: 1.25,
+  display: "flex",
+  flexDirection: "row",
+  gap: .5,
+  color: "white",
+}
+
 
 const Sidebar = ({ isSidebarCollapsed, setIsSidebarCollapsed, pageTopMargin }) => {
   const navigate = useNavigate();
+  const params = useParams();
 
   return (
     <>
@@ -230,15 +241,16 @@ const Sidebar = ({ isSidebarCollapsed, setIsSidebarCollapsed, pageTopMargin }) =
         gridArea: "nav",
         border: 1,
         borderColor: "rgba(255,255,255, .05)",
-        borderRadius: 4,
+        borderRadius: {xs: 3, sm:4},
         position: "fixed",
         top:{xs: "initial", sm: 0 },
-        bottom:{xs: 0, sm: "initial"},
+        bottom:{xs: 10, sm: "initial"},
         right:{xs: 0, sm: 2},
         left: {xs: 0, sm:"auto"},
         mr: {sm: 2},
         overflowY: "auto",
-        pb: {sm: 6 },
+        pb: {xs: 0, sm: 6 },
+        pt: {xs: 0, sm: 0 },
         mt: {sm: 6 },
         px: {sm: 2 },
         height: "auto",
@@ -267,13 +279,27 @@ const Sidebar = ({ isSidebarCollapsed, setIsSidebarCollapsed, pageTopMargin }) =
         <Box 
           sx={{
             display: "flex",
-            flexDirection: "column",
-            gap: 2,
+            flexDirection: { xs: "row", sm:"column" },
+            gap: {sm:2},
             alignItems: "center"
           }}
         >
-          <IconButton sx={{borderRadius: 2, background: "rgba(255,255,255,0.05)"}} color="primary"><PersonIcon style={{fontSize: "inherit"}}/></IconButton>
-          <IconButton sx={{borderRadius: 2, background: "rgba(255,255,255,0.05)"}} color="primary"><PhoneIcon style={{fontSize: "inherit"}}/></IconButton>
+        {/* xs media */}
+          <Button sx={mobileButtonProps} onClick={() => navigate("/")}>
+            <HomeIcon style={{fontSize: "inherit", opacity: .6}}/>
+            <Typography variant='h6' sx={textProps}>HOME</Typography>
+          </Button>
+          <Button sx={{...mobileButtonProps, borderLeft: 1, borderRight: 1, borderRadius: 0, borderColor: "primary.dark"}} onClick={() => navigate("/about")}>
+            <PersonIcon style={{fontSize: "inherit", opacity: .6}}/>
+            <Typography variant='h6' sx={textProps}>ABOUT</Typography>
+          </Button>
+          <Button sx={mobileButtonProps} onClick={() => navigate("/contact")}>
+            <PhoneIcon style={{fontSize: "inherit", opacity: .6}}/>
+            <Typography variant='h6' sx={textProps}>CONTACT</Typography>
+          </Button>
+        {/* small media */}
+          <IconButton sx={{display: {xs: "none", sm:"inline-flex"}, borderRadius: 2, background: "rgba(255,255,255,0.05)"}} color="primary"><PersonIcon style={{fontSize: "inherit"}}/></IconButton>
+          <IconButton sx={{display: {xs: "none", sm:"inline-flex"}, borderRadius: 2, background: "rgba(255,255,255,0.05)"}} color="primary"><PhoneIcon style={{fontSize: "inherit"}}/></IconButton>
         </Box>
       </Box>
       <Box sx={{...boxBorderProps, display: {xs: "none", sm:"flex"}}}>

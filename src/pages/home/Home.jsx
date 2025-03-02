@@ -3,6 +3,7 @@ import { Box } from '@mui/material';
 
 import ProjectsList from './ProjectsList';
 import Sidebar from './Sidebar';
+import MobileSidebar from '../../components/layout/MobileSidebar';
 
 
 const sidebarWidthsOff = {
@@ -50,6 +51,7 @@ export default function Home() {
       >
         <Sidebar isSidebarCollapsed={isSidebarCollapsed} setIsSidebarCollapsed={setIsSidebarCollapsed} pageTopMargin={pageTopMargin}/>
         <ProjectsList isSidebarCollapsed={isSidebarCollapsed}/>
+        <MobileSidebar/>
       </Box>
   )
 }

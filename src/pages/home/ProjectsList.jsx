@@ -31,9 +31,9 @@ const ProjectsList = ({ isSidebarCollapsed }) => {
       }}
     >
     {/* mobile header */}
-      <Box>
+      {/* <Box>
         asdasdasds
-      </Box>
+      </Box> */}
       <Fade in={true} timeout={{enter: 800}} style={{transitionDelay: "300ms"}}>
         <Box 
           sx={{
