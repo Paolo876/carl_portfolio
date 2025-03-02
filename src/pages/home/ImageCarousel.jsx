@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Carousel from 'react-material-ui-carousel'
+import { useSwipeable } from 'react-swipeable';
 import { Box,  Typography, List, ListItem } from '@mui/material'
 import useImagePreloader from '../../hooks/useImagePreloader'
 import Image from 'mui-image'
@@ -48,35 +49,52 @@ const listItemProps = {
 
 
 const ImageCarousel = ({ src, title, images, softwares, style, id }) => {
+  const { imagesPreloaded, maxDimensions } = useImagePreloader(images.map(item => item.src));
+  const [ currentIdx, setCurrentIdx ] = useState(0)
 
-  const { imagesPreloaded, maxDimensions } = useImagePreloader(images.map(item => item.src))
-  console.log(maxDimensions.ratio * window.innerWidth)
-  return (
+
+
+  const handlers = useSwipeable({
+    onSwiped: e => {
+      if(e.dir === "Left"){
+        setCurrentIdx(prevState => images.length - 1 > prevState ? prevState + 1 : 0)
+      } else if (e.dir === "Right") {
+        setCurrentIdx(prevState => prevState > 0 ? prevState - 1 : images.length - 1)
+      }
+    },
+  });
+
+
+  if(imagesPreloaded) return (
     <Box sx={containerProps}>
-      {imagesPreloaded && <Carousel
-        indicators={true}
-        autoPlay={false}
-        animation='slide'
-      >
-        {images.map(item => <Box 
-          sx={{
-            ...carouselContainerProps, 
-            // height: maxDimensions.width > maxDimensions.height ? (maxDimensions.height / maxDimensions.width) * window.innerWidth : "100%",
-            height: maxDimensions.ratio * window.innerWidth
-          }} 
-          key={item.filename}
+      <Box  {...handlers}>
+        <Carousel
+          indicators={true}
+          autoPlay={false}
+          animation='slide'
+          swipe={false}
+          index={currentIdx}
         >
-          <Image 
-            src={item.src} 
-            duration={100} 
-            sx={{transition: "300ms width ease"}} 
-            fit="scale-down"
-            alt={item.title}
-          />
-        </Box>)}
+          {images.map(item => <Box 
+            sx={{
+              ...carouselContainerProps, 
+              height: maxDimensions.ratio * window.innerWidth
+            }} 
+            key={item.filename}
+            
+          >
+            <Image 
+              src={item.src} 
+              duration={100} 
+              sx={{transition: "300ms width ease"}} 
+              fit="scale-down"
+              alt={item.title}
+              
+            />
+          </Box>)}
 
-      </Carousel>}
-
+        </Carousel>
+      </Box>
       <Box sx={infoContainerProps}>
         <Typography 
           sx={{  

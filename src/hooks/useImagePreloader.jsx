@@ -27,13 +27,14 @@ const useImagePreloader = (imageList) => {
         return
       }
       const imagesPromiseList = []
+      
       for (const i of imageList) {
         imagesPromiseList.push(preloadImage(i))
         const img = new Image();
         img.src = i;
 
         img.onload = () => {
-          if((img.height / img.width) > maxDimensions.ratio) {
+          if(img.complete && (img.height / img.width) > maxDimensions.ratio) {
             setMaxDimensions({height: img.height, width: img.width, ratio: (img.height / img.width)})
           }
         }
@@ -45,7 +46,8 @@ const useImagePreloader = (imageList) => {
         return
       }
 
-      setImagesPreloaded(true)
+      
+      setTimeout(() => setImagesPreloaded(true), 20)
     }
 
     effect()
