@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate, useParams } from 'react-router';
+import { useNavigate, useLocation } from 'react-router';
 import { Paper, Box, Typography, ButtonBase, IconButton, Tooltip, Fade, Button } from '@mui/material'
 import Image from 'mui-image'
 import logo from "../../assets/logo_white_100.png"
@@ -12,7 +12,6 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import KeyboardTabIcon from '@mui/icons-material/KeyboardTab';
-import HomeIcon from '@mui/icons-material/Home';
 
 const buttonProps = {
   p:0,
@@ -41,19 +40,12 @@ const boxBorderProps = {
   borderColor: "primary.dark"
 }
 
-const mobileButtonProps = {
-  px: 1.85,
-  py: 1.25,
-  display: "flex",
-  flexDirection: "row",
-  gap: .5,
-  color: "white",
-}
-
 
 const Sidebar = ({ isSidebarCollapsed, setIsSidebarCollapsed, pageTopMargin }) => {
   const navigate = useNavigate();
-  const params = useParams();
+  const { pathname } = useLocation();
+
+  console.log(pathname)
 
   return (
     <>
@@ -284,19 +276,6 @@ const Sidebar = ({ isSidebarCollapsed, setIsSidebarCollapsed, pageTopMargin }) =
             alignItems: "center"
           }}
         >
-        {/* xs media */}
-          <Button sx={mobileButtonProps} onClick={() => navigate("/")}>
-            <HomeIcon style={{fontSize: "inherit", opacity: .6}}/>
-            <Typography variant='h6' sx={textProps}>HOME</Typography>
-          </Button>
-          <Button sx={{...mobileButtonProps, borderLeft: 1, borderRight: 1, borderRadius: 0, borderColor: "primary.dark"}} onClick={() => navigate("/about")}>
-            <PersonIcon style={{fontSize: "inherit", opacity: .6}}/>
-            <Typography variant='h6' sx={textProps}>ABOUT</Typography>
-          </Button>
-          <Button sx={mobileButtonProps} onClick={() => navigate("/contact")}>
-            <PhoneIcon style={{fontSize: "inherit", opacity: .6}}/>
-            <Typography variant='h6' sx={textProps}>CONTACT</Typography>
-          </Button>
         {/* small media */}
           <IconButton sx={{display: {xs: "none", sm:"inline-flex"}, borderRadius: 2, background: "rgba(255,255,255,0.05)"}} color="primary"><PersonIcon style={{fontSize: "inherit"}}/></IconButton>
           <IconButton sx={{display: {xs: "none", sm:"inline-flex"}, borderRadius: 2, background: "rgba(255,255,255,0.05)"}} color="primary"><PhoneIcon style={{fontSize: "inherit"}}/></IconButton>

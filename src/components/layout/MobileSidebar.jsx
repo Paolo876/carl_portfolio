@@ -1,19 +1,16 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router';
 import { useLocation } from 'react-router-dom';
-import { Paper, Box, Typography, IconButton, Button } from '@mui/material'
+import { Paper, Typography, Button } from '@mui/material'
 
 // icons
 import PersonIcon from '@mui/icons-material/Person';
 import PhoneIcon from '@mui/icons-material/Phone';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import InstagramIcon from '@mui/icons-material/Instagram';
 import HomeIcon from '@mui/icons-material/Home';
 
 
 const containerProps = {
-  display: "flex",
+  display: {xs: "flex", sm: "none"},
   flexDirection: "row",
   gridArea: "nav",
   border: 1,
@@ -65,7 +62,10 @@ const MobileSidebar = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  console.log(pathname)
+  const handleClick = (path) => {
+    window.scrollTo(0, 0);
+    navigate(path)
+  }
   return (
     <Paper sx={containerProps}>
       <Button 
@@ -73,7 +73,7 @@ const MobileSidebar = () => {
           ...mobileButtonProps,
           ...(pathname === "/" && {...activePageProps})
         }} 
-        onClick={() => navigate("/")}
+        onClick={() => handleClick("/")}
       >
         <HomeIcon style={iconProps}/>
         <Typography variant='h6' sx={textProps}>HOME</Typography>
@@ -87,7 +87,7 @@ const MobileSidebar = () => {
           borderColor: "primary.dark",
           ...(pathname === "/about" && {...activePageProps})
           }} 
-        onClick={() => navigate("/about")}
+        onClick={() => handleClick("/about")}
       >
         <PersonIcon style={iconProps}/>
         <Typography variant='h6' sx={textProps}>ABOUT</Typography>
@@ -97,7 +97,7 @@ const MobileSidebar = () => {
           ...mobileButtonProps,
           ...(pathname === "/contact" && {...activePageProps})
         }} 
-        onClick={() => navigate("/contact")}
+        onClick={() => handleClick("/contact")}
       >
         <PhoneIcon style={iconProps}/>
         <Typography variant='h6' sx={textProps}>CONTACT</Typography>

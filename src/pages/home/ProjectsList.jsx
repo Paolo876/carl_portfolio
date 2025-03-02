@@ -4,6 +4,7 @@ import ProjectImage from './ProjectImage'
 import useProjectsRedux from '../../hooks/useProjectsRedux'
 import ProjectModal from './ProjectModal'
 import Carousel from 'react-material-ui-carousel'
+import MobileHeader from './MobileHeader'
 
 const projectImagesContainerProps = {
   pt: 5,
@@ -30,10 +31,8 @@ const ProjectsList = ({ isSidebarCollapsed }) => {
         transition: "300ms width ease"
       }}
     >
-    {/* mobile header */}
-      {/* <Box>
-        asdasdasds
-      </Box> */}
+      {/* mobile header */}
+      <MobileHeader/>
       <Fade in={true} timeout={{enter: 800}} style={{transitionDelay: "300ms"}}>
         <Box 
           sx={{
