@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import { Box, ButtonBase, Typography } from '@mui/material'
 import Image from 'mui-image'
 
@@ -13,7 +14,7 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 const containerProps = {
   display: { xs: "flex", sm: "none" },
   flexDirection: "column",
-  mb: 4,
+  mb: 3,
   py: 2, 
   px: 2,
   borderBottom: 1,
@@ -24,7 +25,9 @@ const infoContainerProps = {
   display: "flex",
   flexDirection: "row",
   alignItems: "center",
-  gap: 3
+  justifyContent: "center",
+  gap: 3.5,
+  my: 1,
 }
 
 const iconProps = {
@@ -33,15 +36,27 @@ const iconProps = {
 }
 
 const linksContainerProps = {
-
+  display: "flex",
+  flexDirection: "row",
+  gap: 1.5,
+  justifyContent: "space-around",
+  mx: .5,
+  mt: 4,
 }
 
 const linksButtonProps = {
-
+  display: "flex",
+  flexDirection: "row",
+  alignItems: "center",
+  gap: .5,
+  fontSize: 11,
+  letterSpacing: 1,
+  fontWeight: 400,
 }
 
 const linksButtonTextProps = {
-
+  fontSize: "inherit",
+  fontWeight: "inherit",
 }
 
 
@@ -51,7 +66,7 @@ const MobileHeader = () => {
       <Box sx={infoContainerProps }>
         <Box 
           sx={{ 
-            height: 50, 
+            height: 55, 
             display: "flex", 
             justifyContent: "center",
           }}
@@ -108,15 +123,30 @@ const MobileHeader = () => {
         </Box>
       </Box>
       <Box sx={linksContainerProps}>
-        <ButtonBase sx={linksButtonProps}>
+        <ButtonBase 
+          sx={linksButtonProps}
+          href="https://www.linkedin.com/in/carladriantdimabuyu/"
+          target="_blank" 
+          rel="noreferrer"
+        >
           <LinkedInIcon style={iconProps}/>
           <Typography variant='h6' sx={linksButtonTextProps}>LINKEDIN</Typography>
         </ButtonBase>
-        <ButtonBase sx={linksButtonProps}>
+        <ButtonBase 
+          sx={linksButtonProps}
+          href="https://www.facebook.com/adobotrash" 
+          target="_blank" 
+          rel="noreferrer"
+        >
           <FacebookIcon style={iconProps}/>
           <Typography variant='h6' sx={linksButtonTextProps}>FACEBOOK</Typography>
         </ButtonBase>
-        <ButtonBase sx={linksButtonProps}>
+        <ButtonBase 
+          sx={linksButtonProps}
+          href="https://www.instagram.com/adobotrash/" 
+          target="_blank" 
+          rel="noreferrer"  
+        >
           <InstagramIcon style={iconProps}/>
           <Typography variant='h6' sx={linksButtonTextProps}>INSTAGRAM</Typography>
         </ButtonBase>
