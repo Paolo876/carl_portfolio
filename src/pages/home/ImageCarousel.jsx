@@ -11,6 +11,7 @@ const containerProps = {
   borderColor: "rgba(255,255,255, .25)",
   mb: 2,
   pb: 4,
+  transition: "200ms all ease"
 }
 
 const carouselContainerProps = {
@@ -27,16 +28,15 @@ const carouselContainerProps = {
 
 const infoContainerProps = {
   py: .75,
-  px: 1.25,
+  px: .8,
   align: "left",
-  mt: 1,
 }
 
 const listProps = {
   m:0,
   p:0,
-  pt: 1,
-
+  pt: .25,
+  pl: .2,
 }
 
 const listItemProps = {
@@ -88,7 +88,7 @@ const ImageCarousel = ({ title, images, softwares, style }) => {
               color: '#036b91',
             }
           }}
-          IndicatorIcon={<CircleIcon style={{fontSize: 10}}/>}
+          IndicatorIcon={<CircleIcon style={{fontSize: 8}}/>}
         >
           {images.map(item => <Box 
             sx={{

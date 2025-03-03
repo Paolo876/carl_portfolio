@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 
 import ProjectsList from './ProjectsList';
 import Sidebar from './Sidebar';
@@ -42,7 +42,7 @@ export default function Home() {
       <Box
         sx={{
           display: "grid",
-          gridTemplateAreas: {sm: "'projects nav'", md: "'projects nav' 'footer footer'"},
+          gridTemplateAreas: {sm: "'projects nav' 'footer footer'", md: "'projects nav' 'footer footer'"},
           gridTemplateColumns,
           gap: {sm: 4, md: 4, lg:5},
           mx: {sm: 4, md: 4, lg: 4, xl: 8},
@@ -52,6 +52,20 @@ export default function Home() {
         <Sidebar isSidebarCollapsed={isSidebarCollapsed} setIsSidebarCollapsed={setIsSidebarCollapsed} pageTopMargin={pageTopMargin}/>
         <ProjectsList isSidebarCollapsed={isSidebarCollapsed}/>
         <MobileSidebar/>
+        {/* <Box
+          sx={{
+            gridArea: "footer",
+            alignItems: "center",
+            position: "fixed",
+            bottom: 5,
+            right:0,
+            left: 0,
+            width: "fit-content",
+            marginInline: "auto",
+          }}
+        >
+          <Typography align="center" fontSize={12} sx={{opacity: .5}}>© 2025 Carl Dimabuyu, All rights reserved.</Typography>
+        </Box> */}
       </Box>
   )
 }
