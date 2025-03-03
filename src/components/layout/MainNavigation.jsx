@@ -4,7 +4,6 @@ import { useAuthContext } from '../../hooks/useAuthContext';
 
 // pages
 import Home from '../../pages/home/Home';
-import Projects from "../../pages/projects/Projects";
 import About from "../../pages/about/About";
 import Contact from "../../pages/contact/Contact";
 
@@ -15,15 +14,15 @@ import UpdateResume from '../../pages/dev/updateResume/UpdateResume';
 
 export default function MainNavigation() {
   const { isLoginAllowed, user, authIsReady } = useAuthContext();
-  // console.log(user, authIsReady)
+
   return (
     <main>
       {authIsReady &&
         <Routes>
             <Route path='/' element={ <Home/> }/>
-            <Route path='/projects' element={ <Projects/>}/>
             <Route path='/about' element={ <About/>}/>
             <Route path='/contact' element={ <Contact/>}/>
+            <Route path="*" element={<Navigate to="/"/>} />
             <Route path='/dev/login' element={ !user ? <Login/> : <Navigate to="/"/>}/>
             <Route path='/dev/upload' element={ isLoginAllowed || user ? <Upload/> : <Navigate to="/"/>}/>
             <Route path='/dev/update-resume' element={ isLoginAllowed || user ? <UpdateResume/> : <Navigate to="/"/>}/>

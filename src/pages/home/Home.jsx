@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Box, Typography } from '@mui/material';
 
 import ProjectsList from './ProjectsList';
-import Sidebar from './Sidebar';
+import Sidebar from '../../components/layout/Sidebar/Sidebar';
 import MobileSidebar from '../../components/layout/MobileSidebar';
 
 
