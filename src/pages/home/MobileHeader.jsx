@@ -48,7 +48,7 @@ const linksButtonProps = {
   display: "flex",
   flexDirection: "row",
   alignItems: "center",
-  gap: .5,
+  gap: .75,
   fontSize: 11,
   letterSpacing: 1,
   fontWeight: 400,
@@ -132,7 +132,7 @@ const MobileHeader = () => {
           <LinkedInIcon style={iconProps}/>
           <Typography variant='h6' sx={linksButtonTextProps}>LINKEDIN</Typography>
         </ButtonBase>
-        <ButtonBase 
+        {/* <ButtonBase 
           sx={linksButtonProps}
           href="https://www.facebook.com/adobotrash" 
           target="_blank" 
@@ -140,7 +140,7 @@ const MobileHeader = () => {
         >
           <FacebookIcon style={iconProps}/>
           <Typography variant='h6' sx={linksButtonTextProps}>FACEBOOK</Typography>
-        </ButtonBase>
+        </ButtonBase> */}
         <ButtonBase 
           sx={linksButtonProps}
           href="https://www.instagram.com/adobotrash/" 

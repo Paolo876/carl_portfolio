@@ -12,7 +12,7 @@ const Logo = ({ state }) => {
         height: {
           md: state ? 35 : 60, 
           lg: state ? 35 : 65, 
-          xl: state ? 45 : 75
+          xl: state ? 40 : 70
         }, 
         display: "flex", 
         justifyContent: "center",

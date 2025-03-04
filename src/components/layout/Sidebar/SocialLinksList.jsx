@@ -77,7 +77,7 @@ const SocialLinksList = ({ state }) => {
               <LinkedInIcon style={iconProps}/>
             </IconButton>
           </Tooltip>
-          <Tooltip  title="Facebook" placement="left" arrow>
+          {/* <Tooltip  title="Facebook" placement="left" arrow>
             <IconButton 
               sx={iconButtonProps}
               href="https://www.facebook.com/adobotrash" 
@@ -86,7 +86,7 @@ const SocialLinksList = ({ state }) => {
             >
               <FacebookIcon style={iconProps}/>
             </IconButton>
-          </Tooltip>
+          </Tooltip> */}
           <Tooltip  title="Instagram" placement="left" arrow>
             <IconButton 
               sx={iconButtonProps}
@@ -110,7 +110,7 @@ const SocialLinksList = ({ state }) => {
               <LinkedInIcon style={iconProps}/>
               <Typography variant='h6' sx={textProps}>LINKEDIN</Typography>
             </ButtonBase>
-            <ButtonBase 
+            {/* <ButtonBase 
               sx={buttonProps}
               href="https://www.facebook.com/adobotrash" 
               target="_blank" 
@@ -118,7 +118,7 @@ const SocialLinksList = ({ state }) => {
             >
               <FacebookIcon style={iconProps}/>
               <Typography variant='h6' sx={textProps}>FACEBOOK</Typography>
-            </ButtonBase>
+            </ButtonBase> */}
             <ButtonBase 
               sx={buttonProps}
               href="https://www.instagram.com/adobotrash/" 
