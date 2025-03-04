@@ -4,6 +4,7 @@ import ProjectImage from './ProjectImage'
 import useProjectsRedux from '../../hooks/useProjectsRedux'
 import ProjectModal from './ProjectModal'
 import MobileHeader from './MobileHeader'
+import LoadingSpinner from '../../components/ui/LoadingSpinner'
 
 const projectImagesContainerProps = {
   pt: 5,
@@ -19,8 +20,6 @@ const ProjectsList = ({ isSidebarCollapsed }) => {
   useEffect(() => {
     getProjects()
   }, [])
-
-
 
 
   return (
@@ -47,9 +46,16 @@ const ProjectsList = ({ isSidebarCollapsed }) => {
             justifyContent: "center"
           }}
         >
-          {projects.map(item => <ProjectImage key={item.id} id={item.id} title={item.header} images={item.images} softwares={item.softwares} style={item.style} setIsModalVisible={setIsModalVisible}/>)}
-          {/* {projects.map(item => <ProjectImage key={item.id} id={item.id} title={item.header} images={item.images} softwares={item.softwares} style={item.style} setIsModalVisible={setIsModalVisible}/>)} */}
-          {/* {projects.map(item => <ProjectImage key={item.id} id={item.id} title={item.header} images={item.images} softwares={item.softwares} style={item.style} setIsModalVisible={setIsModalVisible}/>)} */}
+          {isLoading && <LoadingSpinner/>}
+          {!isLoading && projects.map(item => <ProjectImage 
+            key={item.id} 
+            id={item.id} 
+            title={item.header} 
+            images={item.images} 
+            softwares={item.softwares} 
+            style={item.style} 
+            setIsModalVisible={setIsModalVisible}
+          />)}
         </Box>
       </Fade>
       {isModalVisible.isVisible && <ProjectModal 
@@ -58,6 +64,7 @@ const ProjectsList = ({ isSidebarCollapsed }) => {
       />}
     </Box>
   )
+  
 }
 
 export default ProjectsList

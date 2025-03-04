@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
 import { Box, ButtonBase, Typography } from '@mui/material'
 import Image from 'mui-image'
 
@@ -7,7 +6,6 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import EmailIcon from '@mui/icons-material/Email';
 import logo from "../../assets/logo_white_100.png"
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 
 
@@ -132,15 +130,6 @@ const MobileHeader = () => {
           <LinkedInIcon style={iconProps}/>
           <Typography variant='h6' sx={linksButtonTextProps}>LINKEDIN</Typography>
         </ButtonBase>
-        {/* <ButtonBase 
-          sx={linksButtonProps}
-          href="https://www.facebook.com/adobotrash" 
-          target="_blank" 
-          rel="noreferrer"
-        >
-          <FacebookIcon style={iconProps}/>
-          <Typography variant='h6' sx={linksButtonTextProps}>FACEBOOK</Typography>
-        </ButtonBase> */}
         <ButtonBase 
           sx={linksButtonProps}
           href="https://www.instagram.com/adobotrash/" 

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 
 import ProjectsList from './ProjectsList';
 import Sidebar from '../../components/layout/Sidebar/Sidebar';
@@ -52,20 +52,6 @@ export default function Home() {
         <Sidebar isSidebarCollapsed={isSidebarCollapsed} setIsSidebarCollapsed={setIsSidebarCollapsed} pageTopMargin={pageTopMargin}/>
         <ProjectsList isSidebarCollapsed={isSidebarCollapsed}/>
         <MobileSidebar/>
-        {/* <Box
-          sx={{
-            gridArea: "footer",
-            alignItems: "center",
-            position: "fixed",
-            bottom: 5,
-            right:0,
-            left: 0,
-            width: "fit-content",
-            marginInline: "auto",
-          }}
-        >
-          <Typography align="center" fontSize={12} sx={{opacity: .5}}>© 2025 Carl Dimabuyu, All rights reserved.</Typography>
-        </Box> */}
       </Box>
   )
 }
