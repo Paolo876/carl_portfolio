@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Box, Typography, ListItem, List, Fade} from '@mui/material'
+import { Box, Typography, Fade} from '@mui/material'
 import Image from 'mui-image'
 import CollectionsIcon from '@mui/icons-material/Collections';
 import ImageCarousel from './ImageCarousel';
@@ -34,26 +34,6 @@ const textProps={
   letterSpacing: 1,
   fontSize: 15,
   textAlign: "center"
-}
-
-const listProps = {
-  m:0,
-  p:0,
-  mt: {sm: 1,},
-  mb: 2,
-  pb: 3,
-  borderBottom: 1,
-  borderColor: "rgba(255,255,255, .2)",
-}
-
-const listItemProps = {
-  m:0,
-  p:0,
-  mt: {sm: .75},
-  fontWeight: 300,
-  letterSpacing: 1,
-  fontSize: {sm: 11},
-  opacity: .8,
 }
 
 

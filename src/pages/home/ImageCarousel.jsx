@@ -93,7 +93,7 @@ const ImageCarousel = ({ title, images, softwares, style }) => {
           {images.map(item => <Box 
             sx={{
               ...carouselContainerProps, 
-              height: maxDimensions.ratio * window.innerWidth
+              height: {xs: maxDimensions.ratio * window.innerWidth, sm: maxDimensions.ratio * (window.innerWidth * .65)}
             }} 
             key={item.filename}
             
