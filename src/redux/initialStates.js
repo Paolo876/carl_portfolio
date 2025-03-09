@@ -36,3 +36,7 @@ export const configInitialState = {
     error: null,
     emailjs: {}
 }
+
+// export const rootInitialState = {
+
+// }

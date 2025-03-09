@@ -3,7 +3,7 @@ import { Box } from '@mui/material';
 
 import ProjectsList from './ProjectsList';
 import Sidebar from '../../components/layout/Sidebar/Sidebar';
-import MobileSidebar from '../../components/layout/MobileSidebar';
+import MobileSidebar from '../../components/layout/Sidebar/MobileSidebar/MobileSidebar';
 
 
 const sidebarWidthsOff = {

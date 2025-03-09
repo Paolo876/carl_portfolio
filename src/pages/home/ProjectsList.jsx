@@ -22,7 +22,7 @@ const ProjectsList = ({ isSidebarCollapsed }) => {
   }, [])
 
 
-  return (
+  if(!isLoading && !error) return (
     <Box
       sx={{
         gridArea: "projects",

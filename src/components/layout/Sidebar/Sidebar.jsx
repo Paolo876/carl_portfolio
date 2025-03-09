@@ -20,7 +20,7 @@ const containerProps = {
   mr: {sm: 2, md: 3, lg: 4, xl: 8},
   left: "auto",
   overflowY: "auto",
-  transition: "150ms all ease",
+  transition: "50ms width ease",
   display: {xs: "none", sm:"initial"},
 
 }

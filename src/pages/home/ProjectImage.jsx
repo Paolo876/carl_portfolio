@@ -3,6 +3,7 @@ import { Box, Typography, Fade} from '@mui/material'
 import Image from 'mui-image'
 import CollectionsIcon from '@mui/icons-material/Collections';
 import ImageCarousel from './ImageCarousel';
+import { IKImage, IKVideo, IKContext, IKUpload } from 'imagekitio-react';
 
 const boxContainerProps = {
   border: 1, 
@@ -40,7 +41,8 @@ const textProps={
 const ProjectImage = ({ title, images, softwares, style, setIsModalVisible, id }) => {
   const [ isHovered, setIsHovered ] = useState(false)
 
-
+  const coverImage = images[0].src
+  const newStr = `${coverImage.substring(0, coverImage.indexOf("q5892cimh/") + 10)}tr:w-0.4/${coverImage.slice(coverImage.indexOf("q5892cimh/") + 10)}`;
   return (
     <>
       <Box sx={boxContainerProps} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)} onClick={() => setIsModalVisible({ isVisible: true, id })}>
@@ -75,9 +77,15 @@ const ProjectImage = ({ title, images, softwares, style, setIsModalVisible, id }
         >
           <CollectionsIcon style={{fontSize: "inherit", filter: "drop-shadow( 1px 1px 1px rgba(0, 0, 0, 0.7))"}}/>
         </Box>}
-
-
-        <Image src={images[0].src} duration={100} sx={{transition: "300ms width ease"}} />
+          {/* <IKImage 
+            src={images[0].src} 
+            urlEndpoint="https://ik.imagekit.io/q5892cimh" 
+            transformation={[{cropMode: 'c-maintain_ratio with fo-custom', }]}
+            style={{"object-fit": "cover"}} 
+            loading="lazy"
+            // lqip={{ active: true, quality: 20 }}  
+          /> */}
+        <Image src={newStr} duration={100} sx={{transition: "300ms width ease"}} />
       </Box>
       <Box
         sx={{

@@ -15,7 +15,8 @@ const LoadingSpinner = ({ }) => {
         justifyContent: "center", 
         top:0, 
         left:0, 
-        zIndex: -1
+        zIndex: -1,
+        opacity: .3
       }}
     >
       <CircularProgress color='primary'/>
