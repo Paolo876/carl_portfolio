@@ -3,7 +3,6 @@ import { Box } from '@mui/material'
 
 const sidebarWidthsOff = {
   sm: "70px", md: "230px", lg: "280px", xl: "340px"
-
 }
 
 const sidebarWidthsOn = {
@@ -16,10 +15,10 @@ const pageTopMargin = {
   xl: 4
 }
 
+const isSidebarCollapsedInitialState = {state: false, widthOff: sidebarWidthsOff, widthOn: sidebarWidthsOn}
 
 const PageContainer = ({ children, gridArea: contentGridArea }) => {
-  const [ isSidebarCollapsed, setIsSidebarCollapsed ] = useState({state: false, widthOff: sidebarWidthsOff, widthOn: sidebarWidthsOn});
-  // const element = Children.only(children);
+  const [ isSidebarCollapsed, setIsSidebarCollapsed ] = useState(isSidebarCollapsedInitialState);
   const gridTemplateColumns = {
     xs: `4fr ${isSidebarCollapsed.state ? sidebarWidthsOn.xs : sidebarWidthsOff.xs}`,
     sm: `4fr ${isSidebarCollapsed.state ? sidebarWidthsOn.sm : sidebarWidthsOff.sm}`,
@@ -42,12 +41,12 @@ const PageContainer = ({ children, gridArea: contentGridArea }) => {
         gap: {sm: 4, md: 4, lg:5},
         mx: {sm: 4, md: 4, lg: 4, xl: 8},
         mt: pageTopMargin,
-        mb: 20,
+        // mb: 20,
         // transition: "150ms grid-template-columns linear",
       }}
     >
       {Children.map(children, child => {
-        return cloneElement(child, { isSidebarCollapsed, setIsSidebarCollapsed, pageTopMargin });
+        return cloneElement(child, { isSidebarCollapsed, setIsSidebarCollapsed, pageTopMargin, isSidebarCollapsedInitialState });
       })}
     </Box>
   )

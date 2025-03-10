@@ -10,7 +10,6 @@ import SmallScreenSidebar from './SmallScreenSidebar/SmallScreenSidebar';
 
 
 const containerProps = {
-  // gridArea: "nav",
   border: 1,
   borderColor: "rgba(255,255,255, .05)",
   borderRadius: 4,

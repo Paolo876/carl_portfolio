@@ -16,11 +16,7 @@ const projectImagesContainerProps = {
 
 const ProjectsList = ({ isSidebarCollapsed, gridArea }) => {
   const [ isModalVisible, setIsModalVisible ] = useState({ isVisible: false, id: null })
-  const { isLoading, projects, error, getProjects } = useProjectsRedux();
-
-  // useEffect(() => {
-  //   getProjects()
-  // }, [])
+  const { isLoading, projects, error } = useProjectsRedux();
 
 
   if(!error) return (
