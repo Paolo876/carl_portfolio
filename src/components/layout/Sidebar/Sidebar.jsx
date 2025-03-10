@@ -10,7 +10,7 @@ import SmallScreenSidebar from './SmallScreenSidebar/SmallScreenSidebar';
 
 
 const containerProps = {
-  gridArea: "nav",
+  // gridArea: "nav",
   border: 1,
   borderColor: "rgba(255,255,255, .05)",
   borderRadius: 4,
@@ -20,14 +20,16 @@ const containerProps = {
   mr: {sm: 2, md: 3, lg: 4, xl: 8},
   left: "auto",
   overflowY: "auto",
-  transition: "50ms width ease",
+  transition: "250ms width ease",
   display: {xs: "none", sm:"initial"},
+  maxHeight: "85vh",
+  contain: "content"
 
 }
 
 const mainContainerProps = {
   display: {xs: "none", md:"initial"},
-  height: "auto",
+  height: "min-content",
 
 }
 

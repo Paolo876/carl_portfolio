@@ -1,18 +1,18 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router';
 import { Box, Typography, Fade} from '@mui/material'
 import Image from 'mui-image'
 import CollectionsIcon from '@mui/icons-material/Collections';
 import ImageCarousel from './ImageCarousel';
-import { IKImage, IKVideo, IKContext, IKUpload } from 'imagekitio-react';
 
 const boxContainerProps = {
   border: 1, 
   borderColor: "rgba(255,255,255,.1)", 
-  height: {sm: 400, md: 240, lg: 240,  xl: 275},
+  height: {md: 240, lg: 240,  xl: 275},
   cursor: "pointer",
   position: "relative",
   overflow: "hidden",
-  transition: "300ms width ease",
+  // transition: "300ms width ease",
   display: {xs: "none", md: "initial"}
 }
 
@@ -39,13 +39,20 @@ const textProps={
 
 
 const ProjectImage = ({ title, images, softwares, style, setIsModalVisible, id }) => {
+  const navigate = useNavigate();
   const [ isHovered, setIsHovered ] = useState(false)
 
   const coverImage = images[0].src
-  const newStr = `${coverImage.substring(0, coverImage.indexOf("q5892cimh/") + 10)}tr:w-0.4/${coverImage.slice(coverImage.indexOf("q5892cimh/") + 10)}`;
+  const newStr = `${coverImage.substring(0, coverImage.indexOf("q5892cimh/") + 10)}tr:h-300/${coverImage.slice(coverImage.indexOf("q5892cimh/") + 10)}`;
   return (
     <>
-      <Box sx={boxContainerProps} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)} onClick={() => setIsModalVisible({ isVisible: true, id })}>
+      <Box 
+        sx={boxContainerProps} 
+        onMouseEnter={() => setIsHovered(true)} 
+        onMouseLeave={() => setIsHovered(false)} 
+        onClick={() => navigate(`/post/${id}`)}
+        // onClick={() => setIsModalVisible({ isVisible: true, id })}
+        >
         {/* hover info container */}
         {isHovered && 
         <Fade in={true} timeout={{enter: 250}}>
@@ -72,7 +79,7 @@ const ProjectImage = ({ title, images, softwares, style, setIsModalVisible, id }
             p: 1,
             zIndex: 1,
             fontSize: 20,
-            transition: "300ms width ease"
+            // transition: "300ms width ease"
           }}
         >
           <CollectionsIcon style={{fontSize: "inherit", filter: "drop-shadow( 1px 1px 1px rgba(0, 0, 0, 0.7))"}}/>
@@ -85,7 +92,7 @@ const ProjectImage = ({ title, images, softwares, style, setIsModalVisible, id }
             loading="lazy"
             // lqip={{ active: true, quality: 20 }}  
           /> */}
-        <Image src={newStr} duration={100} sx={{transition: "300ms width ease"}} />
+        <Image src={newStr} duration={100} sx={{transition: "300ms width ease"}} fit='cover'/>
       </Box>
       <Box
         sx={{

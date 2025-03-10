@@ -10,28 +10,31 @@ const projectImagesContainerProps = {
   pt: 5,
   display: "grid",
   gap: 1,
+  height: "100%"
 }
 
 
-const ProjectsList = ({ isSidebarCollapsed }) => {
+const ProjectsList = ({ isSidebarCollapsed, gridArea }) => {
   const [ isModalVisible, setIsModalVisible ] = useState({ isVisible: false, id: null })
   const { isLoading, projects, error, getProjects } = useProjectsRedux();
 
-  useEffect(() => {
-    getProjects()
-  }, [])
+  // useEffect(() => {
+  //   getProjects()
+  // }, [])
 
 
-  if(!isLoading && !error) return (
+  if(!error) return (
     <Box
       sx={{
-        gridArea: "projects",
-        transition: "300ms width ease"
+        gridArea,
+        // gridTemplateColumns: "1fr auto",
+        // transition: "300ms all ease"
       }}
     >
       {/* mobile header */}
       <MobileHeader/>
-      <Fade in={true} timeout={{enter: 800}} style={{transitionDelay: "300ms"}}>
+
+      <Fade in={true} timeout={{enter: 800}}>
         <Box 
           sx={{
             ...projectImagesContainerProps, 
@@ -42,7 +45,8 @@ const ProjectsList = ({ isSidebarCollapsed }) => {
               lg: `repeat(auto-fill, minmax(${isSidebarCollapsed.state ? "300px": "250px"}, 1fr))`,
               xl: `repeat(auto-fill, minmax(${isSidebarCollapsed.state ? "350px": "280px"}, 1fr))`
             },
-            transition: "300ms width ease",
+            
+            transition: "300ms all ease",
             justifyContent: "center"
           }}
         >

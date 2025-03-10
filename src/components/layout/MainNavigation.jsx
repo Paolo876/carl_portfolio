@@ -11,6 +11,7 @@ import Contact from "../../pages/contact/Contact";
 import Login from '../../pages/dev/Login';
 import Upload from '../../pages/dev/upload/Upload';
 import UpdateResume from '../../pages/dev/updateResume/UpdateResume';
+import Post from '../../pages/post/Post';
 
 export default function MainNavigation() {
   const { isLoginAllowed, user, authIsReady } = useAuthContext();
@@ -20,6 +21,7 @@ export default function MainNavigation() {
       {authIsReady &&
         <Routes>
             <Route path='/' element={ <Home/> }/>
+            <Route path='/post/:id' element={ <Post/> }/>
             <Route path='/about' element={ <About/>}/>
             <Route path='/contact' element={ <Contact/>}/>
             <Route path="*" element={<Navigate to="/"/>} />
