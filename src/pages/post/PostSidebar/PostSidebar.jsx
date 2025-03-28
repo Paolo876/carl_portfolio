@@ -21,8 +21,8 @@ const containerProps = {
   transition: "250ms width ease",
   display: {xs: "none", md:"initial"},
   width : {sm: "70px", md: "230px", lg: "280px", xl: "340px"},
-  maxHeight: "85vh",
-
+  maxHeight: "90vh",
+  height: "100%",
 }
 
 const pageTopMargin = {
@@ -37,7 +37,7 @@ const PostSidebar = ({ title, softwares, style }) => {
     <Paper
       sx={{
         ...containerProps,
-        mt: {sm: 6, md: 6, lg: pageTopMargin.lg + 5, xl: pageTopMargin.xl + 5 },
+        mt: {sm: 5, md: 5, lg: pageTopMargin.lg + 4, xl: pageTopMargin.xl + 4 },
         px: {md: 3, lg: 4},
       }}
     >

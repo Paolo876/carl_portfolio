@@ -3,7 +3,6 @@ import PostImages from './PostImages'
 import LoadingSpinner from '../../components/ui/LoadingSpinner'
 import { Box } from '@mui/material'
 import FallbackPageWarning from '../../components/ui/FallbackPageWarning'
-import { useEffect } from 'react'
 
 
 const pageTopMargin = {

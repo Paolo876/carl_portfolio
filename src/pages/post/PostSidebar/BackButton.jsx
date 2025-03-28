@@ -21,7 +21,7 @@ const BackButton = () => {
         onClick={() => navigate("/")}
       >
         <KeyboardBackspaceIcon style={{fontSize: "inherit"}} color="primary"/>
-        <Typography sx={{fontSize: 12, ml: .75, fontWeight: 500, letterSpacing: .8, color: "primary.light"}}>Back To Home Page</Typography>
+        <Typography sx={{fontSize: 12, ml: .75, fontWeight: 500, letterSpacing: .5, color: "primary.light"}}>Back To Home Page</Typography>
       </IconButton>
     </Box>
   )

@@ -2,8 +2,8 @@ import React from 'react'
 import { Box, Typography, List, ListItem } from '@mui/material'
 
 const containerProps = {
-  mt: 10,
-  pb: 12,  
+  mt: 4,
+  pb: 8,  
   borderBottom: 1,
   borderColor: "primary.dark",
 }

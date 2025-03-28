@@ -78,7 +78,7 @@ input {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #F9F6EE;
+  background-color: #616161;
   border-radius: 20px;
   border: 6px solid transparent;
   background-clip: content-box;

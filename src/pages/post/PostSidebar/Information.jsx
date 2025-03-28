@@ -9,7 +9,7 @@ const Information = () => {
   return (
     <Box
       sx={{ 
-        mt: { sm: 3, md: 3, lg: 6 },
+        mt: { sm: 3, md: 3, lg: 4 },
         // height: {
         //   md: state ? 35 : 60, 
         //   lg: state ? 35 : 65, 
