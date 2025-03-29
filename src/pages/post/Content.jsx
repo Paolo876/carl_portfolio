@@ -1,8 +1,5 @@
-import useProjectsRedux from '../../hooks/useProjectsRedux'
 import PostImages from './PostImages'
-import LoadingSpinner from '../../components/ui/LoadingSpinner'
 import { Box } from '@mui/material'
-import FallbackPageWarning from '../../components/ui/FallbackPageWarning'
 
 
 const pageTopMargin = {
@@ -14,8 +11,7 @@ const sidebarWidthsOff = {
   sm: "70px", md: "230px", lg: "280px", xl: "340px"
 }
 
-const Content = ({ project }) => {
-  const { isLoading, error } = useProjectsRedux();
+const Content = ({ project, prevProjectId, nextProjectId }) => {
 
 
   return (
@@ -28,9 +24,8 @@ const Content = ({ project }) => {
         gap: {sm: 4, md: 4, lg:5},
       }}
     >
-      {isLoading && <LoadingSpinner/>}
-      {!isLoading && project && <PostImages project={project}/>}
-      {!project && <FallbackPageWarning/>}
+      
+      <PostImages project={project} prevProjectId={prevProjectId} nextProjectId={nextProjectId}/>
     </Box>
   )
 }
