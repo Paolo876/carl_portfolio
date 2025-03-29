@@ -10,24 +10,15 @@ const Information = () => {
     <Box
       sx={{ 
         mt: { sm: 3, md: 3, lg: 4 },
-        // height: {
-        //   md: state ? 35 : 60, 
-        //   lg: state ? 35 : 65, 
-        //   xl: state ? 40 : 70
-        // }, 
         display: "flex", 
         justifyContent: "left",
         alignItems: "center",
         gap: 3,
-        // borderBottom: 1,
-        // borderColor: "primary.dark",
-        // pb: 2,
-        
       }}
     >
       <Box
         sx={{
-          height: {xl: 30},
+          height: {md: 28, lg: 30},
           display: "flex",
           justifyContent: "center",
         }}
@@ -47,7 +38,7 @@ const Information = () => {
           variant="h6"
           sx={{
             letterSpacing: 2.5,
-            fontSize: {md: 15, lg: 16, xl:14},
+            fontSize: {md: 12, lg: 13, xl:14},
             fontWeight: 600,
             opacity: .9
           }}

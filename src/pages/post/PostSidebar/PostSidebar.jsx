@@ -38,7 +38,7 @@ const PostSidebar = ({ title, softwares, style }) => {
       sx={{
         ...containerProps,
         mt: {sm: 5, md: 5, lg: pageTopMargin.lg + 4, xl: pageTopMargin.xl + 4 },
-        px: {md: 3, lg: 4},
+        px: {md: 1.5, lg: 4},
       }}
     >
       <Box
