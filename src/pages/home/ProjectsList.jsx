@@ -1,8 +1,6 @@
-import { useEffect, useState } from 'react'
 import { Box, Fade } from '@mui/material'
 import ProjectImage from './ProjectImage'
 import useProjectsRedux from '../../hooks/useProjectsRedux'
-import ProjectModal from './ProjectModal'
 import MobileHeader from './MobileHeader'
 import LoadingSpinner from '../../components/ui/LoadingSpinner'
 
@@ -15,7 +13,6 @@ const projectImagesContainerProps = {
 
 
 const ProjectsList = ({ isSidebarCollapsed, gridArea }) => {
-  const [ isModalVisible, setIsModalVisible ] = useState({ isVisible: false, id: null })
   const { isLoading, projects, error } = useProjectsRedux();
 
 
@@ -54,14 +51,10 @@ const ProjectsList = ({ isSidebarCollapsed, gridArea }) => {
             images={item.images} 
             softwares={item.softwares} 
             style={item.style} 
-            setIsModalVisible={setIsModalVisible}
           />)}
         </Box>
       </Fade>
-      {isModalVisible.isVisible && <ProjectModal 
-        isModalVisible={isModalVisible} 
-        setIsModalVisible={setIsModalVisible}
-      />}
+
     </Box>
   )
   

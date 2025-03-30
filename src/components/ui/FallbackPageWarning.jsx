@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router';
 import { Box, Button, Typography } from '@mui/material'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 
-const FallbackPageWarning = () => {
+const FallbackPageWarning = ({message="Page not found."}) => {
   const navigate = useNavigate();
 
   return (
@@ -16,7 +16,7 @@ const FallbackPageWarning = () => {
         mt: 1
       }}
     >
-      <Typography>Page not found.</Typography>
+      <Typography>{message}</Typography>
       <Box>
         <Button 
           variant="outlined" 

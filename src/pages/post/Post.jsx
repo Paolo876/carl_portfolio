@@ -18,10 +18,19 @@ const Post = () => {
 
   if(isLoading) return <Box><LoadingSpinner/></Box>;
   if(project && !isLoading) return (
-    <Box>
-      <Content gridArea="Post" project={project} prevProjectId={prevProjectId} nextProjectId={nextProjectId}/>
-      <PostSidebar title={project.header} softwares={project.softwares} style={project.style}/>
-    </Box>
+    <>
+      <Box sx={{display: {xs: "none", md:"initial"}}}>
+        <Content gridArea="Post" project={project} prevProjectId={prevProjectId} nextProjectId={nextProjectId}/>
+        <PostSidebar title={project.header} softwares={project.softwares} style={project.style}/>
+      </Box>
+      <Box sx={{display: {xs: "initial", md:"none"}}}>
+        <Box sx={{mx:3, my: 5}}>
+          <FallbackPageWarning message="This page is not available for this device. Please navigate back to the home page."/>
+
+        </Box>
+      </Box>
+    </>
+
   );
   if(error || !project) return <Box><Alert severity="error">{error} <FallbackPageWarning/></Alert></Box>;
 

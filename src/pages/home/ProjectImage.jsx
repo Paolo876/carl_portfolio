@@ -38,7 +38,7 @@ const textProps={
 }
 
 
-const ProjectImage = ({ title, images, softwares, style, setIsModalVisible, id }) => {
+const ProjectImage = ({ title, images, softwares, style, id }) => {
   const navigate = useNavigate();
   const [ isHovered, setIsHovered ] = useState(false)
 
@@ -51,7 +51,6 @@ const ProjectImage = ({ title, images, softwares, style, setIsModalVisible, id }
         onMouseEnter={() => setIsHovered(true)} 
         onMouseLeave={() => setIsHovered(false)} 
         onClick={() => navigate(`/post/${id}`)}
-        // onClick={() => setIsModalVisible({ isVisible: true, id })}
         >
         {/* hover info container */}
         {isHovered && 
@@ -79,19 +78,10 @@ const ProjectImage = ({ title, images, softwares, style, setIsModalVisible, id }
             p: 1,
             zIndex: 1,
             fontSize: 20,
-            // transition: "300ms width ease"
           }}
         >
           <CollectionsIcon style={{fontSize: "inherit", filter: "drop-shadow( 1px 1px 1px rgba(0, 0, 0, 0.7))"}}/>
         </Box>}
-          {/* <IKImage 
-            src={images[0].src} 
-            urlEndpoint="https://ik.imagekit.io/q5892cimh" 
-            transformation={[{cropMode: 'c-maintain_ratio with fo-custom', }]}
-            style={{"object-fit": "cover"}} 
-            loading="lazy"
-            // lqip={{ active: true, quality: 20 }}  
-          /> */}
         <Image src={newStr} duration={100} sx={{transition: "300ms width ease"}} fit='cover'/>
       </Box>
       <Box
