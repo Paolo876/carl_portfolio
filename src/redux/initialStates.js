@@ -23,12 +23,16 @@ export const projectsInitialState = {
 export const aboutInitialState = {
     isLoading: false,
     error: null,
-    careerObjective: "",
-    experience: [],
-    information: {},
-    professionalSummary: "",
-    resume: {},
-    softwareSkills: []
+    about: {
+        careerObjective: "",
+        experience: [],
+        information: {},
+        professionalSummary: "",
+        resume: {},
+        softwareSkills: []
+    },
+
+    
 }
 
 export const configInitialState = {

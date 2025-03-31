@@ -6,7 +6,7 @@ import Experiences from './Experiences'
 
 const Content = ({ gridArea }) => {
   return (
-    <Box sx={{gridArea, background: "red", mt: 5}}>
+    <Box sx={{gridArea, mt: 5}}>
       <Header/>
       <Skills/>
       <Experiences/>
