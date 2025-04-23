@@ -7,13 +7,14 @@ import DescriptionIcon from '@mui/icons-material/Description';
 
 
 const containerProps = {
-  background: "rgba(60,60,60,.25)",
+  // background: "rgba(60,60,60,.25)",
   display: "flex",
   alignItems: "flex-start",
   justifyContent: "center",
   gap: {lg: 15},
   pt: 25,
-  pb: 18
+  pb: 18,
+  minHeight: "65vh"
 }
 
 const buttonContainerProps = {
