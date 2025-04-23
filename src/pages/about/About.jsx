@@ -5,6 +5,8 @@ import Content from './content/Content';
 
 
 const About = () => {
+  window.scrollTo(0, 0);
+
   return (
     <PageContainer  gridArea="about">
       <Sidebar/>

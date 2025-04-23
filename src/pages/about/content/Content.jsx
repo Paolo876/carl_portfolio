@@ -15,7 +15,6 @@ const mainContainerProps = {
 }
 const Content = ({ gridArea }) => {
   const { isLoading, about, error} = useAboutRedux();
-  console.log(about)
 
 
   if(isLoading) return <Box><LoadingSpinner/></Box>;
