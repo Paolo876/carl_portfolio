@@ -14,7 +14,7 @@ const containerProps = {
   pt: 20,
   pb: 16,
   px: {lg: 8},
-  minHeight: "70vh"
+  minHeight: "50vh"
 }
 
 const titleTextProps = {
@@ -74,7 +74,7 @@ const skillItemTextProps = {
 const Skills = ({ skills }) => {
   return (
     <Box sx={containerProps}>
-      <Typography sx={titleTextProps} variant="h6">My Skills</Typography>
+      <Typography sx={titleTextProps} variant="h6">Skills</Typography>
       <Box sx={skillsContainerProps}>
       {skills.map(item => <Box size={1.5} key={item.fileName} sx={skillItemContainerProps}>
         <Box sx={imageContainerProps}>
