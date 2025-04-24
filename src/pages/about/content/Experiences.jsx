@@ -1,5 +1,6 @@
 import React from 'react'
 import { Box, Typography } from '@mui/material'
+// import { Timeline, TimelineItem } from '@mui/lab';
 
 
 const containerProps = {
@@ -31,12 +32,32 @@ const experiencesItemContainer = {
   gridTemplateColumns: "1fr 2fr",
 }
 
+const durationTextProps = {
+
+}
+
+const jobTitleTextProps = {
+
+}
+
+const companyTextProps = {
+
+}
+
+const addressTextProps = {
+
+}
+
+const responsibilitiesTextProps = {
+  
+}
+
 const Experiences = ({ experiences }) => {
   console.log(experiences)
   return (
     <Box sx={containerProps}>
       <Typography sx={titleTextProps} variant="h6">Work Experience</Typography>
-      <Box sx={experiencesContainer}>
+      <Box sx={experiencesContainer}x>
         {[...experiences].reverse().map(item => <Box key={item.company} sx={experiencesItemContainer}>
           <Box>
             <Typography variant="h6">{item.duration}</Typography>
