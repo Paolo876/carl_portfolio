@@ -16,7 +16,6 @@ const mainContainerProps = {
 const Content = ({ gridArea }) => {
   const { isLoading, about, error} = useAboutRedux();
 
-
   if(isLoading) return <Box><LoadingSpinner/></Box>;
   if(!isLoading && !error )return (
     <Box sx={{ ...mainContainerProps, gridArea }}>
