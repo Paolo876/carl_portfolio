@@ -10,19 +10,22 @@ import Objectives from './Objectives';
 
 const mainContainerProps = {
   mt:5,
-  borderRadius: 5,
   overflow: "auto"
 }
+
+
 const Content = ({ gridArea }) => {
   const { isLoading, about, error} = useAboutRedux();
 
   if(isLoading) return <Box><LoadingSpinner/></Box>;
   if(!isLoading && !error )return (
-    <Box sx={{ ...mainContainerProps, gridArea }}>
-      <Header professionalSummary={about.professionalSummary} resume={about.resume}/>
-      <Objectives careerObjective={about.careerObjective}/>
-      <Skills skills={about.softwareSkills}/>
-      <Experiences experiences={about.experience}/>
+    <Box sx={{gridArea}}>
+      <Box sx={mainContainerProps}>
+        <Header professionalSummary={about.professionalSummary} resume={about.resume}/>
+        <Objectives careerObjective={about.careerObjective}/>
+        <Skills skills={about.softwareSkills}/>
+        <Experiences experiences={about.experience}/>
+      </Box>
     </Box>
   )
   if(!isLoading && error) (

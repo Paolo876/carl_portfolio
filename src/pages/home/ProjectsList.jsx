@@ -15,7 +15,7 @@ const projectImagesContainerProps = {
 const ProjectsList = ({ isSidebarCollapsed, gridArea }) => {
   const { isLoading, projects, error } = useProjectsRedux();
 
-
+  console.log(gridArea)
   if(!error) return (
     <Box
       sx={{

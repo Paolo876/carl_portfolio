@@ -5,7 +5,7 @@ import MobileSidebar from '../../components/layout/Sidebar/MobileSidebar/MobileS
 
 
 export default function Home() {
-
+  // window.scrollTo(0,0)
   return (
       <PageContainer gridArea="projects">
         <Sidebar/>

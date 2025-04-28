@@ -5,7 +5,7 @@ import Content from './content/Content';
 import MobileSidebar from '../../components/layout/Sidebar/MobileSidebar/MobileSidebar';
 
 const About = () => {
-  window.scrollTo(0, 0);
+  // window.scrollTo(0, 0);
 
   return (
     <PageContainer  gridArea="about">
