@@ -13,10 +13,10 @@ const containerProps = {
   alignItems: {xs: "center", sm:"flex-start"},
   justifyContent: "center",
   flexDirection: {xs:"column-reverse", sm: "row"},
-  gap: {xs: 15, sm: 8, md: 12, lg: 15},
+  gap: {xs: 10, sm: 8, md: 12, lg: 15},
   pt: {xs: 8, sm:25},
-  pb: 18,
-  minHeight: "65vh"
+  pb: {xs: 8, sm: 18},
+  minHeight: {xs: "40vh", sm: "45vh", md: "50vh", lg:"65vh"}
 }
 
 const buttonContainerProps = {
@@ -33,7 +33,7 @@ const buttonProps = {
 
 const imageContainerProps = { 
   width: {
-    xs: 140,
+    xs: 120,
     sm: 150,
     md: 180, 
     lg: 200, 
