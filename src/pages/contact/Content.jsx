@@ -24,7 +24,8 @@ const mainContainerProps = {
 	display: "flex",
 	width: "100%",
 	justifyContent: "space-between",
-	alignItems: "flex-start"
+	alignItems: "center",
+	minHeight: "60vh",
 }
 
 const Content = ({ gridArea }) => {
