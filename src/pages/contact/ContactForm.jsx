@@ -1,6 +1,7 @@
 import { Box, Button, TextField, Typography } from '@mui/material'
 import { useState } from 'react'
 import TextInput from './FormInputs/TextInput'
+import EmailInput from './FormInputs/EmailInput'
 
 
 const containerProps = {
@@ -60,7 +61,7 @@ const ContactForm = () => {
         />
       </Box>
       <Box sx={textInputContainerProps}>
-        <TextInput 
+        <EmailInput 
           id="email" 
           label="Email"
           setValue={value => setEmail(value)}
