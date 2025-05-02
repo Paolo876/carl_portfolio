@@ -4,10 +4,8 @@
   "private": true,
   "dependencies": {
     "@emailjs/browser": "^3.6.2",
-    "@emotion/react": "^11.9.0",
-    "@emotion/styled": "^11.8.1",
-    "@mui/icons-material": "^5.8.0",
-    "@mui/material": "^5.8.1",
+    "@mui/material": "^5.17.1",
+    "@mui/styled-engine-sc": "^7.0.2",
     "@redux-devtools/extension": "^3.3.0",
     "@reduxjs/toolkit": "^2.5.1",
     "@testing-library/jest-dom": "^5.16.4",
@@ -31,6 +29,7 @@
     "react-scripts": "5.0.1",
     "react-swipeable": "^7.0.2",
     "sass": "^1.52.1",
+    "styled-components": "^6.1.17",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
