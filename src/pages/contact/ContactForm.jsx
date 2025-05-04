@@ -9,7 +9,7 @@ import MessageInput from './FormInputs/MessageInput'
 const containerProps = {
   // '& > :not(style)': { m: 1, width: '25ch' },
   display: "flex",
-  flexDirection: "column"
+  flexDirection: "column",
 }
 
 const headerTextProps = {

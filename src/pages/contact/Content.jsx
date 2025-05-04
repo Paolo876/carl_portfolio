@@ -1,7 +1,11 @@
 import React from 'react'
-import { Box, Typography } from '@mui/material'
+import { Box, Typography, Alert } from '@mui/material'
 import ContactForm from './ContactForm'
 import ContactDetails from './ContactDetails'
+import useAboutRedux from "../../hooks/useAboutRedux"
+import LoadingSpinner from '../../components/ui/LoadingSpinner'
+import FallbackPageWarning from '../../components/ui/FallbackPageWarning'
+
 
 const containerProps = {
   mt:5,
@@ -20,16 +24,20 @@ const headerTextProps = {
 }
 
 const mainContainerProps = {
-	mt: 8,
+	mt: {lg: 12},
 	display: "flex",
 	width: "100%",
 	justifyContent: "space-between",
-	alignItems: "center",
+	alignItems: "flex-start",
 	minHeight: "60vh",
 }
 
 const Content = ({ gridArea }) => {
-  return (
+	const { about, isLoading, error } = useAboutRedux();
+
+	if(isLoading) return <Box><LoadingSpinner/></Box>;
+	if(error && !isLoading) return <Box><Alert severity="error">{error} <FallbackPageWarning message='Failed to load data.'/></Alert></Box>;
+  if(!error && !isLoading) return (
 		<Box sx={gridArea}>
 			<Box sx={containerProps}>
 				<Box sx={headerContainerProps}>
@@ -40,7 +48,7 @@ const Content = ({ gridArea }) => {
 						<ContactForm/>
 					</Box>
 					<Box>
-						<ContactDetails/>
+						<ContactDetails about={about}/>
 					</Box>
 				</Box>
 			</Box>
