@@ -18,13 +18,13 @@ const headerTextProps = {
   color: "primary.light",
   letterSpacing: 1.5,
   pb: 3,
+  mb: {lg: 5}
 }
 
 const textInputContainerProps = {
-  mb: 2,
+  mb: 3,
   display: "flex",
-  width: {lg: 350}
-  // width: "150em"
+  width: {lg: 420},
 }
 
 

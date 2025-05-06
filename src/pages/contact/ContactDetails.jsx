@@ -1,12 +1,12 @@
 import React from 'react'
-import { Box, Typography, Alert } from '@mui/material'
-import useAboutRedux from "../../hooks/useAboutRedux"
-import LoadingSpinner from '../../components/ui/LoadingSpinner'
+import { Box, ButtonBase, Typography } from '@mui/material'
 
 const containerProps = {
   display: "flex",
   flexDirection: "column",
-
+  mr: {lg: 5},
+  justifyContent: "flex-end",
+  alignItems: "flex-end"
 }
 
 
@@ -18,14 +18,50 @@ const headerTextProps = {
   pb: 3,
 }
 
+const informationContainerProps = {
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "flex-end",
+  alignItems: "flex-end",
+  mt: {lg: 5}
+}
 
-const ContactDetails = () => {
-  const { about, isLoading, error } = useAboutRedux();
+const nameProps = {
+  fontSize: {lg: 30},
+  fontWeight: 600,
+  letterSpacing: 1.5 
+}
 
+const addressProps = {
+  fontSize: {lg: 22},
+  fontWeight: 200,
+  letterSpacing: .8 
+}
+
+const phoneProps = {
+  fontSize: {lg: 22},
+  fontWeight: 500,
+  letterSpacing: .8 
+}
+
+const emailProps = {
+
+}
+
+
+
+const ContactDetails = ({ information, resume }) => {
+  console.log(resume, information)
 
   return (
     <Box sx={containerProps}>
       <Typography variant="h6" sx={headerTextProps}>Contact Details</Typography>
+      <Box sx={informationContainerProps}>
+        <Typography variant='h6' sx={nameProps}>{information.name}</Typography>
+        <Typography variant='h6' sx={addressProps}>{information.address}</Typography>
+        <ButtonBase sx={{mt: 8, color: "secondary.light"}}><Typography variant='h6' sx={phoneProps}>{information.phone}</Typography></ButtonBase>
+        <ButtonBase sx={{mt: 2, color: "secondary.light"}}><Typography variant='h6' sx={emailProps}>{information.email}</Typography></ButtonBase>
+      </Box>
     </Box>
   )
 }

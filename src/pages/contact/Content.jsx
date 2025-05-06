@@ -48,7 +48,7 @@ const Content = ({ gridArea }) => {
 						<ContactForm/>
 					</Box>
 					<Box>
-						<ContactDetails about={about}/>
+						<ContactDetails information={about.information} resume={about.resume}/>
 					</Box>
 				</Box>
 			</Box>
