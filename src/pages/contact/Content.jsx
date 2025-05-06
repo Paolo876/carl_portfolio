@@ -17,14 +17,14 @@ const headerContainerProps = {
 }
 
 const headerTextProps = {
-	fontSize: {lg: 40},
+	fontSize: {xs: 40, sm: 45, md: 50, lg: 55},
 	fontWeight: 700,
 	letterSpacing: 1.4, 
 	opacity: .9
 }
 
 const mainContainerProps = {
-	mt: {lg: 12},
+	mt: {md: 8, lg: 12},
 	display: "flex",
 	width: "100%",
 	justifyContent: "space-between",
