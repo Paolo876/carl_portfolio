@@ -15,7 +15,7 @@ const containerProps = {
 
 const headerTextProps = {
   fontWeight: 600,
-  fontSize: {xs: 17, sm: 18, md: 20, lg: 22},
+  fontSize: {xs: 18, sm: 18, md: 20, lg: 22},
   color: "primary.light",
   letterSpacing: 1.5,
   pb: 3,

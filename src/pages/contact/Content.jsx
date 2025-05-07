@@ -8,7 +8,7 @@ import FallbackPageWarning from '../../components/ui/FallbackPageWarning'
 
 
 const containerProps = {
-  mt:5,
+  my:5,
   overflow: "auto",
 }
 
