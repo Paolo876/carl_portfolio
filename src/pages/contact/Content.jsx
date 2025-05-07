@@ -9,7 +9,7 @@ import FallbackPageWarning from '../../components/ui/FallbackPageWarning'
 
 const containerProps = {
   mt:5,
-  overflow: "auto"
+  overflow: "auto",
 }
 
 const headerContainerProps = {
@@ -17,18 +17,21 @@ const headerContainerProps = {
 }
 
 const headerTextProps = {
-	fontSize: {xs: 40, sm: 45, md: 50, lg: 55},
+	fontSize: {xs: 32, sm: 45, md: 50, lg: 55},
 	fontWeight: 700,
 	letterSpacing: 1.4, 
-	opacity: .9
+	opacity: .9,
+	pl: {xs: 2, sm: 0},
 }
 
 const mainContainerProps = {
-	mt: {md: 8, lg: 12},
+	mt: {xs: 5, sm: 8, md: 8, lg: 12},
 	display: "flex",
+	flexDirection: { xs:"column-reverse", sm: "row" },
 	width: "100%",
 	justifyContent: "space-between",
 	alignItems: "flex-start",
+	pl: {xs: 2, sm: 0},
 	minHeight: "60vh",
 }
 

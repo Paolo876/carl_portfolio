@@ -10,6 +10,7 @@ const containerProps = {
   // '& > :not(style)': { m: 1, width: '25ch' },
   display: "flex",
   flexDirection: "column",
+  mb: {xs: 15, sm: 0}
 }
 
 const headerTextProps = {
@@ -18,13 +19,13 @@ const headerTextProps = {
   color: "primary.light",
   letterSpacing: 1.5,
   pb: 3,
-  mb: {md: 3, lg: 5}
+  mb: {xs: 2, sm: 3, md: 3, lg: 5}
 }
 
 const textInputContainerProps = {
-  mb: {md: 2, lg: 3},
+  mb: {xs: 1.25, sm: 1.5, md: 2, lg: 3},
   display: "flex",
-  width: {md: 360, lg: 420},
+  width: {xs: 280, sm: 260, md: 360, lg: 420},
 }
 
 
