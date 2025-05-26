@@ -54,7 +54,7 @@ const ProjectImage = ({ title, images, softwares, style, id }) => {
         >
         {/* hover info container */}
         {isHovered && 
-        <Fade in={true} timeout={{enter: 250}}>
+        <Fade in={true} timeout={{enter: 350}} style={{ transitionDelay: `150ms` }}>
           <Box sx={infoBoxProps}>
             <Box 
               sx={{

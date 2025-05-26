@@ -89,7 +89,14 @@ const ContactForm = () => {
         />
       </Box>
       <Box>
-        <Button type="submit" variant='contained' size='large'>SUBMIT INQUIRY</Button>
+        <Button 
+          type="submit" 
+          variant='contained' 
+          size='large'
+          disabled={isLoading}
+        >
+          SUBMIT INQUIRY
+        </Button>
       </Box>
     </Box>
   )

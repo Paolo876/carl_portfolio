@@ -27,9 +27,9 @@ const PageContainer = ({ children, gridArea: contentGridArea }) => {
     xl: `4fr ${isSidebarCollapsed.state ? sidebarWidthsOn.xl : sidebarWidthsOff.xl}`,
   }
 
-  window.onscroll = () => {
-    if(!isSidebarCollapsed.state) setIsSidebarCollapsed(prevState => ({...prevState, state: true}))
-  }
+  // window.onscroll = () => {
+  //   if(!isSidebarCollapsed.state) setIsSidebarCollapsed(prevState => ({...prevState, state: true}))
+  // }
 
 
   return (
@@ -42,7 +42,7 @@ const PageContainer = ({ children, gridArea: contentGridArea }) => {
         mx: {sm: 4, md: 4, lg: 4, xl: 8},
         mt: pageTopMargin,
         // mb: 20,
-        // transition: "150ms grid-template-columns linear",
+        transition: "200ms grid-template-columns linear",
       }}
     >
       {Children.map(children, child => {
