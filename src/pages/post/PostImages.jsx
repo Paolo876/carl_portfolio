@@ -58,7 +58,7 @@ const PostImages = ({ project, prevProjectId, nextProjectId }) => {
       <Box sx={boxContainerProps}>
         <Box sx={imagesListContainerProps}>
           {project.images.map(item => <Box sx={{maxHeight: "80vh"}} key={item.filename}>
-            <Image src={item.src} alt={item.filename} fit="contain" duration={100}/>
+            <Image src={item.src} alt={item.filename} fit="contain" duration={100} showLoading/>
           </Box>)}
         </Box>
       </Box>

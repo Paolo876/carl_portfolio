@@ -4,6 +4,7 @@ import { Box, Typography, Fade} from '@mui/material'
 import Image from 'mui-image'
 import CollectionsIcon from '@mui/icons-material/Collections';
 import ImageCarousel from './ImageCarousel';
+import { useInView } from 'react-intersection-observer';
 
 const boxContainerProps = {
   border: 1, 
@@ -42,6 +43,15 @@ const ProjectImage = ({ title, images, softwares, style, id }) => {
   const navigate = useNavigate();
   const [ isHovered, setIsHovered ] = useState(false)
 
+  const { ref, inView } = useInView({
+    threshold: 0,
+    // rootMargin: "0% 0px -35% 0px",
+    delay: 250,
+    triggerOnce: true
+  });
+
+  if(inView) console.log(title)
+
   const coverImage = images[0].src
   const newStr = `${coverImage.substring(0, coverImage.indexOf("q5892cimh/") + 10)}tr:h-300/${coverImage.slice(coverImage.indexOf("q5892cimh/") + 10)}`;
   return (
@@ -51,6 +61,7 @@ const ProjectImage = ({ title, images, softwares, style, id }) => {
         onMouseEnter={() => setIsHovered(true)} 
         onMouseLeave={() => setIsHovered(false)} 
         onClick={() => navigate(`/post/${id}`)}
+        ref={ref}
         >
         {/* hover info container */}
         {isHovered && 
@@ -82,7 +93,7 @@ const ProjectImage = ({ title, images, softwares, style, id }) => {
         >
           <CollectionsIcon style={{fontSize: "inherit", filter: "drop-shadow( 1px 1px 1px rgba(0, 0, 0, 0.7))"}}/>
         </Box>}
-        <Image src={newStr} duration={100} sx={{transition: "300ms width ease"}} fit='cover'/>
+        <Image src={newStr} duration={250} sx={{transition: "300ms width ease"}} fit='cover' showLoading easing="ease-in-out"/>
       </Box>
       <Box
         sx={{
