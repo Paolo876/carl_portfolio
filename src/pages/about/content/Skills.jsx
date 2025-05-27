@@ -1,7 +1,19 @@
-import { Box, Typography, Paper } from '@mui/material'
-
+import { Box, Typography } from '@mui/material'
 import React from 'react'
 import Image from 'mui-image'
+import { useInView } from 'react-intersection-observer';
+import { keyframes } from '@mui/system';
+
+
+// animations
+const appear = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
 
 
 const containerProps = {
@@ -30,7 +42,7 @@ const skillsContainerProps = {
   display: "grid",
   gridTemplateColumns: {xs: "1fr 1fr", md:"1fr 1fr 1fr"},
   width: "auto",
-  gap: {xs: 1, sm: 4, md: 5, lg: 15}
+  gap: {xs: 1, sm: 4, md: 5, lg: 15},
 }
 
 const skillItemContainerProps = {
@@ -74,10 +86,19 @@ const skillItemTextProps = {
 
 
 const Skills = ({ skills }) => {
+
+  const { ref, inView } = useInView({
+    threshold: 0,
+    rootMargin: "0% 0px -25% 0px",
+    delay: 250,
+    triggerOnce: true
+  });
+
+
   return (
     <Box sx={containerProps}>
       <Typography sx={titleTextProps} variant='h6'>Skills</Typography>
-      <Box sx={skillsContainerProps}>
+      <Box sx={skillsContainerProps} ref={ref}>
         {skills.map(item => <Box size={1.5} key={item.fileName} sx={skillItemContainerProps}>
           <Box sx={imageContainerProps}>
             <Image src={item.src} alt={item.fileName} sx={imageProps} duration={0} fit="scale-down" />
