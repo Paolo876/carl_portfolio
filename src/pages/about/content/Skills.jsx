@@ -1,11 +1,21 @@
 import { Box, Typography } from '@mui/material'
-import React from 'react'
 import Image from 'mui-image'
 import { useInView } from 'react-intersection-observer';
 import { keyframes } from '@mui/system';
 
 
 // animations
+const slideLeft = keyframes`
+  0% {
+    transform: translateX(3em);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+`;
+
 const appear = keyframes`
   0% {
     opacity: 0;
@@ -35,7 +45,8 @@ const titleTextProps = {
   letterSpacing: 3,
   mb: {xs: 2, sm: 3, md: 5, lg: 10},
   textTransform: "uppercase",
-  color: "primary.light"
+  color: "primary.light",
+  opacity: 0
 }
 
 const skillsContainerProps = {
@@ -51,6 +62,7 @@ const skillItemContainerProps = {
   gap: 2,
   py: 1,
   px: 2,
+  opacity: 0
 }
 
 
@@ -97,9 +109,13 @@ const Skills = ({ skills }) => {
 
   return (
     <Box sx={containerProps}>
-      <Typography sx={titleTextProps} variant='h6'>Skills</Typography>
+      <Typography sx={{...titleTextProps, animation: inView ? `${appear} 1400ms ease forwards` : ""}} variant='h6'>Skills</Typography>
       <Box sx={skillsContainerProps} ref={ref}>
-        {skills.map(item => <Box size={1.5} key={item.fileName} sx={skillItemContainerProps}>
+        {skills.map((item, idx) => <Box 
+          size={1.5} 
+          key={item.fileName} 
+          sx={{...skillItemContainerProps , animation: inView ? `${slideLeft} 900ms ease forwards ${(idx * 150) * 2}ms` : ""}}
+        >
           <Box sx={imageContainerProps}>
             <Image src={item.src} alt={item.fileName} sx={imageProps} duration={0} fit="scale-down" />
           </Box>

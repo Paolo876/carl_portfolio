@@ -1,6 +1,30 @@
-import React from 'react'
 import { Box, List, ListItem, Typography } from '@mui/material'
 import LocationOnIcon from '@mui/icons-material/LocationOn';
+import { useInView } from 'react-intersection-observer';
+import { keyframes } from '@mui/system';
+
+
+
+// animations
+const slideLeft = keyframes`
+  0% {
+    transform: translateX(3em);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+`;
+
+const appear = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
 
 
 const containerProps = {
@@ -22,14 +46,16 @@ const titleTextProps = {
   letterSpacing: 3,
   mb: {xs: 2, sm: 3, md: 5, lg: 10},
   textTransform: "uppercase",
-  color: "primary.light"
+  color: "primary.light",
+  opacity: 0
 }
 
 const experiencesItemContainer = {
   display: "grid",
   gridTemplateColumns: {md: "1fr 2fr", lg: "1fr 2fr"},
   gap: {md:1, lg:2},
-  mb: {xs: 1.5, sm: 2, md: 3, lg: 5}
+  mb: {xs: 2, sm: 3, md: 4, lg: 6},
+  opacity: 0
 }
 
 const durationTextProps = {
@@ -70,10 +96,21 @@ const responsibilitiesTextProps = {
 
 const Experiences = ({ experiences }) => {
 
+  const { ref, inView } = useInView({
+    threshold: 0,
+    rootMargin: "0% 0px -25% 0px",
+    delay: 250,
+    triggerOnce: true
+  });
+
+
   return (
     <Box sx={containerProps}>
-      <Typography sx={titleTextProps} variant="h6" align="center">Work Experience</Typography>
-      {[...experiences].reverse().map(item => <Box key={item.company} sx={experiencesItemContainer}>
+      <Typography sx={{...titleTextProps, animation: inView ? `${appear} 1400ms ease forwards` : ""}} variant="h6" align="center" ref={ref}>Work Experience</Typography>
+      {[...experiences].reverse().map((item, idx) => <Box 
+        key={item.company} 
+        sx={{...experiencesItemContainer, animation: inView ? `${slideLeft} 900ms ease forwards ${(idx * 150) * 2}ms` : ""}}
+      >
         <Box>
           <Typography variant="h6" sx={durationTextProps}>{item.duration}</Typography>
           <Typography sx={jobTitleTextProps}>{item.jobTitle}</Typography>
