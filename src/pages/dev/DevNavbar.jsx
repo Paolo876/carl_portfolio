@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { useNavigate } from 'react-router';
-import { Box, Button, Typography, IconButton, Drawer, List, ListItem, ListItemButton, ListItemText, ListItemIcon, Divider } from '@mui/material';
+import { Box, Button, Typography, IconButton, SwipeableDrawer, List, ListItem, ListItemButton, ListItemText, ListItemIcon, Divider } from '@mui/material';
 import { useLogout } from '../../hooks/useLogout';
 
 import Image from 'mui-image';
+import PersonIcon from '@mui/icons-material/Person';
+import PhoneIcon from '@mui/icons-material/Phone';
+import HomeIcon from '@mui/icons-material/Home';
 import LogoutIcon from '@mui/icons-material/Logout';
 import MenuIcon from '@mui/icons-material/Menu';
 import AddIcon from '@mui/icons-material/Add';
@@ -74,6 +77,13 @@ const DevNavbar = () => {
   const { logout } = useLogout();
   const navigate = useNavigate();
 
+
+  const handleNavigationClick = (link) => {
+    navigate(link)
+    setIsDrawerOpen(false)
+  }
+
+
   if(user) return (
     <Box sx={containerProps}>
       <Box sx={infoContainerProps}>
@@ -86,18 +96,45 @@ const DevNavbar = () => {
         </Box>
       </Box>
       <Box>
-        <IconButton size="large" onClick={() => setIsDrawerOpen(state => !state)}><MenuIcon/></IconButton>
+        <IconButton size="large" onClick={() => setIsDrawerOpen(true)}><MenuIcon/></IconButton>
       </Box>
-      
-      <Drawer 
+
+      <SwipeableDrawer 
         open={isDrawerOpen} 
-        onClose={() => setIsDrawerOpen(state => !state)} 
+        onClose={() => setIsDrawerOpen(false)} 
+        onOpen={() => setIsDrawerOpen(true)} 
         anchor='right'
+        disableBackdropTransition
       >
         <Box>
           <List>
             <ListItem>
-              <ListItemButton>
+              <Typography variant='h6'>Main Navigation</Typography>
+            </ListItem>
+            <ListItem>
+              <ListItemButton onClick={() => handleNavigationClick("/")}>
+                <ListItemIcon><HomeIcon/></ListItemIcon>
+                <ListItemText primary="Home"/>
+              </ListItemButton>
+            </ListItem>
+            <ListItem>
+              <ListItemButton onClick={() => handleNavigationClick("/about")}>
+                <ListItemIcon><PersonIcon/></ListItemIcon>
+                <ListItemText primary="About"/>
+              </ListItemButton>
+            </ListItem>
+            <ListItem>
+              <ListItemButton onClick={() => handleNavigationClick("/contact")}>
+                <ListItemIcon><PhoneIcon/></ListItemIcon>
+                <ListItemText primary="Contact"/>
+              </ListItemButton>
+            </ListItem>
+            <Divider />
+            <ListItem>
+              <Typography variant='h6'>Dev Tools</Typography>
+            </ListItem>
+            <ListItem>
+              <ListItemButton onClick={() => handleNavigationClick("/dev/new-post")}>
                 <ListItemIcon><AddIcon/></ListItemIcon>
                 <ListItemText primary="New Post"/>
               </ListItemButton>
@@ -123,7 +160,7 @@ const DevNavbar = () => {
             </ListItem>
           </List>
         </Box>
-      </Drawer>
+      </SwipeableDrawer>
     </Box>
   )
 }

@@ -9,6 +9,8 @@ import Contact from "../../pages/contact/Contact";
 
 //dev
 import Login from '../../pages/dev/Login';
+import NewPost from '../../pages/dev/new-post/NewPost';
+
 import Upload from '../../pages/dev/upload/Upload';
 import UpdateResume from '../../pages/dev/updateResume/UpdateResume';
 import Post from '../../pages/post/Post';
@@ -26,6 +28,7 @@ export default function MainNavigation() {
             <Route path='/contact' element={ <Contact/>}/>
             <Route path="*" element={<Navigate to="/"/>} />
             <Route path='/dev/login' element={ !user ? <Login/> : <Navigate to="/"/>}/>
+            <Route path='/dev/new-post' element={ user ? <NewPost/> : <Navigate to="/"/>}/>
             <Route path='/dev/upload' element={ isLoginAllowed || user ? <Upload/> : <Navigate to="/"/>}/>
             <Route path='/dev/update-resume' element={ isLoginAllowed || user ? <UpdateResume/> : <Navigate to="/"/>}/>
         </Routes>
