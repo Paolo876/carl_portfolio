@@ -1,10 +1,15 @@
+import { useState } from 'react';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { useNavigate } from 'react-router';
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button, Typography, IconButton, Drawer, List, ListItem, ListItemButton, ListItemText, ListItemIcon, Divider } from '@mui/material';
 import { useLogout } from '../../hooks/useLogout';
 
 import Image from 'mui-image';
 import LogoutIcon from '@mui/icons-material/Logout';
+import MenuIcon from '@mui/icons-material/Menu';
+import AddIcon from '@mui/icons-material/Add';
+import EditIcon from '@mui/icons-material/Edit';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 
 
 const containerProps = {
@@ -15,12 +20,12 @@ const containerProps = {
   zIndex: 50,
   display: "flex",
   flexDirection: "row",
-  justifyContent: "right",
+  justifyContent: {xs: "space-between", sm:"right"},
   backgroundColor: "secondary.light",
   alignItems: "center",
   boxShadow: 5,
-  gap: 10,
-  pr: {xs: 3, sm: 5, md: 8, lg:15}
+  gap: {xs: 2, sm:10},
+  px: {xs: 3, sm: 5, md: 8, lg:15}
 }
 
 const infoContainerProps = {
@@ -33,6 +38,7 @@ const infoContainerProps = {
 const infoTextProps = {
   fontWeight: 300, 
   fontSize: {xs: 12, sm: 15, md: 16, lg:17},
+  display: {xs: "none", sm: "initial"}
 }
 
 const nameInfoContainerProps = {
@@ -57,12 +63,13 @@ const nameTextProps = {
 const imageContainerProps = {
   borderRadius: "50%",
   overflow: "hidden",
-  height: "30px",
-  width: "30px",
+  height: {xs: "20px", sm: "30px"},
+  width: {xs: "20px", sm: "30px"},
 }
 
 
 const DevNavbar = () => {
+  const [ isDrawerOpen, setIsDrawerOpen ] = useState(false);
   const { user } = useAuthContext();
   const { logout } = useLogout();
   const navigate = useNavigate();
@@ -79,15 +86,44 @@ const DevNavbar = () => {
         </Box>
       </Box>
       <Box>
-        <Button 
-          variant='contained' 
-          color="primary" 
-          startIcon={<LogoutIcon/>} 
-          onClick={() => logout()}
-        >
-          LOGOUT
-        </Button>
+        <IconButton size="large" onClick={() => setIsDrawerOpen(state => !state)}><MenuIcon/></IconButton>
       </Box>
+      
+      <Drawer 
+        open={isDrawerOpen} 
+        onClose={() => setIsDrawerOpen(state => !state)} 
+        anchor='right'
+      >
+        <Box>
+          <List>
+            <ListItem>
+              <ListItemButton>
+                <ListItemIcon><AddIcon/></ListItemIcon>
+                <ListItemText primary="New Post"/>
+              </ListItemButton>
+            </ListItem>
+            <ListItem>
+              <ListItemButton>
+                <ListItemIcon><EditIcon/></ListItemIcon>
+                <ListItemText primary="Edit/Manage Posts"/>
+              </ListItemButton>
+            </ListItem>
+            <ListItem>
+              <ListItemButton>
+                <ListItemIcon><ManageAccountsIcon/></ListItemIcon>
+                <ListItemText primary="Update Personal Information"/>
+              </ListItemButton>
+            </ListItem>
+            <Divider />
+            <ListItem>
+              <ListItemButton onClick={() => logout()}>
+                <ListItemIcon><LogoutIcon/></ListItemIcon>
+                <ListItemText primary="Logout"/>
+              </ListItemButton>
+            </ListItem>
+          </List>
+        </Box>
+      </Drawer>
     </Box>
   )
 }
