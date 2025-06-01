@@ -1,5 +1,4 @@
 import { useGoogleLogin } from "../../hooks/useGoogleLogin";
-import { useAuthContext } from '../../hooks/useAuthContext';
 import { useNavigate } from 'react-router';
 import { Box, Container, Paper, Typography, Button } from "@mui/material";
 import HomeIcon from '@mui/icons-material/Home';
@@ -37,7 +36,6 @@ const buttonContainerProps = {
 
 const Login = () => {
   const navigate = useNavigate();
-  const { user } = useAuthContext();
   const { login, isLoading } = useGoogleLogin();
 
   const handleLogin = async () => {

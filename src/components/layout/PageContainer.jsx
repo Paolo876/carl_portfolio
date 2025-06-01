@@ -1,5 +1,6 @@
 import { useState, cloneElement, Children } from 'react'
 import { Box } from '@mui/material'
+// import useScrollTrigger from '@mui/material/useScrollTrigger';
 
 const sidebarWidthsOff = {
   sm: "70px", md: "230px", lg: "280px", xl: "340px"
@@ -26,12 +27,12 @@ const PageContainer = ({ children, gridArea: contentGridArea }) => {
     lg: `4fr ${isSidebarCollapsed.state ? sidebarWidthsOn.lg : sidebarWidthsOff.lg}`,
     xl: `4fr ${isSidebarCollapsed.state ? sidebarWidthsOn.xl : sidebarWidthsOff.xl}`,
   }
-
+  // const trigger = useScrollTrigger();
   // window.onscroll = () => {
   //   if(!isSidebarCollapsed.state) setIsSidebarCollapsed(prevState => ({...prevState, state: true}))
   // }
 
-
+  // console.log(trigger)
   return (
     <Box
       sx={{
