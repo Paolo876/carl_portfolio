@@ -1,10 +1,16 @@
-import React from 'react'
-import { Container } from '@mui/material'
+import { Container, Box } from '@mui/material'
 
+const mainContainerProps = {
+  mt: {xs: 7, md: 8, lg: 10},
+}
 
 const DevPageContainer = ({ children }) => {
   return (
-    <Container>{children}</Container>
+    <Container maxWidth="xl">
+      <Box sx={mainContainerProps}>
+        {children}
+      </Box>
+    </Container>
   )
 }
 
