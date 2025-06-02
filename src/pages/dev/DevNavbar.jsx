@@ -140,13 +140,13 @@ const DevNavbar = () => {
               </ListItemButton>
             </ListItem>
             <ListItem>
-              <ListItemButton>
+              <ListItemButton onClick={() => handleNavigationClick("/dev/manage-post")}>
                 <ListItemIcon><EditIcon/></ListItemIcon>
                 <ListItemText primary="Edit/Manage Posts"/>
               </ListItemButton>
             </ListItem>
             <ListItem>
-              <ListItemButton>
+              <ListItemButton onClick={() => handleNavigationClick("/dev/update-info")}>
                 <ListItemIcon><ManageAccountsIcon/></ListItemIcon>
                 <ListItemText primary="Update Personal Information"/>
               </ListItemButton>
