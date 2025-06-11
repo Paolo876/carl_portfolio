@@ -1,11 +1,20 @@
 import React from 'react'
-import { Box, Button } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import { DropzoneArea } from "mui-file-dropzone";
 
 
 const mainContainerProps = {
   mb: {lg: 5}
 }
+
+const headerTextContainerProps = {
+
+}
+
+const headerTextProps = {
+
+}
+
 
 const dropZoneProps = {
   background: "rgba(255,255,255,.2)",
@@ -16,14 +25,21 @@ const dropZoneProps = {
 }
 
 
-const UploadImagesForm = () => {
+const UploadImagesForm = ({ images, setImages, imageData, setImageData }) => {
+
+  const handleChange = (files) => {
+    console.log(files)
+  }
   return (
     <Box sx={mainContainerProps}>
+      <Box sx={headerTextContainerProps}>
+        <Typography variant="h6" sx={headerTextProps}>Upload Images. Maximum of 10 images per post. Each image not exceeding 3mb.</Typography>
+      </Box>
       <Box sx={dropZoneProps}>
         <DropzoneArea
         acceptedFiles={['image/*']}
         dropzoneText={"Drag and drop image/s here or click to upload"}
-        onChange={(files) => console.log('Files:', files)}
+        onChange={(files) => handleChange(files)}
         filesLimit={10}
       />
       </Box>

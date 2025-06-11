@@ -74,7 +74,7 @@ const NewPost = () => {
           <Typography variant="h6" sx={headerTextProps}>New Post</Typography>
         </Box>
         <Box sx={contentContainerProps}>
-          {stepNumber === 0 && <UploadImagesForm/>}
+          {stepNumber === 0 && <UploadImagesForm images={images} setImages={setImages} imageData={imageData} setImageData={setImageData} />}
           {stepNumber === 1 && <PostInformationForm/>}
           {stepNumber === 2 && <PreviewPost/>}
         </Box>
