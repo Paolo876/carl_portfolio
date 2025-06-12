@@ -33,6 +33,7 @@ const contentContainerProps = {
 }
 
 const stepperContainerProps = {
+  mt: {lg: 5}, 
   display: "flex",
   flexDirection: "row",
   justifyContent: "space-between",
@@ -60,7 +61,7 @@ const NewPost = () => {
     }
 
     if(action === "next" && stepNumber < 2) {
-      // if stepNumber === 0 &&
+      // if stepNumber === 0 && imageData == 0
       // if stepNumber === 1 &&
       // if stepNumber === 2 &&
       setStepNumber(prevState => prevState + 1)
@@ -94,7 +95,10 @@ const NewPost = () => {
             variant="contained" 
             size="large" 
             endIcon={<ChevronRightIcon/>}
-            disabled={stepNumber >= 2}
+            disabled={
+              (stepNumber === 0 && imageData.length === 0) ||
+              stepNumber >= 2
+              }
             onClick={() => handleStepperClick("next")}
 
           >

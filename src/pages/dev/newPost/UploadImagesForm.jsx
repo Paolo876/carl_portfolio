@@ -8,10 +8,12 @@ const mainContainerProps = {
 }
 
 const headerTextContainerProps = {
+  mb: 3,
 
 }
 
 const headerTextProps = {
+  fontSize: { xs: 16, sm: 18, md: 20, lg: 22 },
 
 }
 
@@ -24,11 +26,18 @@ const dropZoneProps = {
   borderRadius: 2
 }
 
+const previewTextProps = {
+  fontSize: { xs: 13, sm: 14, md: 16, lg: 18 },
+  mt: 2,
+  mb: 1,
+  letterSpacing: .8,
+  fontWeight: 500,
+}
 
 const UploadImagesForm = ({ images, setImages, imageData, setImageData }) => {
 
   const handleChange = (files) => {
-    console.log(files)
+    setImageData(files)
   }
   return (
     <Box sx={mainContainerProps}>
@@ -41,6 +50,12 @@ const UploadImagesForm = ({ images, setImages, imageData, setImageData }) => {
         dropzoneText={"Drag and drop image/s here or click to upload"}
         onChange={(files) => handleChange(files)}
         filesLimit={10}
+        initialFiles={imageData}
+        // useChipsForPreview={true}
+        // showFileNamesInPreview={true}
+        showPreviewsInDropzone={false}
+        showPreviews={true}
+        previewText={<Typography variant="h6" sx={previewTextProps}>Preview: </Typography>}
       />
       </Box>
     </Box>
