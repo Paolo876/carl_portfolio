@@ -1,9 +1,9 @@
 import { Box, Button, TextField, Typography } from '@mui/material'
 import { useState } from 'react'
-import TextInput from './FormInputs/TextInput'
-import EmailInput from './FormInputs/EmailInput'
-import PhoneInput from './FormInputs/PhoneInput'
-import MessageInput from './FormInputs/MessageInput'
+import TextInput from '../../components/FormInputs/TextInput'
+import EmailInput from '../../components/FormInputs/EmailInput'
+import PhoneInput from '../../components/FormInputs/PhoneInput'
+import MessageInput from '../../components/FormInputs/MessageInput'
 
 
 const containerProps = {
