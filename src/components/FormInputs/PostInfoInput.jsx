@@ -32,9 +32,9 @@ const PostInfoInput = ({ id, label, initialValue, setValue, disabled=false }) =>
     if(input.trim().length === 0) {
       setError({state: true, message: "Input required."})
       setValue("")
-    } else if(input.match(/[^A-Za-z 0-9]/g)) {
-      setError({state: true, message: "Input must not contain any special characters."})
-      setValue("")
+    // } else if(input.match(/[^A-Za-z 0-9]/g)) {
+    //   setError({state: true, message: "Input must not contain any special characters."})
+    //   setValue("")
     } else {
       setValue(input)
       setError({state: false, message: ""})

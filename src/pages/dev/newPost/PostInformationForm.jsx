@@ -62,7 +62,7 @@ const PostInformationForm = ({ postInformation, setPostInformation }) => {
           <Typography sx={formHeaderTextProps} variant="h6">Post Title</Typography>
           <PostInfoInput
             id="header" 
-            label="Daily Majlis"
+            label="Post Title"
             initialValue={postInformation.header}
             setValue={value => setPostInformation(prevState => ({...prevState, header: value}))}
             value={postInformation.header}
@@ -72,7 +72,7 @@ const PostInformationForm = ({ postInformation, setPostInformation }) => {
           <Typography sx={formHeaderTextProps} variant="h6">Style</Typography>
           <PostInfoInput
             id="style" 
-            label="Classic"
+            label="Style"
             initialValue={postInformation.style}
             setValue={value => setPostInformation(prevState => ({...prevState, style: value}))}
           />
@@ -84,7 +84,6 @@ const PostInformationForm = ({ postInformation, setPostInformation }) => {
             { postInformation.softwares.map(item => <Chip label={item} variant="outlined" onDelete={() => handleDeleteSkill(item)} key={item} color="success"/>) }
           </Box>
         </Box>
-        {/* softwares used - fetch softwares from existing projects */}
       </Box>
     </Box>
   )

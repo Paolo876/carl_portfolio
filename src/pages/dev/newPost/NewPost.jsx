@@ -99,7 +99,9 @@ const NewPost = () => {
             endIcon={<ChevronRightIcon/>}
             disabled={
               (stepNumber === 0 && imageData.length === 0) ||
-              (stepNumber >= 2 && postInformation.title === "")
+              (stepNumber === 1 && postInformation.header === "") ||
+              (stepNumber === 1 && postInformation.style === "") ||
+              (stepNumber === 1 && postInformation.softwares.length === 0)
               }
             onClick={() => handleStepperClick("next")}
 
