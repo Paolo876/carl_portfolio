@@ -45,23 +45,20 @@ const PostInformationForm = ({ postInformation, setPostInformation}) => {
   const [ isLoading, setIsLoading ] = useState(false)
   const [ header, setHeader ] = useState("");
   const [ style, setStyle ] = useState("");
-  const [ softwares, setSoftwares ] = useState(postInformation.softwares)
-  const [ softwareInput, setSoftwareInput ] = useState("");
 
 
   const handleAddSkill = item => {
-    
+    setPostInformation(prevState => ({...prevState, softwares: [...prevState.softwares, item]}))
   }
 
-
   const handleDeleteSkill = item => {
-    // setSoftwares(prevState => prevState.filter(_item => _item !== item))
     setPostInformation(prevState => ({...prevState, softwares: prevState.softwares.filter(_item => _item !== item)}))
   }
   
   const handleConfirm = () => {
     
   }
+  
 
   return (
     <Box sx={mainContainerProps}>
