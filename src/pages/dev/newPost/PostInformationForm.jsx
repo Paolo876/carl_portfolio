@@ -41,11 +41,7 @@ const skillsListContainer = {
 
 
 
-const PostInformationForm = ({ postInformation, setPostInformation}) => {
-  const [ isLoading, setIsLoading ] = useState(false)
-  const [ header, setHeader ] = useState("");
-  const [ style, setStyle ] = useState("");
-
+const PostInformationForm = ({ postInformation, setPostInformation }) => {
 
   const handleAddSkill = item => {
     setPostInformation(prevState => ({...prevState, softwares: [...prevState.softwares, item]}))
@@ -54,11 +50,7 @@ const PostInformationForm = ({ postInformation, setPostInformation}) => {
   const handleDeleteSkill = item => {
     setPostInformation(prevState => ({...prevState, softwares: prevState.softwares.filter(_item => _item !== item)}))
   }
-  
-  const handleConfirm = () => {
-    
-  }
-  
+
 
   return (
     <Box sx={mainContainerProps}>
@@ -72,9 +64,8 @@ const PostInformationForm = ({ postInformation, setPostInformation}) => {
             id="header" 
             label="Daily Majlis"
             initialValue={postInformation.header}
-            setValue={value => setHeader(value)}
+            setValue={value => setPostInformation(prevState => ({...prevState, header: value}))}
             value={postInformation.header}
-            disabled={isLoading}
           />
         </Box>
         <Box sx={formItemProps}>
@@ -83,8 +74,7 @@ const PostInformationForm = ({ postInformation, setPostInformation}) => {
             id="style" 
             label="Classic"
             initialValue={postInformation.style}
-            setValue={value => setStyle(value)}
-            disabled={isLoading}
+            setValue={value => setPostInformation(prevState => ({...prevState, style: value}))}
           />
         </Box>
         <Box sx={formItemProps}>

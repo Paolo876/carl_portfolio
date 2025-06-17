@@ -73,6 +73,7 @@ const ListInput = ({ id, label, addValues, disabled=false }) => {
         endIcon={<AddIcon/>} 
         sx={{flex: {xs: "45%", sm: "50%", md:"40%", lg: "30%"}}}
         onClick={handleClick}
+        disabled={input.trim().length == 0}
       >
         Add
       </Button>
