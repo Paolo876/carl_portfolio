@@ -44,12 +44,14 @@ const stepperButtonProps = {
 
 }
 
+// image obj: {src: "", filename: ""}
 
 const NewPost = () => {
   const [ stepNumber, setStepNumber ] = useState(0);
 
   const [ images, setImages ] = useState([]);
   const [ imageData, setImageData ] = useState([]);
+  const [ postInformation, setPostInformation ] = useState({header: "", style: "", softwares: []})
 
   // upload to be handled here too
   const handleStepperClick = async (action) => {
@@ -76,7 +78,7 @@ const NewPost = () => {
         </Box>
         <Box sx={contentContainerProps}>
           {stepNumber === 0 && <UploadImagesForm images={images} setImages={setImages} imageData={imageData} setImageData={setImageData} />}
-          {stepNumber === 1 && <PostInformationForm/>}
+          {stepNumber === 1 && <PostInformationForm postInformation={postInformation} setPostInformation={setPostInformation} />}
           {stepNumber === 2 && <PreviewPost/>}
         </Box>
         <Box sx={stepperContainerProps}>

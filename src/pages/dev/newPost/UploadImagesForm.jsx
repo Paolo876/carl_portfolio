@@ -34,7 +34,7 @@ const previewTextProps = {
   fontWeight: 500,
 }
 
-const UploadImagesForm = ({ images, setImages, imageData, setImageData }) => {
+const UploadImagesForm = ({ imageData, setImageData }) => {
 
   const handleChange = (files) => {
     setImageData(files)
@@ -51,8 +51,6 @@ const UploadImagesForm = ({ images, setImages, imageData, setImageData }) => {
         onChange={(files) => handleChange(files)}
         filesLimit={10}
         initialFiles={imageData}
-        // useChipsForPreview={true}
-        // showFileNamesInPreview={true}
         showPreviewsInDropzone={false}
         showPreviews={true}
         previewText={<Typography variant="h6" sx={previewTextProps}>Preview: </Typography>}

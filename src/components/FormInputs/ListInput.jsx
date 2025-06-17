@@ -1,6 +1,12 @@
 import { useState } from 'react'
-import { TextField } from '@mui/material'
+import { TextField, Button, Box } from '@mui/material'
+import AddIcon from '@mui/icons-material/Add';
 
+
+const softwaresInputContainerProps = {
+  display : "flex",
+  gap : 1,
+}
 
 const inputStyles = {
   sx: {
@@ -31,27 +37,47 @@ const ListInput = ({ id, label, addValues, disabled=false }) => {
 
   const handleChange = (e) => {
     if (e.key === "Enter" && input.trim().length !== 0) {
-      addValues(prevState => [...prevState, input])
+      addValues(input)
+      // addValues(prevState => [...prevState, input])
+      setInput("")
+    }
+  }
+
+  const handleClick = () => {
+    if (input.trim().length !== 0) {
+      // addValues(prevState => [...prevState, input])
+      addValues(input)
       setInput("")
     }
   }
 
 
   return (
-    <TextField
-      variant="outlined" 
-      fullWidth 
-      type="text" 
-      InputProps={inputStyles} 
-      InputLabelProps={inputLabelStyles} 
-      inputProps={{maxLength: 40}} 
-      id={id}
-      label={label}
-      value={input}
-      onKeyDown={e => handleChange(e)}
-      onChange={e => setInput(e.target.value)}
-      disabled={disabled}
-    />
+    <Box sx={softwaresInputContainerProps}>
+      <TextField
+        variant="outlined" 
+        fullWidth 
+        type="text" 
+        InputProps={inputStyles} 
+        InputLabelProps={inputLabelStyles} 
+        inputProps={{maxLength: 40}} 
+        id={id}
+        label={label}
+        value={input}
+        onKeyDown={e => handleChange(e)}
+        onChange={e => setInput(e.target.value)}
+        disabled={disabled}
+      />
+      <Button 
+        variant="contained" 
+        endIcon={<AddIcon/>} 
+        sx={{flex: {xs: "45%", sm: "50%", md:"40%", lg: "30%"}}}
+        onClick={handleClick}
+      >
+        Add
+      </Button>
+    </Box>
+
   )
 }
 

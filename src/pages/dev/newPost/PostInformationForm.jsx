@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { Box, Typography, TextField, Chip, Button } from '@mui/material'
-import TextInput from '../../../components/FormInputs/TextInput'
-import AddIcon from '@mui/icons-material/Add';
+import PostInfoInput from '../../../components/FormInputs/PostInfoInput'
 import ListInput from '../../../components/FormInputs/ListInput';
 
 
@@ -32,10 +31,6 @@ const formHeaderTextProps = {
   mb: 1,
 }
 
-const softwaresInputContainerProps = {
-  display : "flex",
-  gap : 1,
-}
 
 const skillsListContainer = {
   display: "flex",
@@ -44,21 +39,30 @@ const skillsListContainer = {
 }
 
 
-const MOCK_SKILLS = [ "Adobe Photoshop", "3DSMax", "Corona" ]
 
 
-const PostInformationForm = () => {
+const PostInformationForm = ({ postInformation, setPostInformation}) => {
   const [ isLoading, setIsLoading ] = useState(false)
   const [ header, setHeader ] = useState("");
   const [ style, setStyle ] = useState("");
-  const [ softwares, setSoftwares ] = useState(MOCK_SKILLS)
+  const [ softwares, setSoftwares ] = useState(postInformation.softwares)
   const [ softwareInput, setSoftwareInput ] = useState("");
 
 
-  const handleDeleteSkill = (item) => {
-    setSoftwares(prevState => prevState.filter(_item => _item !== item))
+  const handleAddSkill = item => {
+    
   }
-  console.log(softwares)
+
+
+  const handleDeleteSkill = item => {
+    // setSoftwares(prevState => prevState.filter(_item => _item !== item))
+    setPostInformation(prevState => ({...prevState, softwares: prevState.softwares.filter(_item => _item !== item)}))
+  }
+  
+  const handleConfirm = () => {
+    
+  }
+
   return (
     <Box sx={mainContainerProps}>
       <Box sx={headerTextContainerProps}>
@@ -67,30 +71,30 @@ const PostInformationForm = () => {
       <Box sx={formContainerProps} component="form">
         <Box sx={formItemProps}>
           <Typography sx={formHeaderTextProps} variant="h6">Post Title</Typography>
-          <TextInput
+          <PostInfoInput
             id="header" 
             label="Daily Majlis"
+            initialValue={postInformation.header}
             setValue={value => setHeader(value)}
+            value={postInformation.header}
             disabled={isLoading}
           />
         </Box>
         <Box sx={formItemProps}>
           <Typography sx={formHeaderTextProps} variant="h6">Style</Typography>
-          <TextInput
+          <PostInfoInput
             id="style" 
             label="Classic"
+            initialValue={postInformation.style}
             setValue={value => setStyle(value)}
             disabled={isLoading}
           />
         </Box>
         <Box sx={formItemProps}>
           <Typography sx={formHeaderTextProps} variant="h6">Softwares used</Typography>
-          <Box sx={softwaresInputContainerProps}>
-            <ListInput addValues={setSoftwares}/>
-            <Button variant="contained" endIcon={<AddIcon/>}>Add</Button>
-          </Box>
+          <ListInput addValues={handleAddSkill}/>
           <Box sx={skillsListContainer}>
-            { softwares.map(item => <Chip label={item} variant="outlined" onDelete={() => handleDeleteSkill(item)} key={item} color="success"/>) }
+            { postInformation.softwares.map(item => <Chip label={item} variant="outlined" onDelete={() => handleDeleteSkill(item)} key={item} color="success"/>) }
           </Box>
         </Box>
         {/* softwares used - fetch softwares from existing projects */}
