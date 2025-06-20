@@ -9,14 +9,11 @@ const mainContainerProps = {
 
 const headerTextContainerProps = {
   mb: 3,
-
 }
 
 const headerTextProps = {
   fontSize: { xs: 16, sm: 18, md: 20, lg: 22 },
-
 }
-
 
 const dropZoneProps = {
   background: "rgba(255,255,255,.2)",
@@ -34,11 +31,20 @@ const previewTextProps = {
   fontWeight: 500,
 }
 
-const UploadImagesForm = ({ imageData, setImageData }) => {
+const UploadImagesForm = ({ setImages, imageData, setImageData }) => {
 
   const handleChange = (files) => {
     setImageData(files)
+    
+    setImages([])
+    //image preview
+    files.forEach(item => {
+      const reader = new FileReader();
+      reader.addEventListener("load", () => setImages(prevState => [...prevState, reader.result]));
+      reader.readAsDataURL(item);
+    })
   }
+
   return (
     <Box sx={mainContainerProps}>
       <Box sx={headerTextContainerProps}>

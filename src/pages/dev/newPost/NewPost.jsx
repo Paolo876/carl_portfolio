@@ -79,7 +79,7 @@ const NewPost = () => {
         <Box sx={contentContainerProps}>
           {stepNumber === 0 && <UploadImagesForm images={images} setImages={setImages} imageData={imageData} setImageData={setImageData} />}
           {stepNumber === 1 && <PostInformationForm postInformation={postInformation} setPostInformation={setPostInformation} />}
-          {stepNumber === 2 && <PreviewPost/>}
+          {stepNumber === 2 && <PreviewPost images={images} postInformation={postInformation}/>}
         </Box>
         <Box sx={stepperContainerProps}>
           <Button 
