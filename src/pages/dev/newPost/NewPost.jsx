@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Box, Button, Typography } from '@mui/material'
+import { Box, Button, Container, Typography } from '@mui/material'
 
 import DevPageContainer from '../../../components/layout/DevPageContainer'
 import PostInformationForm from './PostInformationForm'
@@ -34,10 +34,19 @@ const contentContainerProps = {
 
 const stepperContainerProps = {
   mt: {lg: 5}, 
+  position: "fixed",
+  bottom: 0,
+  left:0,
+  width: "100%",
+  py: { lg: 5},
+  background: "rgba(255,255,255,.15)",
+  boxShadow: 5,
+}
+
+const stepperContainerContentProps = {
   display: "flex",
   flexDirection: "row",
   justifyContent: "space-between",
-
 }
 
 const stepperButtonProps = {
@@ -53,21 +62,25 @@ const NewPost = () => {
   const [ imageData, setImageData ] = useState([]);
   const [ postInformation, setPostInformation ] = useState({header: "", style: "", softwares: []})
 
+  const [ isLoading, setIsLoading ] = useState(false);
+  const [ success, setSuccess ] = useState(false);
+  const [ error, setError ] = useState(null);
+
   // upload to be handled here too
   const handleStepperClick = async (action) => {
-    if(action === "prev" && stepNumber > 0) {
-      // if stepNumber === 0 &&
-      // if stepNumber === 1 &&
-      // if stepNumber === 2 &&
-      setStepNumber(prevState => prevState - 1)
-    }
+    if(action === "prev" && stepNumber > 0) setStepNumber(prevState => prevState - 1)
+    if(action === "next" && stepNumber < 2) setStepNumber(prevState => prevState + 1)
 
-    if(action === "next" && stepNumber < 2) {
-      // if stepNumber === 0 && imageData == 0
-      // if stepNumber === 1 &&
-      // if stepNumber === 2 &&
-      setStepNumber(prevState => prevState + 1)
+    if(action === "upload" && imageData.length !== 0 && 
+      postInformation.header.trim().length !== 0 && 
+      postInformation.style.trim().length !== 0 && 
+      postInformation.softwares.length !== 0) 
+    {
+      setIsLoading(true)
+      setError(null)
+
     }
+    
   }
 
   return (
@@ -82,43 +95,47 @@ const NewPost = () => {
           {stepNumber === 2 && <PreviewPost images={images} postInformation={postInformation}/>}
         </Box>
         <Box sx={stepperContainerProps}>
-          <Button 
-            sx={stepperButtonProps} 
-            variant="contained" 
-            size="large" 
-            startIcon={<ChevronLeftIcon/>} 
-            disabled={stepNumber === 0}
-            onClick={() => handleStepperClick("prev")}
-          >
-            Back
-          </Button>
-          {stepNumber < 2 ? <Button 
-            sx={stepperButtonProps} 
-            variant="contained" 
-            size="large" 
-            endIcon={<ChevronRightIcon/>}
-            disabled={
-              (stepNumber === 0 && imageData.length === 0) ||
-              (stepNumber === 1 && postInformation.header === "") ||
-              (stepNumber === 1 && postInformation.style === "") ||
-              (stepNumber === 1 && postInformation.softwares.length === 0)
-              }
-            onClick={() => handleStepperClick("next")}
+          <Container maxWidth="xl">
+            <Box sx={stepperContainerContentProps}>
+              <Button 
+                sx={stepperButtonProps} 
+                variant="contained" 
+                size="large" 
+                startIcon={<ChevronLeftIcon/>} 
+                disabled={stepNumber === 0}
+                onClick={() => handleStepperClick("prev")}
+              >
+                Back
+              </Button>
+              {stepNumber < 2 ? <Button 
+                sx={stepperButtonProps} 
+                variant="contained" 
+                size="large" 
+                endIcon={<ChevronRightIcon/>}
+                disabled={
+                  (stepNumber === 0 && imageData.length === 0) ||
+                  (stepNumber === 1 && postInformation.header === "") ||
+                  (stepNumber === 1 && postInformation.style === "") ||
+                  (stepNumber === 1 && postInformation.softwares.length === 0)
+                  }
+                onClick={() => handleStepperClick("next")}
 
-          >
-            Next
-          </Button> :
-          <Button
-            variant="contained" 
-            size="large" 
-            endIcon={<ChevronRightIcon/>}
-            disabled={stepNumber < 2}
-            onClick={() => handleStepperClick("upload")}
-            color='info'
-          >
-            UPLOAD
-          </Button>
-          }
+              >
+                Next
+              </Button> :
+              <Button
+                variant="contained" 
+                size="large" 
+                endIcon={<ChevronRightIcon/>}
+                disabled={stepNumber < 2}
+                onClick={() => handleStepperClick("upload")}
+                color='info'
+              >
+                UPLOAD
+              </Button>
+              }
+            </Box>
+          </Container>
         </Box>
       </Box>
     </DevPageContainer>
