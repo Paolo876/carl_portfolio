@@ -5,6 +5,10 @@ import DevPageContainer from '../../../components/layout/DevPageContainer'
 import PostInformationForm from './PostInformationForm'
 import PreviewPost from './PreviewPost'
 import UploadImagesForm from './UploadImagesForm'
+
+import useUpload from '../../../hooks/useUpload'
+import { useFirestore } from '../../../hooks/useFirestore'
+
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
@@ -53,14 +57,18 @@ const stepperButtonProps = {
 
 }
 
-// image obj: {src: "", filename: ""}
+
+const postInformationInitialState = { header: "", style: "", softwares: [] }
 
 const NewPost = () => {
+  const { uploadMany } = useUpload('user');
+  const { updateArrayDocument } = useFirestore('user');
+  
   const [ stepNumber, setStepNumber ] = useState(0);
 
   const [ images, setImages ] = useState([]);
   const [ imageData, setImageData ] = useState([]);
-  const [ postInformation, setPostInformation ] = useState({header: "", style: "", softwares: []})
+  const [ postInformation, setPostInformation ] = useState(postInformationInitialState)
 
   const [ isLoading, setIsLoading ] = useState(false);
   const [ success, setSuccess ] = useState(false);
@@ -78,7 +86,34 @@ const NewPost = () => {
     {
       setIsLoading(true)
       setError(null)
+      try {
+        //image obj props {header: "", id: "", softwares: [], style, "", images: [0: {filename: "", src: ""}]}
 
+        // upload image to imageKit
+        // get src of each
+        // create variable of the whole object and properties {header: "", id: "", softwares: [], style, "", images: [0: {filename: "", src: ""}]}
+
+        // update db
+
+        //reset states
+        
+        //redirect to home page or post page if not mobile
+        
+        console.log(imageData)
+        // const uploaded = await uploadMany('project-images', imageData);
+        // const id = String(Date.now().toString(32) + Math.random().toString(16)).replace(/\./g, "").slice(8);
+        // const updateDb = {...postInformation, images: uploaded, id};
+        // await updateArrayDocument('projects', 'images', updateDb);
+        // setSuccess(true)
+        // setPostInformation(postInformationInitialState);
+        // setImageData([]);
+        // setImages([]);
+      } catch(err) {
+        setError(err.message)
+        console.log(err.message)
+      } finally {
+        setIsLoading(false)
+      }
     }
     
   }
@@ -117,7 +152,7 @@ const NewPost = () => {
                   (stepNumber === 1 && postInformation.header === "") ||
                   (stepNumber === 1 && postInformation.style === "") ||
                   (stepNumber === 1 && postInformation.softwares.length === 0)
-                  }
+                }
                 onClick={() => handleStepperClick("next")}
 
               >
@@ -127,7 +162,14 @@ const NewPost = () => {
                 variant="contained" 
                 size="large" 
                 endIcon={<ChevronRightIcon/>}
-                disabled={stepNumber < 2}
+                disabled={
+                  stepNumber < 2 || 
+                  imageData.length === 0 || 
+                  postInformation.header === "" || 
+                  postInformation.style === "" || 
+                  postInformation.softwares.length === 0 || 
+                  isLoading
+                }
                 onClick={() => handleStepperClick("upload")}
                 color='info'
               >
