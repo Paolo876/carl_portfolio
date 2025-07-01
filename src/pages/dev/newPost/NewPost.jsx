@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import { Box, Button, Container, Typography } from '@mui/material'
+import useProjectsRedux from '../../../hooks/useProjectsRedux'
 
 import DevPageContainer from '../../../components/layout/DevPageContainer'
 import PostInformationForm from './PostInformationForm'
 import PreviewPost from './PreviewPost'
 import UploadImagesForm from './UploadImagesForm'
+import UploadSuccess from './UploadSuccess'
 
 import useUpload from '../../../hooks/useUpload'
 import { useFirestore } from '../../../hooks/useFirestore'
@@ -62,8 +64,9 @@ const postInformationInitialState = { header: "", style: "", softwares: [] }
 
 const NewPost = () => {
   const { uploadMany } = useUpload('user');
-  const { updateArrayDocument } = useFirestore('user');
-  
+  const { updateArrayDocument, updateDocument } = useFirestore('user');
+  const { projects } = useProjectsRedux();
+
   const [ stepNumber, setStepNumber ] = useState(0);
 
   const [ images, setImages ] = useState([]);
@@ -74,8 +77,10 @@ const NewPost = () => {
   const [ success, setSuccess ] = useState(false);
   const [ error, setError ] = useState(null);
 
+  console.log(projects)
   // upload to be handled here too
   const handleStepperClick = async (action) => {
+
     if(action === "prev" && stepNumber > 0) setStepNumber(prevState => prevState - 1)
     if(action === "next" && stepNumber < 2) setStepNumber(prevState => prevState + 1)
 
@@ -84,30 +89,19 @@ const NewPost = () => {
       postInformation.style.trim().length !== 0 && 
       postInformation.softwares.length !== 0) 
     {
+      setStepNumber(3)
       setIsLoading(true)
       setError(null)
       try {
-        //image obj props {header: "", id: "", softwares: [], style, "", images: [0: {filename: "", src: ""}]}
+        const uploaded = await uploadMany('project-images', imageData);
+        const id = String(Date.now().toString(32) + Math.random().toString(16)).replace(/\./g, "").slice(8);
+        const updateDb = {...postInformation, images: uploaded, id};
+        await updateDocument({id:"projects", images: [updateDb, ...projects]}, "projects")
 
-        // upload image to imageKit
-        // get src of each
-        // create variable of the whole object and properties {header: "", id: "", softwares: [], style, "", images: [0: {filename: "", src: ""}]}
-
-        // update db
-
-        //reset states
-        
-        //redirect to home page or post page if not mobile
-        
-        console.log(imageData)
-        // const uploaded = await uploadMany('project-images', imageData);
-        // const id = String(Date.now().toString(32) + Math.random().toString(16)).replace(/\./g, "").slice(8);
-        // const updateDb = {...postInformation, images: uploaded, id};
-        // await updateArrayDocument('projects', 'images', updateDb);
-        // setSuccess(true)
-        // setPostInformation(postInformationInitialState);
-        // setImageData([]);
-        // setImages([]);
+        setSuccess(true)
+        setPostInformation(postInformationInitialState);
+        setImageData([]);
+        setImages([]);
       } catch(err) {
         setError(err.message)
         console.log(err.message)
@@ -128,6 +122,7 @@ const NewPost = () => {
           {stepNumber === 0 && <UploadImagesForm images={images} setImages={setImages} imageData={imageData} setImageData={setImageData} />}
           {stepNumber === 1 && <PostInformationForm postInformation={postInformation} setPostInformation={setPostInformation} />}
           {stepNumber === 2 && <PreviewPost images={images} postInformation={postInformation}/>}
+          {stepNumber === 3 && <UploadSuccess setStepNumber={setStepNumber} isLoading={isLoading} success={success} error={error}/>}
         </Box>
         <Box sx={stepperContainerProps}>
           <Container maxWidth="xl">
@@ -185,3 +180,8 @@ const NewPost = () => {
 }
 
 export default NewPost
+
+
+
+
+
