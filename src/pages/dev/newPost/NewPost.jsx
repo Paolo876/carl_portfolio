@@ -6,7 +6,7 @@ import DevPageContainer from '../../../components/layout/DevPageContainer'
 import PostInformationForm from './PostInformationForm'
 import PreviewPost from './PreviewPost'
 import UploadImagesForm from './UploadImagesForm'
-import UploadSuccess from './UploadSuccess'
+import UploadStatus from './UploadStatus'
 
 import useUpload from '../../../hooks/useUpload'
 import { useFirestore } from '../../../hooks/useFirestore'
@@ -64,7 +64,7 @@ const postInformationInitialState = { header: "", style: "", softwares: [] }
 
 const NewPost = () => {
   const { uploadMany } = useUpload('user');
-  const { updateArrayDocument, updateDocument } = useFirestore('user');
+  const { updateDocument } = useFirestore('user');
   const { projects } = useProjectsRedux();
 
   const [ stepNumber, setStepNumber ] = useState(0);
@@ -77,8 +77,7 @@ const NewPost = () => {
   const [ success, setSuccess ] = useState(false);
   const [ error, setError ] = useState(null);
 
-  console.log(projects)
-  // upload to be handled here too
+
   const handleStepperClick = async (action) => {
 
     if(action === "prev" && stepNumber > 0) setStepNumber(prevState => prevState - 1)
@@ -98,15 +97,16 @@ const NewPost = () => {
         const updateDb = {...postInformation, images: uploaded, id};
         await updateDocument({id:"projects", images: [updateDb, ...projects]}, "projects")
 
-        setSuccess(true)
-        setPostInformation(postInformationInitialState);
-        setImageData([]);
-        setImages([]);
       } catch(err) {
         setError(err.message)
         console.log(err.message)
       } finally {
+        //reset states
         setIsLoading(false)
+        setSuccess(true)
+        setPostInformation(postInformationInitialState);
+        setImageData([]);
+        setImages([]);
       }
     }
     
@@ -122,9 +122,9 @@ const NewPost = () => {
           {stepNumber === 0 && <UploadImagesForm images={images} setImages={setImages} imageData={imageData} setImageData={setImageData} />}
           {stepNumber === 1 && <PostInformationForm postInformation={postInformation} setPostInformation={setPostInformation} />}
           {stepNumber === 2 && <PreviewPost images={images} postInformation={postInformation}/>}
-          {stepNumber === 3 && <UploadSuccess setStepNumber={setStepNumber} isLoading={isLoading} success={success} error={error}/>}
+          {stepNumber === 3 && <UploadStatus setStepNumber={setStepNumber} isLoading={isLoading} success={success} error={error}/>}
         </Box>
-        <Box sx={stepperContainerProps}>
+        {stepNumber !== 3 && <Box sx={stepperContainerProps}>
           <Container maxWidth="xl">
             <Box sx={stepperContainerContentProps}>
               <Button 
@@ -173,7 +173,7 @@ const NewPost = () => {
               }
             </Box>
           </Container>
-        </Box>
+        </Box>}
       </Box>
     </DevPageContainer>
   )
