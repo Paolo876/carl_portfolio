@@ -31,20 +31,21 @@ const headerTextProps = {
   fontSize: {xs: 20, sm: 20, md: 26, lg: 30},
   fontWeight: 600,
   letterSpacing: 1.5,
+  textDecoration: "underline"
 }
 
 const contentContainerProps = {
   flex: 1,
-
+  mb: {xs: 13, sm: 15, md: 15,}
 }
 
 const stepperContainerProps = {
-  mt: {lg: 5}, 
+  mt: {xs: 2, sm: 2, md: 3, lg: 5}, 
   position: "fixed",
   bottom: 0,
   left:0,
   width: "100%",
-  py: { lg: 5},
+  py: {xs: 2, sm: 2, md: 3,  lg: 5},
   background: "rgba(255,255,255,.15)",
   boxShadow: 5,
 }
@@ -53,10 +54,6 @@ const stepperContainerContentProps = {
   display: "flex",
   flexDirection: "row",
   justifyContent: "space-between",
-}
-
-const stepperButtonProps = {
-
 }
 
 
@@ -128,7 +125,6 @@ const NewPost = () => {
           <Container maxWidth="xl">
             <Box sx={stepperContainerContentProps}>
               <Button 
-                sx={stepperButtonProps} 
                 variant="contained" 
                 size="large" 
                 startIcon={<ChevronLeftIcon/>} 
@@ -138,7 +134,6 @@ const NewPost = () => {
                 Back
               </Button>
               {stepNumber < 2 ? <Button 
-                sx={stepperButtonProps} 
                 variant="contained" 
                 size="large" 
                 endIcon={<ChevronRightIcon/>}
