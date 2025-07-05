@@ -7,16 +7,19 @@ import HomeIcon from '@mui/icons-material/Home';
 
 const actionButtonsContainer = {
   display: "flex",
-  flexDirection: "row",
-  gap: {lg: 3},
-  mt: {lg: 5}
+  flexDirection: {xs: "column", sm:"row"},
+  gap: {xs: 3, sm: 2, md: 2, lg: 3},
+  mt: {xs: 5, sm: 4, md: 4, lg: 5}
 }
 const UploadStatus = ({ setStepNumber, isLoading, success, error }) => {
   const navigate = useNavigate();
 
   const handleClick = (action) => {
     if(action === "upload") setStepNumber(0)
-    if(action === "home") navigate("/")
+    if(action === "home") {
+      navigate("/")
+      window.location.reload();
+    }
   }
 
   if(isLoading) return (
@@ -36,7 +39,7 @@ const UploadStatus = ({ setStepNumber, isLoading, success, error }) => {
   if(success) return (
     <Box>
       <Alert severity='success'>
-        <AlertTitle>Upload Successful!</AlertTitle>
+        <AlertTitle>Upload Complete!</AlertTitle>
         Your post has been uploaded successfully.
       </Alert>
 

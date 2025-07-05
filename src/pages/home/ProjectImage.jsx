@@ -44,7 +44,15 @@ const ProjectImage = ({ title, images, softwares, style, id }) => {
 
 
   const coverImage = images[0].src
-  const newStr = `${coverImage.substring(0, coverImage.indexOf("q5892cimh/") + 10)}tr:h-300/${coverImage.slice(coverImage.indexOf("q5892cimh/") + 10)}`;
+  let newStr;
+  if(images[0].src.includes("firebase")) {
+    let domain = new URL(coverImage);
+    newStr = `https://ik.imagekit.io/q5892cimh/tr:h-300/${domain.pathname}${domain.search}`;
+  } else {
+    newStr = `${coverImage.substring(0, coverImage.indexOf("q5892cimh/") + 10)}tr:h-300/${coverImage.slice(coverImage.indexOf("q5892cimh/") + 10)}`;
+  }
+
+  
   return (
     <>
       <Box 

@@ -24,9 +24,9 @@ const contentContainerProps = {
 const boxContainerProps = {
   position: "relative",
   display: "flex",
-  flexDirection: "row",
+  flexDirection: {xs: "column", md:"row"},
   userSelect: "none",
-  px: 3,
+  px: {sm: 3},
   width: "auto",
   // my:2,
   gap: 2,
@@ -45,18 +45,19 @@ const imagesListContainerProps = {
 }
 
 const postInformationProps = {
+  backgroundColor: {xs: "none", md:"initial"},
   border: 1,
   borderColor: "rgba(255,255,255, .05)",
   borderRadius: 4,
   py: 2,
   px: 2,
-  minWidth: {lg: 300}
+  minWidth: {sm: 150, md: 200, lg: 300}
 }
 
 const postHeaderTextProps = {
   fontWeight: 500,
   letterSpacing: 1,
-  fontSize: {md: 17, lg: 18},
+  fontSize: {xs: 14, sm: 15, md: 17, lg: 18},
   pb: {md: .2, lg: 0 }
 }
 
@@ -72,16 +73,16 @@ const postSubHeaderTextProps = {
 const listProps = {
   m:0,
   p:0,
-  mt: {sm: 3, md: 4, lg:4},
+  mt: {xs: 2, sm: 3, md: 4, lg:4},
 }
 
 const listItemProps = {
   m:0,
   p:0,
-  mt: {md: .5, lg:.85},
+  mt: {xs: .5, lg:.85},
   fontWeight: 300,
   letterSpacing: 1,
-  fontSize: {md: 11, lg: 11, xl: 12},
+  fontSize: {xs: 10, sm: 11, md: 11, lg: 11, xl: 12},
   opacity: .8,
 }
 
@@ -95,7 +96,7 @@ const PreviewPost = ({ images, postInformation }) => {
       <Box>
         <Box sx={boxContainerProps}>
           <Box sx={imagesListContainerProps}>
-            {images.map(item => <Box sx={{maxHeight: "50vh"}} key={item.filename}>
+            {images.map(item => <Box sx={{maxHeight: {md: "45vh", lg: "50vh"}}} key={item.filename}>
               <Image src={item} alt={item.filename} fit="contain" duration={100} showLoading/>
             </Box>)}
           </Box>
