@@ -11,7 +11,7 @@ const containerProps = {
   borderColor: "rgba(255,255,255, .25)",
   mb: 2,
   pb: 4,
-  transition: "200ms all ease"
+  transition: "200ms all ease",
 }
 
 const carouselContainerProps = {
@@ -70,9 +70,9 @@ const ImageCarousel = ({ title, images, softwares, style }) => {
     let newStr;
       if(src.includes("firebase")) {
         let domain = new URL(src);
-        newStr = `https://ik.imagekit.io/q5892cimh/tr:h-${maxDimensions.ratio * window.innerWidth}/${domain.pathname}${domain.search}`;
+        newStr = `https://ik.imagekit.io/q5892cimh/tr:h-${maxDimensions.ratio * (window.innerWidth * 1.2)}/${domain.pathname}${domain.search}`;
       } else {
-        newStr = `${src.substring(0, src.indexOf("q5892cimh/") + 10)}tr:h-${maxDimensions.ratio * window.innerWidth}/${src.slice(src.indexOf("q5892cimh/") + 10)}`;
+        newStr = `${src.substring(0, src.indexOf("q5892cimh/") + 10)}tr:h-${maxDimensions.ratio * (window.innerWidth * 1.2)}/${src.slice(src.indexOf("q5892cimh/") + 10)}`;
       }
     return newStr
   }
