@@ -66,6 +66,16 @@ const ImageCarousel = ({ title, images, softwares, style }) => {
     },
   });
 
+  const handleImgTransform = (src) => {
+    let newStr;
+      if(src.includes("firebase")) {
+        let domain = new URL(src);
+        newStr = `https://ik.imagekit.io/q5892cimh/tr:h-${maxDimensions.ratio * window.innerWidth}/${domain.pathname}${domain.search}`;
+      } else {
+        newStr = `${src.substring(0, src.indexOf("q5892cimh/") + 10)}tr:h-${maxDimensions.ratio * window.innerWidth}/${src.slice(src.indexOf("q5892cimh/") + 10)}`;
+      }
+    return newStr
+  }
 
   if(imagesPreloaded) return (
     <Box sx={containerProps}>
@@ -99,12 +109,12 @@ const ImageCarousel = ({ title, images, softwares, style }) => {
             
           >
             <Image 
-              src={item.src} 
+              src={handleImgTransform(item.src)} 
               duration={100} 
               sx={{transition: "300ms width ease"}} 
               fit="scale-down"
               alt={item.title}
-              
+              showLoading
             />
           </Box>)}
 
