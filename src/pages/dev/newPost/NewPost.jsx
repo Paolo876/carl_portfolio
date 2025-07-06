@@ -23,7 +23,7 @@ const mainContainerProps = {
 }
 
 const headerTextContainerProps = {
-  mt: {xs: 1, sm: 2, md: 4},
+  mt: {xs: 1, sm: 2, md: 2},
   mb: {xs: 5, sm: 8, md: 10, lg: 12}
 
 }

@@ -24,9 +24,12 @@ const containerProps = {
   display: "flex",
   flexDirection: "row",
   justifyContent: {xs: "space-between", sm:"right"},
-  backgroundColor: "secondary.light",
+  // backgroundColor: "secondary.light",
+  backdropFilter: "blur(10px) brightness(120%)",
   alignItems: "center",
-  boxShadow: 5,
+  borderBottom: 1,
+  borderColor: "rgba(255,255,255,.1)",
+  boxShadow: 3,
   gap: {xs: 2, sm:10},
   px: {xs: 3, sm: 5, md: 8, lg:15}
 }
@@ -40,7 +43,7 @@ const infoContainerProps = {
 
 const infoTextProps = {
   fontWeight: 300, 
-  fontSize: {xs: 12, sm: 15, md: 16, lg:17},
+  fontSize: {xs: 11, sm: 12, md: 13, lg:14},
   display: {xs: "none", sm: "initial"}
 }
 
@@ -49,13 +52,13 @@ const nameInfoContainerProps = {
   flexDirection: "row",
   alignItems: "center",
   gap: 1,
-  border: 2,
+  border: 1.5,
   borderRadius: "35px",
   borderColor: "primary.light",
-  backgroundColor: "secondary.main",
+  // backgroundColor: "secondary.main",
   py: .5,
   px: .75,
-  my: .5,
+  my: {xs: .5, md:.75, lg: 1},
 }
 
 const nameTextProps = {
