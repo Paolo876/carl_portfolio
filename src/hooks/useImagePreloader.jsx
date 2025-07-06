@@ -47,7 +47,7 @@ const useImagePreloader = (imageList) => {
       }
 
       
-      setTimeout(() => setImagesPreloaded(true), 20)
+      setTimeout(() => setImagesPreloaded(true), 10)
     }
 
     effect()
