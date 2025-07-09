@@ -1,10 +1,12 @@
-import React from 'react'
+import { useState } from 'react'
 import { Box, IconButton, Typography } from '@mui/material'
 import useProjectsRedux from '../../../hooks/useProjectsRedux'
 import LoadingSpinner from '../../../components/ui/LoadingSpinner'
 import Image from 'mui-image'
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import DeletePostModal from './PostItemModal/DeletePostModal'
+import EditPostModal from './PostItemModal/EditPostModal'
 
 
 const containerProps = {
@@ -56,9 +58,11 @@ const actionButtonsContainer = {
 }
 
 
+const modalInitialState = { state: false, data: null, action: null }
 
 const PostsList = () => {
   const { projects, isLoading } = useProjectsRedux();
+  const [ showModal, setShowModal ] = useState(modalInitialState)
 
   let projectsList = projects && projects.map(item =>  {
     let newStr
@@ -72,12 +76,13 @@ const PostsList = () => {
     return { header: item.header, coverImage: {filename:item.images[0].filename, src: newStr}, id: item.id }
   })
 
-  const handleClick = (action) => {
+  const handleClick = (action, data) => {
     if(action === "edit") {
+      setShowModal({ state: true, data, action})
 
     }
     if(action === "delete") {
-
+      setShowModal({ state: true, data, action})
     }
   }
 
@@ -93,12 +98,20 @@ const PostsList = () => {
           <Box sx={informationContainer}>
             <Typography variant='h6' sx={headerTextProps}>{item.header}</Typography>
             <Box sx={actionButtonsContainer}>
-              <IconButton color='primary' onClick={() => handleClick("edit")}><EditIcon/></IconButton>
-              <IconButton color='secondary' onClick={() => handleClick("delete")}><DeleteIcon/></IconButton>
+              <IconButton color='primary' onClick={() => handleClick("edit", item)}><EditIcon/></IconButton>
+              <IconButton color='secondary' onClick={() => handleClick("delete", item)}><DeleteIcon/></IconButton>
             </Box>
           </Box>
         </Box>)}
       </Box>}
+      <EditPostModal 
+        open={showModal.state && showModal.action === "edit"}
+        onClose={() => setShowModal(modalInitialState)}
+      />
+      <DeletePostModal 
+        open={showModal.state && showModal.action === "delete"}
+        onClose={() => setShowModal(modalInitialState)}
+      />
     </Box>
   )
 }
