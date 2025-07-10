@@ -107,10 +107,12 @@ const PostsList = () => {
       <EditPostModal 
         open={showModal.state && showModal.action === "edit"}
         onClose={() => setShowModal(modalInitialState)}
+        data={showModal.data}
       />
       <DeletePostModal 
         open={showModal.state && showModal.action === "delete"}
         onClose={() => setShowModal(modalInitialState)}
+        data={showModal.data}
       />
     </Box>
   )

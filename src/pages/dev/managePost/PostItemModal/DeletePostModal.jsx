@@ -1,6 +1,7 @@
 import React from 'react'
 import { Modal, Box, Typography, Paper, Button } from '@mui/material'
 import Image from 'mui-image'
+import useProjectsRedux from '../../../../hooks/useProjectsRedux'
 
 const containerProps = {
   position: 'absolute',
@@ -15,10 +16,17 @@ const containerProps = {
 }
 
 const headerTextProps = {
-
+  fontSize: {xs: 18, sm: 19, md: 20, lg: 22 },
+  textDecoration: "underline",
+  fontWeight: 600,
+  letterSpacing: .5,
+  mb: { xs: 2.5, md: 3}
 }
 
 const descTextProps = {
+  fontSize: {xs: 14, sm: 15, md: 16, lg: 16 },
+  fontWeight: 300,
+  mb: { xs: 1.5, md: 2}
 
 }
 
@@ -35,7 +43,12 @@ const actionContainerProps = {
 }
 
 
-const DeletePostModal = ({ open, onClose }) => {
+const DeletePostModal = ({ open, onClose, data }) => {
+  const { projects } = useProjectsRedux();
+
+  const project = projects && data && projects.find(item => item.id === data.id)
+
+
   return (
     <Modal 
       open={open} 

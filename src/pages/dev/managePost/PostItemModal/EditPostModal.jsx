@@ -2,7 +2,7 @@ import React from 'react'
 import { Modal, Box, Typography } from '@mui/material'
 
 
-const EditPostModal = ({ open, onClose }) => {
+const EditPostModal = ({ open, onClose, data }) => {
   return (
     <Modal 
       open={open} 
