@@ -91,7 +91,7 @@ const PostsList = () => {
     <Box sx={containerProps}>
       {isLoading && <LoadingSpinner opacity={.85}/>}
       {!isLoading && projectsList && <Box sx={projectImagesContainerProps}>
-        {projectsList.map(item => <Box>
+        {projectsList.map(item => <Box key={item.header}>
           <Box sx={boxContainerProps}>
             <Image src={item.coverImage.src}  duration={250} sx={{transition: "300ms width ease"}} fit='cover' showLoading easing="ease-in-out"/>
           </Box>
