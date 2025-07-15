@@ -48,14 +48,14 @@ const UploadImagesForm = ({ setImages, imageData, setImageData }) => {
   return (
     <Box sx={mainContainerProps}>
       <Box sx={headerTextContainerProps}>
-        <Typography variant="h6" sx={headerTextProps}>Upload Images. Maximum of 10 images per post. Each image not exceeding 3mb.</Typography>
+        <Typography variant="h6" sx={headerTextProps}>Upload Images. Maximum of 20 images per post. Each image not exceeding 3mb.</Typography>
       </Box>
       <Box sx={dropZoneProps}>
         <DropzoneArea
         acceptedFiles={['image/*']}
         dropzoneText={"Drag and drop image/s here or click to upload"}
         onChange={(files) => handleChange(files)}
-        filesLimit={10}
+        filesLimit={20}
         initialFiles={imageData}
         showPreviewsInDropzone={false}
         showPreviews={true}

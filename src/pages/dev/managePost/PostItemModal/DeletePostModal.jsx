@@ -1,15 +1,19 @@
 import React from 'react'
 import { Modal, Box, Typography, Paper, Button } from '@mui/material'
-import Image from 'mui-image'
 import useProjectsRedux from '../../../../hooks/useProjectsRedux'
 import ImagesList from './ImagesList'
+import DeleteIcon from '@mui/icons-material/Delete';
+
 
 const containerProps = {
   position: 'absolute',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: {lg: 800},
+  width: {lg: 1100},
+  maxWidth: {lg: "70vw"},
+  maxHeight: "80vh",
+  overflow: "auto",
   // bgcolor: 'background.paper',
   // border: '2px solid #000',
   boxShadow: 24,
@@ -21,7 +25,7 @@ const headerTextProps = {
   textDecoration: "underline",
   fontWeight: 600,
   letterSpacing: .5,
-  mb: { xs: 2.5, md: 3}
+  mb: { xs: 2.5, md: 7, lg: 8}
 }
 
 const descTextProps = {
@@ -32,14 +36,28 @@ const descTextProps = {
 }
 
 const contentContainerProps = {
-
+  display: "flex",
+  mb: {lg: 5}
 }
 
 const infoContainerProps = {
+  width: "35%",
+  ml: {lg: 2},
+}
 
+const titleTextProps = {
+  fontSize: {xs: 17, sm: 18, md: 19, lg: 20}
+}
+
+const styleTextProps = {
+  fontWeight: 300,
+  fontSize: {xs: 12, sm: 13, md: 14, lg: 15}
 }
 
 const actionContainerProps = {
+  display: "flex",
+  justifyContent: "right",
+  gap: 2,
 
 }
 
@@ -61,13 +79,22 @@ const DeletePostModal = ({ open, onClose, data }) => {
         <Box sx={contentContainerProps}>
           <ImagesList images={project.images}/>
           <Box sx={infoContainerProps}>
-            {/* title - style*/}
-            {/* softwares */}
+            <Typography variant='h6' sx={titleTextProps}>{project.header}</Typography>
+            <Typography variant='h6' sx={styleTextProps}>{project.style}</Typography>
           </Box>
         </Box>
         <Box sx={actionContainerProps}>
-          <Button>Delete</Button>
-          <Button onClick={onClose}>Cancel</Button>
+          <Button
+            variant='contained'
+            color="secondary"
+            size="large"
+            startIcon={<DeleteIcon/>}
+          >Delete</Button>
+          <Button 
+            onClick={onClose}
+            variant="outlined"
+            size="large"
+          >Cancel</Button>
         </Box>
       </Paper>
     </Modal>
