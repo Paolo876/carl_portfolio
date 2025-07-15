@@ -10,12 +10,11 @@ const containerProps = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: {lg: 1100},
+  width: {sm: 600, md: 800, lg: 1100},
+  minWidth: {xs: "90vw", sm: "initial"},
   maxWidth: {lg: "70vw"},
   maxHeight: "80vh",
   overflow: "auto",
-  // bgcolor: 'background.paper',
-  // border: '2px solid #000',
   boxShadow: 24,
   p: 4,
 }
@@ -25,24 +24,26 @@ const headerTextProps = {
   textDecoration: "underline",
   fontWeight: 600,
   letterSpacing: .5,
-  mb: { xs: 2.5, md: 7, lg: 8}
+  mb: { xs: 4, md: 7, lg: 8}
 }
 
 const descTextProps = {
-  fontSize: {xs: 14, sm: 15, md: 16, lg: 16 },
+  fontSize: {xs: 13, sm: 14, md: 15, lg: 16 },
   fontWeight: 300,
-  mb: { xs: 1.5, md: 2}
+  mb: 2
 
 }
 
 const contentContainerProps = {
   display: "flex",
-  mb: {lg: 5}
+  flexDirection: {xs: "column", sm: "row"},
+  mb: {xs: 3, sm: 5}
 }
 
 const infoContainerProps = {
-  width: "35%",
-  ml: {lg: 2},
+  width: {sm: "35%"},
+  ml: {sm: 2},
+  mt: {xs: 1.5 , sm: 0}
 }
 
 const titleTextProps = {
@@ -67,7 +68,11 @@ const DeletePostModal = ({ open, onClose, data }) => {
 
   const project = projects && data && projects.find(item => item.id === data.id)
 
-
+  const handleDelete = async () => {
+    // delete images - determine if firebase or imagekit
+    // delete from db
+    // use return value from updated db to update projectsredux
+  }
   if(project) return (
     <Modal 
       open={open} 

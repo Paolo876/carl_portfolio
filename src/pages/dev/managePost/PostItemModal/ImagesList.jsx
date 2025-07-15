@@ -8,18 +8,18 @@ const containerProps = {
   display: "grid",
   // gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
   gridTemplateColumns: `repeat(auto-fill, minmax(120px, 1fr))`,
-  gap: {lg: 1},
-  width: "65%",
-  maxHeight: 400,
+  gap: 1,
+  width:{sm: "65%"},
+  maxHeight: {xs: 300, sm:400},
   background: "rgba(255,255,255,.1)",
   overflow: "auto",
   px: 1,
-  py: 2,
+  py: {xs: 1, sm:2},
   borderRadius: 2,
 }
 
 const imageContainerProps = {
-  width: {lg: 120},
+  width: {xs: "auto", sm: 100, md: 120},
   height: "auto"
 }
 
