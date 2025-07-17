@@ -1,9 +1,12 @@
-import React from 'react'
+import { useState } from 'react'
 import { Modal, Box, Typography, Paper, Button } from '@mui/material'
 import useProjectsRedux from '../../../../hooks/useProjectsRedux'
 import ImagesList from './ImagesList'
 import DeleteIcon from '@mui/icons-material/Delete';
-
+import { deleteObject, ref } from 'firebase/storage';
+import { storage } from '../../../../firebase/config';
+import { useFirestore } from '../../../../hooks/useFirestore';
+import LoadingSpinner from '../../../../components/ui/LoadingSpinner';
 
 const containerProps = {
   position: 'absolute',
@@ -65,6 +68,9 @@ const actionContainerProps = {
 
 const DeletePostModal = ({ open, onClose, data }) => {
   const { projects } = useProjectsRedux();
+  const [ isLoading, setIsLoading ] = useState(false);
+  const [ error, setError ] = useState(null);
+  const { updateDocument } = useFirestore('user');
 
   const project = projects && data && projects.find(item => item.id === data.id)
 
@@ -77,11 +83,14 @@ const DeletePostModal = ({ open, onClose, data }) => {
     <Modal 
       open={open} 
       onClose={onClose} 
+      
       aria-labelledby="delete-post-modal">
       <Paper sx={containerProps}>
         <Typography variant='h6' sx={headerTextProps}>DELETE POST</Typography>
-        <Typography variant='h6' sx={descTextProps}>Are you sure you want to delete this post?</Typography>
-        <Box sx={contentContainerProps}>
+        <Typography variant='h6' sx={{...descTextProps, visibility: isLoading ? "hidden" : "visible"}}>Are you sure you want to delete this post?</Typography>
+
+        {isLoading && <LoadingSpinner opacity={.8} message="Deleting Data..."/>}
+        <Box sx={{...contentContainerProps, visibility: isLoading ? "hidden" : "visible",}}>
           <ImagesList images={project.images}/>
           <Box sx={infoContainerProps}>
             <Typography variant='h6' sx={titleTextProps}>{project.header}</Typography>
@@ -94,11 +103,13 @@ const DeletePostModal = ({ open, onClose, data }) => {
             color="secondary"
             size="large"
             startIcon={<DeleteIcon/>}
+            disabled={isLoading}
           >Delete</Button>
           <Button 
             onClick={onClose}
             variant="outlined"
             size="large"
+            disabled={isLoading}
           >Cancel</Button>
         </Box>
       </Paper>
