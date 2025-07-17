@@ -67,7 +67,7 @@ const actionContainerProps = {
 
 
 const DeletePostModal = ({ open, onClose, data }) => {
-  const { projects } = useProjectsRedux();
+  const { projects, filterProjects } = useProjectsRedux();
   const [ isLoading, setIsLoading ] = useState(false);
   const [ error, setError ] = useState(null);
   const { updateDocument } = useFirestore('user');
@@ -75,9 +75,32 @@ const DeletePostModal = ({ open, onClose, data }) => {
   const project = projects && data && projects.find(item => item.id === data.id)
 
   const handleDelete = async () => {
-    // delete images - determine if firebase or imagekit
-    // delete from db
-    // use return value from updated db to update projectsredux
+    setIsLoading(true);
+    setError(null);
+    try {
+
+      //delete from firebase storage
+      if(project.images[0].src.includes("firebasestorage")) {
+        for(const item of project.images){
+          const imageRef = ref(storage, `project-images/${item.filename}`)
+          await deleteObject(imageRef);  
+        }
+      }
+      //update document
+      const updatedProjects = projects.filter(item => item.id !== project.id);
+      const updatedDocument =  {...projects, images: updatedProjects }
+      await updateDocument(updatedDocument, 'projects');
+
+      //update redux
+      filterProjects({id: project.id})
+    } catch(err){
+      setError(err.message);
+      setIsLoading(false)
+    } finally {
+      setIsLoading(false)
+      onClose()
+    }
+
   }
   if(project) return (
     <Modal 
@@ -104,6 +127,7 @@ const DeletePostModal = ({ open, onClose, data }) => {
             size="large"
             startIcon={<DeleteIcon/>}
             disabled={isLoading}
+            onClick={handleDelete}
           >Delete</Button>
           <Button 
             onClick={onClose}

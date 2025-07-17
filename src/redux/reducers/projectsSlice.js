@@ -5,7 +5,11 @@ import { getProjects } from "./projectsReducers";
 const projectsSlice = createSlice({
     name: "projects",
     initialState: projectsInitialState,
-    reducers: {},
+    reducers: {
+        filterProjects(state, { payload }){
+            state.projects = state.projects.filter(item => item.id !== payload.id);
+        }
+    },
     extraReducers: builder => {
       builder
       //getProjects

@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-// import { projectsActions } from "../redux/reducers/projectsSlice";
+import { projectsActions } from "../redux/reducers/projectsSlice";
 import { getProjects } from "../redux/reducers/projectsReducers";
 
 
@@ -10,6 +10,7 @@ const useProjectsRedux = () => {
     if(projectsRedux) {
       return {
       ...projectsRedux,
+      filterProjects: (data) => dispatch(projectsActions.filterProjects(data)),
       getProjects: () => dispatch(getProjects()),
 
       }
