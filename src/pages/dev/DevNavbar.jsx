@@ -145,7 +145,7 @@ const DevNavbar = () => {
             <ListItem>
               <ListItemButton onClick={() => handleNavigationClick("/dev/manage-post")}>
                 <ListItemIcon><EditIcon/></ListItemIcon>
-                <ListItemText primary="Edit/Update Posts"/>
+                <ListItemText primary="Edit/Delete Posts"/>
               </ListItemButton>
             </ListItem>
             <ListItem>
