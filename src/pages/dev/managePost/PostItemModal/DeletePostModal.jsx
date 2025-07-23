@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Modal, Box, Typography, Paper, Button } from '@mui/material'
+import { Modal, Box, Typography, Paper, Button, Alert } from '@mui/material'
 import useProjectsRedux from '../../../../hooks/useProjectsRedux'
 import ImagesList from './ImagesList'
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -113,6 +113,7 @@ const DeletePostModal = ({ open, onClose, data }) => {
         <Typography variant='h6' sx={{...descTextProps, visibility: isLoading ? "hidden" : "visible"}}>Are you sure you want to delete this post?</Typography>
 
         {isLoading && <LoadingSpinner opacity={.8} message="Deleting Data..."/>}
+        {error && <Alert severity='error'>Unable to delete data. Error: {error.message}</Alert>}
         <Box sx={{...contentContainerProps, visibility: isLoading ? "hidden" : "visible",}}>
           <ImagesList images={project.images}/>
           <Box sx={infoContainerProps}>
@@ -126,7 +127,7 @@ const DeletePostModal = ({ open, onClose, data }) => {
             color="secondary"
             size="large"
             startIcon={<DeleteIcon/>}
-            disabled={isLoading}
+            disabled={isLoading || error}
             onClick={handleDelete}
           >Delete</Button>
           <Button 
