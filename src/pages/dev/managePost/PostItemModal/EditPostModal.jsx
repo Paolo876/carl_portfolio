@@ -1,9 +1,10 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Modal, Box, Typography, Paper, Button } from '@mui/material'
 import useProjectsRedux from '../../../../hooks/useProjectsRedux'
 import CheckIcon from '@mui/icons-material/Check';
 import ImagesList from './ImagesList';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
+import EditInformationForm from './EditInformationForm';
 
 const containerProps = {
   position: 'absolute',
@@ -57,25 +58,30 @@ const actionContainerProps = {
 
 const EditPostModal = ({ open, onClose, data }) => {
   const { projects } = useProjectsRedux();
+  const [ projectInformation, setProjectInformation ] = useState(null)
   const [ isLoading, setIsLoading ] = useState(false);
   const [ error, setError ] = useState(null);
 
-  const project = projects && data && projects.find(item => item.id === data.id)
+  useEffect(() => {
+    if(projects) setProjectInformation(projects.find(item => item.id === data.id))
+    
+  }, [])
 
   const handleAddImages = async () => {
     
   }
 
-  if(project) return (
+  
+  if(projectInformation) return (
     <Modal 
       open={open} 
       onClose={onClose} 
       aria-labelledby="delete-post-modal">
       <Paper sx={containerProps}>
         <Typography variant='h6' sx={headerTextProps}>EDIT POST</Typography>
-        <ImagesList images={project.images} width={"100%"}/>
-        <Button disabled={project.images.length >= 20} variant="contained" startIcon={<AddPhotoAlternateIcon/>} size="large">Add Images</Button>
-
+        <ImagesList images={projectInformation.images} width={"100%"} isEditable/>
+        <Button disabled={projectInformation.images.length >= 20} variant="contained" startIcon={<AddPhotoAlternateIcon/>} size="large">Add Images</Button>
+        <EditInformationForm header={projectInformation.header} style={projectInformation.style} softwares={projectInformation.softwares}/>
         <Box sx={actionContainerProps}>
           <Button
             variant='contained'

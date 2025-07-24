@@ -29,7 +29,7 @@ const deleteButtonProps = {
   position: "absolute",
   top: 0,
   right: 0,
-  cursor: "pointer"
+  cursor: "pointer", 
 }
 
 
@@ -58,11 +58,11 @@ const ImagesList = ({ images, width={sm: "65%"}, isEditable=false }) => {
           alt={item.filename}
           showLoading
         />
-        <Tooltip title="Delete Image" arrow>
+        {isEditable && <Tooltip title="Delete Image" arrow>
           <Box sx={deleteButtonProps}>
             <CancelIcon color='secondary'/>
           </Box>
-        </Tooltip>
+        </Tooltip>}
 
       </Box>)}
     </Box>

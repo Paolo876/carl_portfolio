@@ -1,13 +1,13 @@
 import { Box, Typography } from '@mui/material'
 import React from 'react'
-
+import PostInfoInput from '../../../../components/FormInputs/PostInfoInput'
 
 const containerProps = {
 
 }
 
 
-const EditInformationForm = () => {
+const EditInformationForm = ({ }) => {
 
 
   return (
