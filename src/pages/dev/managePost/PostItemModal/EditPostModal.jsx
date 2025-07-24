@@ -58,30 +58,32 @@ const actionContainerProps = {
 
 const EditPostModal = ({ open, onClose, data }) => {
   const { projects } = useProjectsRedux();
-  const [ projectInformation, setProjectInformation ] = useState(null)
+  const [ postInformation, setPostInformation ] = useState(null)
   const [ isLoading, setIsLoading ] = useState(false);
   const [ error, setError ] = useState(null);
 
   useEffect(() => {
-    if(projects) setProjectInformation(projects.find(item => item.id === data.id))
+    if(projects && data) setPostInformation(projects.find(item => item.id === data.id))
     
-  }, [])
+    return () => {
+      setPostInformation(null)
+    }
+  }, [data, projects])
 
   const handleAddImages = async () => {
     
   }
 
-  
-  if(projectInformation) return (
+  if(postInformation) return (
     <Modal 
       open={open} 
       onClose={onClose} 
       aria-labelledby="delete-post-modal">
       <Paper sx={containerProps}>
         <Typography variant='h6' sx={headerTextProps}>EDIT POST</Typography>
-        <ImagesList images={projectInformation.images} width={"100%"} isEditable/>
-        <Button disabled={projectInformation.images.length >= 20} variant="contained" startIcon={<AddPhotoAlternateIcon/>} size="large">Add Images</Button>
-        <EditInformationForm header={projectInformation.header} style={projectInformation.style} softwares={projectInformation.softwares}/>
+        <ImagesList images={postInformation.images} width={"100%"} isEditable/>
+        <Button disabled={postInformation.images.length >= 20} variant="contained" startIcon={<AddPhotoAlternateIcon/>} size="large">Add Images</Button>
+        <EditInformationForm postInformation={postInformation} setPostInformation={setPostInformation}/>
         <Box sx={actionContainerProps}>
           <Button
             variant='contained'
