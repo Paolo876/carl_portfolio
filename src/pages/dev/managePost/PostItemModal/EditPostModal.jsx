@@ -3,8 +3,8 @@ import { Modal, Box, Typography, Paper, Button } from '@mui/material'
 import useProjectsRedux from '../../../../hooks/useProjectsRedux'
 import CheckIcon from '@mui/icons-material/Check';
 import ImagesList from './ImagesList';
-import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import EditInformationForm from './EditInformationForm';
+import AddImagesBtn from './AddImagesBtn';
 
 const containerProps = {
   position: 'absolute',
@@ -62,6 +62,10 @@ const EditPostModal = ({ open, onClose, data }) => {
   const [ isLoading, setIsLoading ] = useState(false);
   const [ error, setError ] = useState(null);
 
+  //states for new images added
+  const [ images, setImages ] = useState([]);
+  const [ imageData, setImageData ] = useState([]);
+
   useEffect(() => {
     if(projects && data) setPostInformation(projects.find(item => item.id === data.id))
     
@@ -74,6 +78,19 @@ const EditPostModal = ({ open, onClose, data }) => {
     
   }
 
+  const handleDelete = (data) => {
+    setPostInformation(prevState => {
+      let updatedImages = prevState.images.filter(item => item.filename !== data.filename)
+      return ({...prevState, images: updatedImages})
+    })
+  }
+
+  const handleSubmit = async () => {
+    // if no images, show error
+    //if info missing, show error
+  }
+
+  // console.log(images)
   if(postInformation) return (
     <Modal 
       open={open} 
@@ -81,8 +98,17 @@ const EditPostModal = ({ open, onClose, data }) => {
       aria-labelledby="delete-post-modal">
       <Paper sx={containerProps}>
         <Typography variant='h6' sx={headerTextProps}>EDIT POST</Typography>
-        <ImagesList images={postInformation.images} width={"100%"} isEditable/>
-        <Button disabled={postInformation.images.length >= 20} variant="contained" startIcon={<AddPhotoAlternateIcon/>} size="large">Add Images</Button>
+        <ImagesList 
+          images={postInformation.images} 
+          width={"100%"} 
+          isEditable 
+          handleDelete={handleDelete}
+          imagesLength={20 - postInformation.images.length}
+          imageData={imageData} 
+          setImageData={setImageData} 
+          setImages={setImages}
+        />
+        {/* <AddImagesBtn postInformation={postInformation} handleAddImages={handleAddImages} imageData={imageData} setImageData={setImageData} setImages={setImages}/> */}
         <EditInformationForm postInformation={postInformation} setPostInformation={setPostInformation}/>
         <Box sx={actionContainerProps}>
           <Button

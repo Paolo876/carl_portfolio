@@ -1,7 +1,12 @@
 import { useState } from 'react'
-import { Box, Tooltip } from '@mui/material';
+import { Box, Tooltip, Typography } from '@mui/material';
 import Image from 'mui-image';
 import CancelIcon from '@mui/icons-material/Cancel';
+// import { DropzoneArea, useDropzone } from "mui-file-dropzone";
+import {useDropzone} from 'react-dropzone';
+
+import styled from 'styled-components';
+import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 
 
 const containerProps = {
@@ -32,9 +37,54 @@ const deleteButtonProps = {
   cursor: "pointer", 
 }
 
+const dropzoneTextProps = {
+  fontSize: {xs:12, sm: 13, md: 15, lg: 16},
+  fontWeight: 600,
+  color: "primary.main",
+  textAlign: "center"
+}
 
-const ImagesList = ({ images, width={sm: "65%"}, isEditable=false }) => {
-  const [ currentIdx, setCurrentIdx ] = useState(0)
+
+const Container = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+  border-width: 2px;
+  border-radius: 6px;
+  border-style: dashed;
+  background-color: #fafafa15;
+  color: #c9c9c9ff;
+  outline: none;
+  transition: border .24s ease-in-out;
+  cursor: pointer;
+  height: 100%;
+`;
+
+
+function StyledDropzone(props) {
+  const {
+    getRootProps,
+    getInputProps,
+    // isFocused,
+    // isDragAccept,
+    // isDragReject
+  } = useDropzone({accept: {'image/*': []}});
+  
+  return (
+    <div className="container">
+      <Container {...getRootProps()}>
+        <input {...getInputProps()} onChange={(e) => props.onChange(e.target.files)}/>
+        <Typography variant='h6' sx={dropzoneTextProps}>Add Image/s</Typography>
+        <AddPhotoAlternateIcon/>
+      </Container>
+    </div>
+  );
+}
+
+
+const ImagesList = ({ images, width={sm: "65%"}, isEditable=false, handleDelete, imageData, setImageData, setImages, imagesLength  }) => {
   
   const handleImgTransform = (src) => {
     let newStr;
@@ -45,6 +95,19 @@ const ImagesList = ({ images, width={sm: "65%"}, isEditable=false }) => {
         newStr = `${src.substring(0, src.indexOf("q5892cimh/") + 10)}tr:h-150/${src.slice(src.indexOf("q5892cimh/") + 10)}`;
       }
     return newStr
+  }
+
+  const handleChange = (files) => {
+    // setImageData(files)
+    
+    console.log(files)
+    setImages([])
+    //image preview
+    // files.forEach(item => {
+    //   const reader = new FileReader();
+    //   reader.addEventListener("load", () => setImages(prevState => [...prevState, reader.result]));
+    //   reader.readAsDataURL(item);
+    // })
   }
 
   return (
@@ -59,12 +122,23 @@ const ImagesList = ({ images, width={sm: "65%"}, isEditable=false }) => {
           showLoading
         />
         {isEditable && <Tooltip title="Delete Image" arrow>
-          <Box sx={deleteButtonProps}>
+          <Box sx={deleteButtonProps} onClick={() => handleDelete({filename: item.filename, src: item.src})}>
             <CancelIcon color='secondary'/>
           </Box>
         </Tooltip>}
 
       </Box>)}
+      {isEditable && imagesLength < 20 && <Box sx={{...imageContainerProps, height: "100%"}}>
+        <StyledDropzone
+          acceptedFiles={['image/*']}
+          dropzoneText={<Typography variant='h6' sx={dropzoneTextProps}>Add Images</Typography>}
+          onChange={(files) => handleChange(files)}
+          filesLimit={20 - imagesLength}
+          initialFiles={imageData}
+          showPreviewsInDropzone={false}
+          maxFileSize={3200000}
+        />
+      </Box>}
     </Box>
   )
 }

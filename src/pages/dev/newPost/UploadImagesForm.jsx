@@ -59,6 +59,7 @@ const UploadImagesForm = ({ setImages, imageData, setImageData }) => {
         initialFiles={imageData}
         showPreviewsInDropzone={false}
         showPreviews={true}
+        maxFileSize={3200000}
         previewText={<Typography variant="h6" sx={previewTextProps}>Preview: </Typography>}
       />
       </Box>

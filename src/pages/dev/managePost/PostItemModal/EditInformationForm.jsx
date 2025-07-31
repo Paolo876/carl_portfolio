@@ -4,11 +4,13 @@ import PostInfoInput from '../../../../components/FormInputs/PostInfoInput'
 import ListInput from '../../../../components/FormInputs/ListInput'
 
 const containerProps = {
-  mt: { lg: 5}
+  borderTop: 1,
+  borderColor: "rgba(255,255,255,0.1)",
+  mb: {lg: 5}
 }
 
 const formItemProps = {
-  mt: 4,
+  mt: 3,
 }
 
 const formHeaderTextProps = {
