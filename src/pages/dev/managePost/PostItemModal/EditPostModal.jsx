@@ -90,7 +90,7 @@ const EditPostModal = ({ open, onClose, data }) => {
     //if info missing, show error
   }
 
-  // console.log(images)
+  console.log(images)
   if(postInformation) return (
     <Modal 
       open={open} 
@@ -107,6 +107,7 @@ const EditPostModal = ({ open, onClose, data }) => {
           imageData={imageData} 
           setImageData={setImageData} 
           setImages={setImages}
+          addedImages={images}
         />
         {/* <AddImagesBtn postInformation={postInformation} handleAddImages={handleAddImages} imageData={imageData} setImageData={setImageData} setImages={setImages}/> */}
         <EditInformationForm postInformation={postInformation} setPostInformation={setPostInformation}/>

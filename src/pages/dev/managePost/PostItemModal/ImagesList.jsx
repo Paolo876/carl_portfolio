@@ -57,9 +57,9 @@ const Container = styled.div`
   background-color: #fafafa15;
   color: #c9c9c9ff;
   outline: none;
-  transition: border .24s ease-in-out;
   cursor: pointer;
   height: 100%;
+  overflow: hidden;
 `;
 
 
@@ -73,18 +73,16 @@ function StyledDropzone(props) {
   } = useDropzone({accept: {'image/*': []}});
   
   return (
-    <div className="container">
-      <Container {...getRootProps()}>
-        <input {...getInputProps()} onChange={(e) => props.onChange(e.target.files)}/>
-        <Typography variant='h6' sx={dropzoneTextProps}>Add Image/s</Typography>
-        <AddPhotoAlternateIcon/>
-      </Container>
-    </div>
+    <Container {...getRootProps()}>
+      <input {...getInputProps()} onChange={(e) => props.onChange(e.target.files)}/>
+      <Typography variant='h6' sx={dropzoneTextProps}>Add Image/s</Typography>
+      <AddPhotoAlternateIcon/>
+    </Container>
   );
 }
 
 
-const ImagesList = ({ images, width={sm: "65%"}, isEditable=false, handleDelete, imageData, setImageData, setImages, imagesLength  }) => {
+const ImagesList = ({ images, width={sm: "65%"}, isEditable=false, handleDelete, imageData, setImageData, setImages, imagesLength, addedImages }) => {
   
   const handleImgTransform = (src) => {
     let newStr;
@@ -98,16 +96,16 @@ const ImagesList = ({ images, width={sm: "65%"}, isEditable=false, handleDelete,
   }
 
   const handleChange = (files) => {
-    // setImageData(files)
+    setImageData(files)
     
-    console.log(files)
     setImages([])
-    //image preview
-    // files.forEach(item => {
-    //   const reader = new FileReader();
-    //   reader.addEventListener("load", () => setImages(prevState => [...prevState, reader.result]));
-    //   reader.readAsDataURL(item);
-    // })
+    for (const item of files) {
+      console.log(item.size)
+      const reader = new FileReader();
+      reader.addEventListener("load", () => setImages(prevState => [...prevState, reader.result]));
+      reader.readAsDataURL(item);
+    }
+    //add an if/else statement for more than 3mb size
   }
 
   return (
@@ -119,6 +117,22 @@ const ImagesList = ({ images, width={sm: "65%"}, isEditable=false, handleDelete,
           sx={{transition: "300ms width ease"}} 
           fit="scale-down"
           alt={item.filename}
+          showLoading
+        />
+        {isEditable && <Tooltip title="Delete Image" arrow>
+          <Box sx={deleteButtonProps} onClick={() => handleDelete({filename: item.filename, src: item.src})}>
+            <CancelIcon color='secondary'/>
+          </Box>
+        </Tooltip>}
+
+      </Box>)}
+      {addedImages.map(item => <Box sx={{...imageContainerProps, border: 1, borderColor: "info.main", borderStyle: "dotted"}} key={item}>
+        <Image 
+          src={item} 
+          duration={300} 
+          sx={{transition: "300ms width ease"}} 
+          fit="scale-down"
+          alt={item}
           showLoading
         />
         {isEditable && <Tooltip title="Delete Image" arrow>
