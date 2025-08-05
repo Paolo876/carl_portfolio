@@ -71,6 +71,8 @@ const EditPostModal = ({ open, onClose, data }) => {
     
     return () => {
       setPostInformation(null)
+      setImages([])
+      setImageData([])
     }
   }, [data, projects])
 

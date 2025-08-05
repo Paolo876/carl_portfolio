@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Box, Tooltip, Typography } from '@mui/material';
+import { Alert, Box, Tooltip, Typography } from '@mui/material';
 import Image from 'mui-image';
 import CancelIcon from '@mui/icons-material/Cancel';
 // import { DropzoneArea, useDropzone } from "mui-file-dropzone";
@@ -82,8 +82,11 @@ function StyledDropzone(props) {
 }
 
 
+const errorInitialState = {state: null, name: ""}
+
 const ImagesList = ({ images, width={sm: "65%"}, isEditable=false, handleDelete, imageData, setImageData, setImages, imagesLength, addedImages }) => {
-  
+  const [ error, setError ] = useState(errorInitialState);
+
   const handleImgTransform = (src) => {
     let newStr;
       if(src.includes("firebase")) {
@@ -97,13 +100,16 @@ const ImagesList = ({ images, width={sm: "65%"}, isEditable=false, handleDelete,
 
   const handleChange = (files) => {
     setImageData(files)
-    
+    setError(errorInitialState)
     setImages([])
     for (const item of files) {
-      console.log(item.size)
-      const reader = new FileReader();
-      reader.addEventListener("load", () => setImages(prevState => [...prevState, reader.result]));
-      reader.readAsDataURL(item);
+      if(item.size < 3145728) {
+        const reader = new FileReader();
+        reader.addEventListener("load", () => setImages(prevState => [...prevState, reader.result]));
+        reader.readAsDataURL(item);
+      } else {
+        setError({name: item.name, state: true})
+      }
     }
     //add an if/else statement for more than 3mb size
   }
@@ -126,7 +132,7 @@ const ImagesList = ({ images, width={sm: "65%"}, isEditable=false, handleDelete,
         </Tooltip>}
 
       </Box>)}
-      {addedImages.map(item => <Box sx={{...imageContainerProps, border: 1, borderColor: "info.main", borderStyle: "dotted"}} key={item}>
+      {addedImages && addedImages.map(item => <Box sx={{...imageContainerProps, border: 1, borderColor: "info.main", borderStyle: "dotted"}} key={item}>
         <Image 
           src={item} 
           duration={300} 
@@ -152,6 +158,12 @@ const ImagesList = ({ images, width={sm: "65%"}, isEditable=false, handleDelete,
           showPreviewsInDropzone={false}
           maxFileSize={3200000}
         />
+      </Box>}
+      {error.state && <Box sx={{gridColumn: "1 / -1", mt: 1}}>
+        <Alert 
+          severity='error'
+          onClose={() => setError(null)}
+        >Error: File size exceeds 3 MB. Please select a smaller file.</Alert>
       </Box>}
     </Box>
   )
