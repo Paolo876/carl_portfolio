@@ -88,11 +88,15 @@ const EditPostModal = ({ open, onClose, data }) => {
   }
 
   const handleSubmit = async () => {
+    console.log(postInformation)
+    if(imageData.length !== 0){
+      // upload images if added
+    }
     // if no images, show error
     //if info missing, show error
   }
 
-  console.log(images)
+
   if(postInformation) return (
     <Modal 
       open={open} 
@@ -105,7 +109,7 @@ const EditPostModal = ({ open, onClose, data }) => {
           width={"100%"} 
           isEditable 
           handleDelete={handleDelete}
-          imagesLength={20 - postInformation.images.length}
+          imagesLength={postInformation.images.length == 0 ? 0 : 20 - postInformation.images.length}
           imageData={imageData} 
           setImageData={setImageData} 
           setImages={setImages}
@@ -119,8 +123,15 @@ const EditPostModal = ({ open, onClose, data }) => {
             color="primary"
             size="large"
             startIcon={<CheckIcon/>}
-            disabled={isLoading || error}
-            // onClick={handleDelete}
+            disabled={
+              isLoading || 
+              error || 
+              postInformation.header.trim().length === 0 || 
+              postInformation.style.trim().length === 0 ||
+              postInformation.softwares.length === 0 ||
+              postInformation.images.length + images.length === 0
+            }
+            onClick={handleSubmit}
           >Save Changes</Button>
           <Button 
             onClick={onClose}
