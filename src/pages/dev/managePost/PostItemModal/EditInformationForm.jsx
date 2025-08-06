@@ -1,5 +1,4 @@
 import { Box, Typography, Chip } from '@mui/material'
-import React from 'react'
 import PostInfoInput from '../../../../components/FormInputs/PostInfoInput'
 import ListInput from '../../../../components/FormInputs/ListInput'
 

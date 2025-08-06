@@ -1,4 +1,3 @@
-import React from 'react'
 import { Box, Typography } from '@mui/material'
 import { DropzoneArea } from "mui-file-dropzone";
 
@@ -23,13 +22,6 @@ const dropZoneProps = {
   borderRadius: 2
 }
 
-const previewTextProps = {
-  fontSize: { xs: 13, sm: 14, md: 16, lg: 18 },
-  mt: 2,
-  mb: 1,
-  letterSpacing: .8,
-  fontWeight: 500,
-}
 
 const UploadImagesForm = ({ setImages, imageData, setImageData }) => {
 

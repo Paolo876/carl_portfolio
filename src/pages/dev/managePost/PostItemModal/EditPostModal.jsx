@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
-import { Modal, Box, Typography, Paper, Button } from '@mui/material'
+import { Modal, Box, Typography, Paper, Button, Alert } from '@mui/material'
 import useProjectsRedux from '../../../../hooks/useProjectsRedux'
 import CheckIcon from '@mui/icons-material/Check';
 import ImagesList from './ImagesList';
 import EditInformationForm from './EditInformationForm';
-import AddImagesBtn from './AddImagesBtn';
+
 
 const containerProps = {
   position: 'absolute',
@@ -56,11 +56,13 @@ const actionContainerProps = {
 
 }
 
+const errorInitialState = {state: null,  message: ""}
+
 const EditPostModal = ({ open, onClose, data }) => {
   const { projects } = useProjectsRedux();
   const [ postInformation, setPostInformation ] = useState(null)
   const [ isLoading, setIsLoading ] = useState(false);
-  const [ error, setError ] = useState(null);
+  const [ error, setError ] = useState(errorInitialState);
 
   //states for new images added
   const [ images, setImages ] = useState([]);
@@ -76,9 +78,6 @@ const EditPostModal = ({ open, onClose, data }) => {
     }
   }, [data, projects])
 
-  const handleAddImages = async () => {
-    
-  }
 
   const handleDelete = (data) => {
     setPostInformation(prevState => {
@@ -88,12 +87,14 @@ const EditPostModal = ({ open, onClose, data }) => {
   }
 
   const handleSubmit = async () => {
+    setIsLoading(true)
+    setError(errorInitialState)
     console.log(postInformation)
     if(imageData.length !== 0){
       // upload images if added
     }
-    // if no images, show error
-    //if info missing, show error
+
+
   }
 
 
@@ -115,9 +116,12 @@ const EditPostModal = ({ open, onClose, data }) => {
           setImages={setImages}
           addedImages={images}
         />
-        {/* <AddImagesBtn postInformation={postInformation} handleAddImages={handleAddImages} imageData={imageData} setImageData={setImageData} setImages={setImages}/> */}
         <EditInformationForm postInformation={postInformation} setPostInformation={setPostInformation}/>
+        {error.state && <Box sx={{mb: 2}}>
+          <Alert severity='error'>{error.message}</Alert>
+        </Box>}
         <Box sx={actionContainerProps}>
+
           <Button
             variant='contained'
             color="primary"
@@ -125,7 +129,7 @@ const EditPostModal = ({ open, onClose, data }) => {
             startIcon={<CheckIcon/>}
             disabled={
               isLoading || 
-              error || 
+              error.state || 
               postInformation.header.trim().length === 0 || 
               postInformation.style.trim().length === 0 ||
               postInformation.softwares.length === 0 ||
