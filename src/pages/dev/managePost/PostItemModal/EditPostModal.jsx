@@ -4,6 +4,8 @@ import useProjectsRedux from '../../../../hooks/useProjectsRedux'
 import CheckIcon from '@mui/icons-material/Check';
 import ImagesList from './ImagesList';
 import EditInformationForm from './EditInformationForm';
+import { useFirestore } from '../../../../hooks/useFirestore';
+import useUpload from '../../../../hooks/useUpload';
 
 
 const containerProps = {
@@ -59,6 +61,8 @@ const actionContainerProps = {
 const errorInitialState = {state: null,  message: ""}
 
 const EditPostModal = ({ open, onClose, data }) => {
+  const { updateDocument } = useFirestore("user");
+  const { uploadMany } = useUpload('user');
   const { projects } = useProjectsRedux();
   const [ postInformation, setPostInformation ] = useState(null)
   const [ isLoading, setIsLoading ] = useState(false);
@@ -90,11 +94,25 @@ const EditPostModal = ({ open, onClose, data }) => {
     setIsLoading(true)
     setError(errorInitialState)
     console.log(postInformation)
-    if(imageData.length !== 0){
-      // upload images if added
+
+    try {
+
+      //upload if images are added
+      if(imageData.length !== 0){
+        const uploaded = await uploadMany('project-images', imageData);
+        const id = String(Date.now().toString(32) + Math.random().toString(16)).replace(/\./g, "").slice(8);
+        const updateDb = {...postInformation, images: uploaded, id};
+        await updateDocument({id:"projects", images: [updateDb, ...projects]}, "projects")
+      }
+      //update document if changes were made ~ if prev obj === new obj && imageData.length !== 0
+
+
+    } catch(err){
+      setError(err.message);
+      setIsLoading(false)
+    } finally {
+      setIsLoading(false)
     }
-
-
   }
 
 
