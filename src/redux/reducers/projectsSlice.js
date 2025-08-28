@@ -8,6 +8,9 @@ const projectsSlice = createSlice({
     reducers: {
         filterProjects(state, { payload }){
             state.projects = state.projects.filter(item => item.id !== payload.id);
+        },
+        updateProjects(state, { payload }){
+            state.projects = payload
         }
     },
     extraReducers: builder => {

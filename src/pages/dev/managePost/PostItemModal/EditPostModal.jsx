@@ -63,7 +63,7 @@ const errorInitialState = {state: null,  message: ""}
 const EditPostModal = ({ open, onClose, data }) => {
   const { updateDocument } = useFirestore("user");
   const { uploadMany } = useUpload('user');
-  const { projects } = useProjectsRedux();
+  const { projects, updateProjects } = useProjectsRedux();
   const [ postInformation, setPostInformation ] = useState(null)
   const [ isLoading, setIsLoading ] = useState(false);
   const [ error, setError ] = useState(errorInitialState);
@@ -93,21 +93,30 @@ const EditPostModal = ({ open, onClose, data }) => {
   const handleSubmit = async () => {
     setIsLoading(true)
     setError(errorInitialState)
-    console.log(postInformation)
 
     try {
 
       //upload if images are added
       if(imageData.length !== 0){
-        const uploaded = await uploadMany('project-images', imageData);
-        const id = String(Date.now().toString(32) + Math.random().toString(16)).replace(/\./g, "").slice(8);
-        const updateDb = {...postInformation, images: uploaded, id};
-        await updateDocument({id:"projects", images: [updateDb, ...projects]}, "projects")
+        const uploaded = await uploadMany('project-images', imageData); //returns images array
+        const updatedProjects = projects.map(item => {
+          if(item.id === postInformation.id){
+            const updatedItem = {...item}
+            updatedItem.images = [...item.images, ...uploaded]
+            return updatedItem
+          } else {
+            return item
+          }
+        })
+        //update firestore doc
+        await updateDocument({id: "projects", images: updatedProjects}, 'projects');
+        //update redux
+        updateProjects(updatedProjects)
       }
       //update document if changes were made ~ if prev obj === new obj && imageData.length !== 0
 
-
     } catch(err){
+      console.log(err)
       setError(err.message);
       setIsLoading(false)
     } finally {
@@ -115,7 +124,7 @@ const EditPostModal = ({ open, onClose, data }) => {
     }
   }
 
-
+  
   if(postInformation) return (
     <Modal 
       open={open} 

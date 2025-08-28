@@ -11,6 +11,7 @@ const useProjectsRedux = () => {
       return {
       ...projectsRedux,
       filterProjects: (data) => dispatch(projectsActions.filterProjects(data)),
+      updateProjects: (data) => dispatch(projectsActions.updateProjects(data)),
       getProjects: () => dispatch(getProjects()),
 
       }
