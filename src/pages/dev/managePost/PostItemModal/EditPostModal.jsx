@@ -6,7 +6,7 @@ import ImagesList from './ImagesList';
 import EditInformationForm from './EditInformationForm';
 import { useFirestore } from '../../../../hooks/useFirestore';
 import useUpload from '../../../../hooks/useUpload';
-
+import objectDeepCompare from '../../../../utils/objectDeepCompare';
 
 const containerProps = {
   position: 'absolute',
@@ -113,7 +113,23 @@ const EditPostModal = ({ open, onClose, data }) => {
         //update redux
         updateProjects(updatedProjects)
       }
-      //update document if changes were made ~ if prev obj === new obj && imageData.length !== 0
+
+      //if changes was made from the info
+      if(!objectDeepCompare(projects.find(item => item.id === data.id), postInformation)) {
+        //update item
+        const updatedProjects = projects.map(item => {
+          if(item.id === postInformation.id) {
+            return ({...item, ...postInformation})
+          } else {
+            return item
+          }
+        })
+
+        //update firestore doc
+        await updateDocument({id: "projects", images: updatedProjects}, 'projects');
+        //update redux
+        updateProjects(updatedProjects)
+      }
 
     } catch(err){
       console.log(err)
