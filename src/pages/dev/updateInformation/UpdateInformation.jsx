@@ -2,7 +2,7 @@ import React from 'react'
 import { Box, Typography } from '@mui/material'
 import DevPageContainer from '../../../components/layout/DevPageContainer'
 import SidebarNavigation from './SidebarNavigation'
-import Content from './Content'
+import Content from './Content/Content'
 
 const mainContainerProps = {
   display: "flex",
@@ -23,8 +23,9 @@ const headerTextProps = {
   textDecoration: "underline"
 }
 
-const mainContent = {
-
+const contentContainerProps = {
+  display: "grid",
+  gridTemplateColumns: "1fr 4fr"
 }
 
 const navigationOptions = [ 
@@ -43,7 +44,7 @@ const UpdateInformation = () => {
         <Box sx={headerTextContainerProps}>
           <Typography variant="h6" sx={headerTextProps}>Update Information</Typography>
         </Box>
-        <Box sx={mainContent}>
+        <Box sx={contentContainerProps}>
           <SidebarNavigation navigationOptions={navigationOptions}/>
           <Content/>
         </Box>

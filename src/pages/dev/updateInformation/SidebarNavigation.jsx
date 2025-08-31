@@ -1,14 +1,27 @@
 import React from 'react'
-import { List, ListItem, ListItemButton } from '@mui/material'
+import { List, Typography, ListItemButton } from '@mui/material'
 
 
-const SidebarNavigation = () => {
+const listItemProps = {
+  opacity: .8,
+  "&:hover": {
+    opacity : 1
+  }
+}
+
+const textProps = {
+  fontWeight: 500,
+  fontSize: {xs: 13, sm: 14, md: 15, lg: 16},
+  letterSpacing: .5,
+}
+
+const SidebarNavigation = ({ navigationOptions }) => {
   return (
     <List>
-        <ListItemButton>One</ListItemButton>
-        <ListItemButton>One</ListItemButton>
-        <ListItemButton>One</ListItemButton>
-        <ListItemButton>One</ListItemButton>
+      {navigationOptions.map( item => 
+        <ListItemButton key={item.id} sx={listItemProps}>
+          <Typography sx={textProps} variant='h6'>{item.title}</Typography>
+        </ListItemButton>)}
     </List>
   )
 }
