@@ -1,11 +1,27 @@
 import React from 'react'
 import { Box } from '@mui/material'
 import CareerObjective from './CareerObjective'
+import WorkExperience from './WorkExperience'
+import PersonalInformation from './PersonalInformation'
+import ProfessionalSummary from './ProfessionalSummary'
+import Resume from './Resume'
+import SoftwareSkills from './SoftwareSkills'
 
 const Content = () => {
   return (
-    <Box>
+    <Box
+      sx={{
+        display: "flex",
+        gap: 2,
+        flexDirection: "column",
+      }}
+    >
       <CareerObjective/>
+      <WorkExperience/>
+      <PersonalInformation/>
+      <ProfessionalSummary/>
+      <Resume/>
+      <SoftwareSkills/>
     </Box>
   )
 }
