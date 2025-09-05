@@ -1,8 +1,25 @@
-import React from 'react'
+import { useState } from 'react'
 import ContentItemContainer from './ContentItemContainer'
-const CareerObjective = () => {
+import useAboutRedux from '../../../../hooks/useAboutRedux'
+import { TextField } from '@mui/material'
+
+
+const CareerObjective = ({ id, title }) => {
+  const { about: { careerObjective } } = useAboutRedux();
+
+  console.log(careerObjective)
   return (
-    <ContentItemContainer>CareerObjective</ContentItemContainer>
+    <ContentItemContainer id={id} title={title}>
+      <TextField
+        id="outlined-multiline-static"
+        // label="Multiline"
+        multiline
+        rows={4}
+        value={careerObjective}
+        fullWidth
+        variant="filled"
+      />
+    </ContentItemContainer>
   )
 }
 

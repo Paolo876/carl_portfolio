@@ -16,7 +16,7 @@ const Content = () => {
         flexDirection: "column",
       }}
     >
-      <CareerObjective/>
+      <CareerObjective id="careerObjective" title="Career Objective"/>
       <WorkExperience/>
       <PersonalInformation/>
       <ProfessionalSummary/>
