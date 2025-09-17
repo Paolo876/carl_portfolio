@@ -1,25 +1,36 @@
 import { useState } from 'react'
 import ContentItemContainer from './ContentItemContainer'
 import useAboutRedux from '../../../../hooks/useAboutRedux'
-import { TextField } from '@mui/material'
+import { TextField, Alert } from '@mui/material'
 import { useFirestore } from '../../../../hooks/useFirestore'
 
 const CareerObjective = ({ id, title }) => {
-  const { about: { careerObjective } } = useAboutRedux();
+  const { about } = useAboutRedux();
   const { updateDocument } = useFirestore("user");
-  const [ inputValue, setInputValue ] = useState(careerObjective)
+  const [ inputValue, setInputValue ] = useState(about.careerObjective)
   const [ isLoading, setIsLoading ] = useState(false)
+  const [ error, setError ] = useState(null);
 
   const handleSubmit = async () => {
     setIsLoading(true)
-
-    // update document
-    // update redux
+    try {
+      // update document
+      await updateDocument({...about, careerObjective: inputValue}, 'about');
+      // update redux
+      
+    } catch(err){
+      console.log(err)
+      setError(err.message);
+      setIsLoading(false)
+    } finally {
+      setIsLoading(false)
+    }
   }
 
 
   return (
-    <ContentItemContainer id={id} title={title} isDisabled={isLoading || inputValue === careerObjective} onClick={handleSubmit}>
+    <ContentItemContainer id={id} title={title} isDisabled={isLoading || inputValue === about.careerObjective} onClick={handleSubmit}>
+      {error && <Alert severity='error' sx={{mb: 1}}>{error.message}</Alert>}
       <TextField
         id="career-objective-input"
         multiline

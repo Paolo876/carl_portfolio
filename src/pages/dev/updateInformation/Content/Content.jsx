@@ -1,4 +1,4 @@
-import React from 'react'
+import useAboutRedux from '../../../../hooks/useAboutRedux'
 import { Box } from '@mui/material'
 import CareerObjective from './CareerObjective'
 import WorkExperience from './WorkExperience'
@@ -8,7 +8,9 @@ import Resume from './Resume'
 import SoftwareSkills from './SoftwareSkills'
 
 const Content = () => {
-  return (
+  const { isLoading } = useAboutRedux();
+
+  if(!isLoading) return (
     <Box
       sx={{
         display: "flex",

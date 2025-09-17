@@ -30,27 +30,6 @@ const headerTextProps = {
   mb: { xs: 4, md: 7, lg: 8}
 }
 
-const contentContainerProps = {
-  display: "flex",
-  flexDirection: {xs: "column", sm: "row"},
-  mb: {xs: 3, sm: 5}
-}
-
-const infoContainerProps = {
-  width: {sm: "35%"},
-  ml: {sm: 2},
-  mt: {xs: 1.5 , sm: 0}
-}
-
-const titleTextProps = {
-  fontSize: {xs: 17, sm: 18, md: 19, lg: 20}
-}
-
-const styleTextProps = {
-  fontWeight: 300,
-  fontSize: {xs: 12, sm: 13, md: 14, lg: 15}
-}
-
 const actionContainerProps = {
   display: "flex",
   justifyContent: "right",
