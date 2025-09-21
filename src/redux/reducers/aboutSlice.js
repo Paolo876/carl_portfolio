@@ -5,7 +5,12 @@ import { getAbout } from "./aboutReducers";
 const aboutSlice = createSlice({
     name: "about",
     initialState: aboutInitialState,
-    reducers: {},
+    reducers: {
+        updateInfo(state, { payload }){
+            let updatedAbout = state.about
+            state.about = {...updatedAbout, ...payload};
+        },
+    },
     extraReducers: builder => {
       builder
       //getAbout

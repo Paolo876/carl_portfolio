@@ -5,7 +5,7 @@ import { TextField, Alert } from '@mui/material'
 import { useFirestore } from '../../../../hooks/useFirestore'
 
 const CareerObjective = ({ id, title }) => {
-  const { about } = useAboutRedux();
+  const { about, updateInfo } = useAboutRedux();
   const { updateDocument } = useFirestore("user");
   const [ inputValue, setInputValue ] = useState(about.careerObjective)
   const [ isLoading, setIsLoading ] = useState(false)
@@ -17,7 +17,7 @@ const CareerObjective = ({ id, title }) => {
       // update document
       await updateDocument({...about, careerObjective: inputValue}, 'about');
       // update redux
-      
+      updateInfo({careerObjective: inputValue})
     } catch(err){
       console.log(err)
       setError(err.message);

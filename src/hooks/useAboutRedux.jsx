@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
-// import { projectsActions } from "../redux/reducers/projectsSlice";
 import { getAbout } from "../redux/reducers/aboutReducers";
+import { aboutActions } from "../redux/reducers/aboutSlice";
 
 
 const useAboutRedux = () => {
@@ -11,7 +11,7 @@ const useAboutRedux = () => {
       return {
       ...aboutRedux,
       getAbout: () => dispatch(getAbout()),
-
+      updateInfo: (data) => dispatch(aboutActions.updateInfo(data))  
       }
     } else {
       throw Error('Error accessing about reducer.');
