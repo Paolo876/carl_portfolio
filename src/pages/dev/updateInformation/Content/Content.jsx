@@ -19,11 +19,11 @@ const Content = () => {
       }}
     >
       <CareerObjective id="careerObjective" title="Career Objective"/>
-      <WorkExperience/>
-      <PersonalInformation/>
-      <ProfessionalSummary/>
-      <Resume/>
-      <SoftwareSkills/>
+      <WorkExperience id="experience" title="Work Experience"/>
+      <PersonalInformation id="personalInformation" title="Personal Information"/>
+      <ProfessionalSummary id="professionalSummary" title="Professional Summary"/>
+      <Resume id="resume" title="Resume"/>
+      <SoftwareSkills id="softwareSkills" title="Software Skills"/>
     </Box>
   )
 }
