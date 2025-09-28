@@ -3,70 +3,71 @@ import ContentItemContainer from './ContentItemContainer'
 import useAboutRedux from '../../../../hooks/useAboutRedux'
 import { TextField, Alert, Box } from '@mui/material'
 import { useFirestore } from '../../../../hooks/useFirestore'
+import objectDeepCompare from '../../../../utils/objectDeepCompare'
+
 
 const PersonalInformation = ({ id, title }) => {
   const { about, updateInfo } = useAboutRedux();
   const { updateDocument } = useFirestore("user");
-  const [ nameInput, setNameInput ] = useState(about.information.name)
-  const [ addressInput, setAddressInput ] = useState(about.information.address)
-  const [ phoneInput, setPhoneInput ] = useState(about.information.phone)
-  const [ emailInput, setEmailInput ] = useState(about.information.email)
+  const [ name, setName ] = useState(about.information.name)
+  const [ address, setAddress ] = useState(about.information.address)
+  const [ phone, setPhone ] = useState(about.information.phone)
+  const [ email, setEmail ] = useState(about.information.email)
   const [ isLoading, setIsLoading ] = useState(false)
   const [ error, setError ] = useState(null);
 
   const handleSubmit = async () => {
     setIsLoading(true)
-    // try {
-    //   // update document
-    //   await updateDocument({...about, professionalSummary: inputValue}, 'about');
-    //   // update redux
-    //   updateInfo({professionalSummary: inputValue})
-    // } catch(err){
-    //   console.log(err)
-    //   setError(err.message);
-    //   setIsLoading(false)
-    // } finally {
-    //   setIsLoading(false)
-    // }
+    try {
+      // update document
+      await updateDocument({...about, information: { name, address, phone, email }}, 'about');
+      // update redux
+      updateInfo({information : { name, address, phone, email }})
+    } catch(err){
+      console.log(err)
+      setError(err.message);
+      setIsLoading(false)
+    } finally {
+      setIsLoading(false)
+    }
   }
 
-  console.log(about.information)
   return (
-    <ContentItemContainer id={id} title={title} isDisabled={isLoading} onClick={handleSubmit}>
+    <ContentItemContainer id={id} title={title} isDisabled={isLoading || objectDeepCompare(about.information, { name, address, phone, email})} onClick={handleSubmit}>
       {error && <Alert severity='error' sx={{mb: 1}}>{error.message}</Alert>}
       <Box
         sx={{
           display: "flex",
           flexDirection: "column",
-          gap: 2
+          gap: 3
         }}
       >
         <TextField
           id="name-input"
           label="Name"
-          value={nameInput}
-          onChange={e => setNameInput(e.target.value)}
+          value={name}
+          onChange={e => setName(e.target.value)}
           variant="filled" 
         />
         <TextField
           id="address-input"
           label="Address"
-          value={addressInput}
-          onChange={e => setAddressInput(e.target.value)}
+          value={address}
+          onChange={e => setAddress(e.target.value)}
           variant="filled" 
         />
         <TextField
           id="phone-input"
           label="Phone"
-          value={phoneInput}
-          onChange={e => setPhoneInput(e.target.value)}
+          value={phone}
+          onChange={e => setPhone(e.target.value)}
           variant="filled" 
         />
         <TextField
           id="email-input"
           label="E-mail"
-          value={emailInput}
-          onChange={e => setEmailInput(e.target.value)}
+          value={email}
+          onChange={e => setEmail(e.target.value)}
           variant="filled" 
         />
       </Box>

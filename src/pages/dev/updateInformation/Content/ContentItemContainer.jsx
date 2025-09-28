@@ -20,13 +20,13 @@ const headerTextProps = {
 const ContentItemContainer = ({ children, title, isDisabled=true, onClick }) => {
   return (
     <Paper sx={containerProps}>
-      <Box sx={{borderBottom: 1, borderColor: "rgba(255,255,255,.15)", mb: 2}}>
+      <Box sx={{borderBottom: 1, borderColor: "rgba(255,255,255,.15)", mb: 5}}>
         <Typography variant='h6' sx={headerTextProps}>{title}</Typography>
       </Box>
       <Box>
         {children}
       </Box>
-      <Box sx={{mt: 4, display: "flex", alignItems: "flex-end", justifyContent: "right"}}>
+      <Box sx={{mt: 5, display: "flex", alignItems: "flex-end", justifyContent: "right"}}>
         <Button color='success' variant='outlined' endIcon={<CheckCircleOutlineIcon/>} disabled={isDisabled} onClick={onClick}>Save Changes</Button>
       </Box>
     </Paper>

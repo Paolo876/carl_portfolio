@@ -14,7 +14,7 @@ const Content = () => {
     <Box
       sx={{
         display: "flex",
-        gap: 2,
+        gap: 4,
         flexDirection: "column",
       }}
     >
