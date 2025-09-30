@@ -5,7 +5,7 @@ import WorkExperience from './WorkExperience'
 import PersonalInformation from './PersonalInformation'
 import ProfessionalSummary from './ProfessionalSummary'
 import Resume from './Resume'
-import SoftwareSkills from './SoftwareSkills'
+import SoftwareSkills from './SoftwareSkills/SoftwareSkills'
 
 const Content = () => {
   const { isLoading } = useAboutRedux();
