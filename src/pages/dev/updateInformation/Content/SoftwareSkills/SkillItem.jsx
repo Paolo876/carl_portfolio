@@ -24,7 +24,7 @@ const textProps = {
 }
 
 
-const SkillItem = ({ item, handleEdit, handleDelete }) => {
+const SkillItem = ({ item, handleEdit, handleDelete, isDisabled }) => {
   const [ isEditable, setIsEditable ] = useState(false)
   const [ input, setInput ] = useState(item.name)
 
@@ -32,6 +32,8 @@ const SkillItem = ({ item, handleEdit, handleDelete }) => {
     handleEdit(item.src, input)
     setIsEditable(false)
   }
+
+
   return (
     <ListItem key={item.name} sx={{...listItemProps, backgroundColor: isEditable ? "rgba(255,255,255,.2)": "rgba(255,255,255,.1)"}}>
       <Box sx={listItemContentProps}>
@@ -47,12 +49,12 @@ const SkillItem = ({ item, handleEdit, handleDelete }) => {
         />}
       </Box>
       {!isEditable && <Box sx={{display: "flex", gap: 1}}>
-        <Button variant='outlined' color='info' onClick={() => setIsEditable(true)}><EditIcon/></Button>
-        <Button variant='contained' color='secondary' onClick={() => handleDelete(item.src)}><CloseIcon/></Button>
+        <Button variant='outlined' color='info' onClick={() => setIsEditable(true)} disabled={isDisabled}><EditIcon/></Button>
+        <Button variant='contained' color='secondary' onClick={() => handleDelete(item.src)} disabled={isDisabled}><CloseIcon/></Button>
       </Box>}
       {isEditable && <Box sx={{display: "flex", gap: 1, ml: 2}}>
-        <Button variant='outlined' color='success' onClick={handleSaveClick}>Save Changes</Button>
-        <Button variant='contained' color='warning' onClick={() => setIsEditable(false)}>Cancel</Button>
+        <Button variant='outlined' color='success' onClick={handleSaveClick} disabled={isDisabled}>Save Changes</Button>
+        <Button variant='contained' color='warning' onClick={() => setIsEditable(false)} disabled={isDisabled}>Cancel</Button>
       </Box>}
     </ListItem>
   )

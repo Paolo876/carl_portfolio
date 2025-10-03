@@ -1,5 +1,6 @@
-import React from 'react'
-import { TextField, Box, Button } from '@mui/material'
+import { useState } from 'react'
+import { TextField, Box, Button, Typography } from '@mui/material'
+import Image from 'mui-image';
 import { styled } from '@mui/material/styles';
 import ImageIcon from '@mui/icons-material/Image';
 
@@ -16,15 +17,42 @@ const VisuallyHiddenInput = styled('input')({
   width: 1,
 });
 
-const AddSkillInput = () => {
+const containerProps = {
+  display: "flex",
+  flexDirection : "column",
+  gap: 2
+}
+
+
+const AddSkillInput = ({ setIsInputVisible }) => {
+  const [ nameInput, setNameInput ] = useState("");
+  const [ image, setImage ] = useState(null)
+  const [ imageData, setImageData ] = useState(null);
+
+
+  const handleChange = (files) => {
+    setImageData(files)
+    
+    setImage([])
+    //image preview
+    files.forEach(item => {
+      const reader = new FileReader();
+      reader.addEventListener("load", () => setImage(prevState => [...prevState, reader.result]));
+      reader.readAsDataURL(item);
+    })
+  }
   return (
-    <Box>
+    <Box sx={containerProps}>
       <Box>
         <TextField
-
+          size='small'
+          fullWidth
+          label="Skill Name"
+          value={nameInput}
+          onChange={e => setNameInput(e.target.value)}
         />
       </Box>
-      <Box>
+      {!image && <Box>
         <Button
           component="label"
           role={undefined}
@@ -40,6 +68,13 @@ const AddSkillInput = () => {
             required
           />
         </Button>
+      </Box>}
+      {image && <Image 
+        
+      />}
+      <Box sx={{display: "flex", gap: 2, width: "100%", justifyContent: "right"}}>
+        <Button variant='outlined' color='success'>Save Changes</Button>
+        <Button variant='contained' color='warning' onClick={() => setIsInputVisible(false)}>Cancel</Button>
       </Box>
     </Box>
   )
