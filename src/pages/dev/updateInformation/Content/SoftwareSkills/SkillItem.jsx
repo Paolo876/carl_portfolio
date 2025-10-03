@@ -8,7 +8,6 @@ import CloseIcon from '@mui/icons-material/Close';
 const listItemProps = {
   display: "flex",
   justifyContent: "space-between",
-  backgroundColor: "rgba(255,255,255,.1)",
   borderRadius: 3,
   mb: 2,
 }
@@ -34,7 +33,7 @@ const SkillItem = ({ item, handleEdit, handleDelete }) => {
     setIsEditable(false)
   }
   return (
-    <ListItem key={item.name} sx={listItemProps}>
+    <ListItem key={item.name} sx={{...listItemProps, backgroundColor: isEditable ? "rgba(255,255,255,.2)": "rgba(255,255,255,.1)"}}>
       <Box sx={listItemContentProps}>
         <Box sx={{height: 30, width: 30, display: "flex", mr: 2}}>
           <Image src={item.src} fit="scale-down" height="auto" width="auto" duration={0}/>

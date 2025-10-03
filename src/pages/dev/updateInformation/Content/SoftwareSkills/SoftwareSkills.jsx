@@ -6,6 +6,7 @@ import { useFirestore } from '../../../../../hooks/useFirestore'
 import objectDeepCompare from '../../../../../utils/objectDeepCompare'
 import AddIcon from '@mui/icons-material/Add';
 import SkillItem from './SkillItem'
+import AddSkillInput from './AddSkillInput'
 
 
 
@@ -54,6 +55,7 @@ const SoftwareSkills = ({ id, title }) => {
     <ContentItemContainer id={id} title={title} isDisabled={isLoading || objectDeepCompare(about.softwareSkills, updatedSkills)} onClick={handleSubmit}>
       <Box sx={{mb: 3, borderBottom: 1, pb: 2, borderColor: "rgba(100,100,100,.1)"}}>
         {/* input here */}
+        {isInputVisible && <AddSkillInput/>}
         {!isInputVisible && <Box>
           <Button sx={{width: "100%", py: 1.75}} variant="contained" size="large" endIcon={<AddIcon/>} onClick={() => setIsInputVisible(true)}>Add New Skill</Button>
         </Box>}
