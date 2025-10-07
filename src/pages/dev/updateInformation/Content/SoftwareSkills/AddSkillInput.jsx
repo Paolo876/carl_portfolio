@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import { TextField, Box, Button, Typography } from '@mui/material'
+import { TextField, Box, Button, Typography, IconButton } from '@mui/material'
 import Image from 'mui-image';
 import { styled } from '@mui/material/styles';
 import ImageIcon from '@mui/icons-material/Image';
-
+import CancelIcon from '@mui/icons-material/Cancel';
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -27,7 +27,7 @@ const inputsContainer = {
   display: "flex",
   flexDirection : "row",
   width: "100%",
-  gap: 1.5,
+  gap: 3,
   backgroundColor: "rgba(255,255,255,.15)",
   alignItems: "center",
   py: 2,
@@ -40,6 +40,7 @@ const logoContainerProps = {
   width : "auto",
   display: {xs: "none", sm:"flex" }, 
   justifyContent: "center",
+  position: "relative"
 }
 
 
@@ -57,7 +58,10 @@ const AddSkillInput = ({ setIsInputVisible }) => {
     reader.readAsDataURL(files[0]);
   }
 
-
+  const handleRemoveImage = () => {
+    setImageData(null)
+    setImage(null)
+  }
   return (
     <Box sx={containerProps}>
       <Box sx={inputsContainer}>
@@ -85,11 +89,17 @@ const AddSkillInput = ({ setIsInputVisible }) => {
             fit="scale-down" 
             height="auto" 
             width="auto" 
+            duration={0}
           />
+          <Box sx={{position: "absolute", top:-10, right: -20}}>
+            <IconButton size="small" onClick={handleRemoveImage}>
+              <CancelIcon size="small" color="secondary"/>
+            </IconButton>
+          </Box>
         </Box>}
         <Box sx={{flex: 1}}>
           <TextField
-            size='small'
+            // size='small'
             fullWidth
             label="Skill Name"
             value={nameInput}
