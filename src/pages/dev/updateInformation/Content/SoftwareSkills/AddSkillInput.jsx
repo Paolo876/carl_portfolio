@@ -23,6 +23,25 @@ const containerProps = {
   gap: 2
 }
 
+const inputsContainer = {
+  display: "flex",
+  flexDirection : "row",
+  width: "100%",
+  gap: 1.5,
+  backgroundColor: "rgba(255,255,255,.15)",
+  alignItems: "center",
+  py: 2,
+  px: 2,
+  borderRadius: 4,
+}
+
+const logoContainerProps = { 
+  height: {sm: 50 }, 
+  width : "auto",
+  display: {xs: "none", sm:"flex" }, 
+  justifyContent: "center",
+}
+
 
 const AddSkillInput = ({ setIsInputVisible }) => {
   const [ nameInput, setNameInput ] = useState("");
@@ -32,48 +51,54 @@ const AddSkillInput = ({ setIsInputVisible }) => {
 
   const handleChange = (files) => {
     setImageData(files)
-    
-    setImage([])
-    //image preview
-    files.forEach(item => {
-      const reader = new FileReader();
-      reader.addEventListener("load", () => setImage(prevState => [...prevState, reader.result]));
-      reader.readAsDataURL(item);
-    })
+    setImage(null)
+    const reader = new FileReader();
+    reader.addEventListener("load", () => setImage(reader.result));
+    reader.readAsDataURL(files[0]);
   }
+
+
   return (
     <Box sx={containerProps}>
-      <Box>
-        <TextField
-          size='small'
-          fullWidth
-          label="Skill Name"
-          value={nameInput}
-          onChange={e => setNameInput(e.target.value)}
-        />
-      </Box>
-      {!image && <Box>
-        <Button
-          component="label"
-          role={undefined}
-          variant="contained"
-          tabIndex={-1}
-          startIcon={<ImageIcon />}
-        >
-          Upload Logo
-          <VisuallyHiddenInput
-            type="file" 
-            accept="image/*"
-            onChange={(event) => console.log(event.target.files)}
-            required
+      <Box sx={inputsContainer}>
+        {!image && <Box>
+          <Button
+            component="label"
+            role={undefined}
+            variant="contained"
+            tabIndex={-1}
+            startIcon={<ImageIcon />}
+          >
+            Upload Logo
+            <VisuallyHiddenInput
+              type="file" 
+              accept="image/*"
+              onChange={(event) => handleChange(event.target.files)}
+              required
+            />
+          </Button>
+        </Box>}
+        {image && <Box sx={logoContainerProps}>
+          <Image 
+            src={image}
+            alt="logo-preview"
+            fit="scale-down" 
+            height="auto" 
+            width="auto" 
           />
-        </Button>
-      </Box>}
-      {image && <Image 
-        
-      />}
+        </Box>}
+        <Box sx={{flex: 1}}>
+          <TextField
+            size='small'
+            fullWidth
+            label="Skill Name"
+            value={nameInput}
+            onChange={e => setNameInput(e.target.value)}
+          />
+        </Box>
+      </Box>
       <Box sx={{display: "flex", gap: 2, width: "100%", justifyContent: "right"}}>
-        <Button variant='outlined' color='success'>Save Changes</Button>
+        <Button variant='outlined' color='success' disabled={!image || nameInput.trim().length === 0}>Save Changes</Button>
         <Button variant='contained' color='warning' onClick={() => setIsInputVisible(false)}>Cancel</Button>
       </Box>
     </Box>

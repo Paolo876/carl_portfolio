@@ -17,7 +17,7 @@ const WorkExperience = ({ id, title }) => {
     
   }
 
-  console.log(about.experience)
+  // console.log(about.experience)
   return (
     <ContentItemContainer id={id} title={title} isDisabled={isLoading || inputValue === about.workExperience} onClick={handleSubmit}>
       {error && <Alert severity='error' sx={{mb: 1}}>{error.message}</Alert>}

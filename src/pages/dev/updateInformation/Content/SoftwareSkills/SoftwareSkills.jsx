@@ -67,6 +67,7 @@ const SoftwareSkills = ({ id, title }) => {
             handleEdit={handleEdit} 
             handleDelete={handleDelete}
             isDisabled={isInputVisible}
+            key={item.name}
           />
         )}
       </List>
